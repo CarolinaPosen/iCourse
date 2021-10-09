@@ -1,0 +1,6 @@
+by\itacademy\mikhalevich\icours\logic\StudentService.class
+by\itacademy\mikhalevich\icours\logic\impl\TeacherServiceImpl.class
+by\itacademy\mikhalevich\icours\logic\impl\StudentServiceImpl.class
+by\itacademy\mikhalevich\icours\logic\exception\LogicalServerErrorException.class
+by\itacademy\mikhalevich\icours\logic\TeacherService.class
+by\itacademy\mikhalevich\icours\logic\impl\ServiceManager.class

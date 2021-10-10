@@ -1,8 +1,10 @@
 package by.itacademy.mikhalevich.icours.model;
 
+import java.util.List;
+
 public class Teacher extends Person {
 
-    private int salary;
+    private List<Integer> salary;
 
     public Teacher() {
     }
@@ -11,16 +13,16 @@ public class Teacher extends Person {
         super(id, name, age);
     }
 
-    public Teacher(long id, String name, int age, int salary) {
+    public Teacher(long id, String name, int age, List<Integer> salary) {
         super(id, name, age);
         this.salary = salary;
     }
 
-    public int getSalary() {
+    public List<Integer> getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(List<Integer> salary) {
         this.salary = salary;
     }
 

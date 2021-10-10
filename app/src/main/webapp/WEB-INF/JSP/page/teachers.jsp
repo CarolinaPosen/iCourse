@@ -4,7 +4,7 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="popup" %>
 <popup:add-new-teacher/>
 
-<div id="productList">
+<div id="teacherList">
 
     <div class="row load-more">
     <jsp:include page="/WEB-INF/JSP/fragment/teacher-list.jsp"/>

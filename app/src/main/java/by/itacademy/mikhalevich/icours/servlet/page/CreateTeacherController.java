@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet("/create-teacher")
@@ -21,7 +22,7 @@ public class CreateTeacherController extends AbstractController {
                 defaultId,
                 req.getParameter("name"),
                 Integer.parseInt(req.getParameter("age")),
-                Integer.parseInt(req.getParameter("salary"))
+                List.of(0,0,0,0,0,0,0,0,0,0,0,0)
         ));
         req.setAttribute("teachers", teachers);
         RoutingUtils.forwardToPage("teachers.jsp", req, resp);

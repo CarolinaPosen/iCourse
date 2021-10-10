@@ -2,7 +2,7 @@
 $(document).ready(function() {
     $('button').click(function() {
         $.ajax({
-            url : 'userServlet',     // URL - сервлет
+            url : 'average',     // URL - сервлет
             data : {                 // передаваемые сервлету данные
                 userName : $('#userName').val()
             },

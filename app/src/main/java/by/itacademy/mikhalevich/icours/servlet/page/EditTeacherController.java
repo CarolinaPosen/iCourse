@@ -16,12 +16,16 @@ public class EditTeacherController extends AbstractController {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        Teacher teacher = getTeacherService().getTeacherById(Integer.parseInt(req.getParameter("id")));
+
         Map<Integer, Teacher> teachers = getTeacherService().updateTeacher(new Teacher(
                 Long.parseLong(req.getParameter("id")),
                 req.getParameter("name"),
                 Integer.parseInt(req.getParameter("age")),
-                Integer.parseInt(req.getParameter("salary"))
+                teacher.getSalary()
         ));
+
         req.setAttribute("teachers", teachers);
         RoutingUtils.forwardToPage("teachers.jsp", req, resp);
     }

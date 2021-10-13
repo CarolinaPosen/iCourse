@@ -12,7 +12,6 @@
                         <div class="list-group hidden-xs adv-chars">
                             NAME: <input type="text" name="name" class="form-control name"><br>
                             AGE: <input type="number" name="age" class="form-control age"><br>
-                            SALARY: <input type="number" name="salary" class="form-control salary"><br>
                         </div>
                     </div>
                 </div>

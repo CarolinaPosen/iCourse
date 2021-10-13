@@ -1,4 +1,4 @@
-package by.itacademy.mikhalevich.icours;
+package by.itacademy.mikhalevich.icourse;
 
 import org.junit.Test;
 

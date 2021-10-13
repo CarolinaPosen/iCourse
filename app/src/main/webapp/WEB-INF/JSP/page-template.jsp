@@ -13,9 +13,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/products.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/aside.css" type="text/css">
-
 </head>
 <body>
 <header>
@@ -42,9 +39,6 @@
 <footer class="footer" style="background-color: #d0e9c6">
 </footer>
 
-<script src="${pageContext.request.contextPath}/static/js/load-more-products.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/find-ajax.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/filter-ajax.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/update-teacher-popup.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/create-teacher-popup.js"></script>
 </body>

@@ -3,4 +3,18 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                       http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <filter-mapping>
+        <filter-name>CheckAuthenticationFilter</filter-name>
+        <url-pattern>/students</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CheckAuthenticationFilter</filter-name>
+        <url-pattern>/teachers</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CheckAuthenticationFilter</filter-name>
+        <url-pattern>/groups</url-pattern>
+    </filter-mapping>
+
 </web-app>

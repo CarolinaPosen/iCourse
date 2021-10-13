@@ -1,7 +1,6 @@
 package by.itacademy.mikhalevich.icourse.repository;
 
 import by.itacademy.mikhalevich.icourse.model.Person;
-import by.itacademy.mikhalevich.icourse.model.Student;
 import by.itacademy.mikhalevich.icourse.model.Teacher;
 
 import java.util.HashMap;
@@ -22,14 +21,6 @@ public class ListDataSource {
 
     public void setTeachersMap(Map<Integer, Teacher> teachersMap) {
         this.teachersMap = teachersMap;
-    }
-
-    public List<Student> initStudentModel() {
-        return List.of(
-                new Student(1, "Anna", 30),
-                new Student(2, "Fedor", 35),
-                new Student(3, "Viktor", 30)
-        );
     }
 
     public static Map<Integer, Teacher> createTeacherList() {

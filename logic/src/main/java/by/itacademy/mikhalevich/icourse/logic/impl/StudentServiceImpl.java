@@ -17,7 +17,7 @@ class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> listAllStudents() {
-        return dataSource.initStudentModel();
+        return null; //dataSource.initStudentModel();
     }
 
 }

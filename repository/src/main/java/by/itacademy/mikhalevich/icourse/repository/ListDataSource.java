@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class ListDataSource {
 
+
     private Map<Integer, Teacher> teachersMap;
 
     public ListDataSource() {
@@ -24,7 +25,7 @@ public class ListDataSource {
     }
 
     public static Map<Integer, Teacher> createTeacherList() {
-        HashMap<Integer, Teacher> teachers = new HashMap<>();
+        Map<Integer, Teacher> teachers = new HashMap<>();
 
         teachers.put(1, new Teacher(1, "John", 30, List.of(10,22,36,48,54,61,75,88,97,160,211,112)));
         teachers.put(2, new Teacher(2, "Petr", 23, List.of(12,255,35,444,555,64,73,86,55,1503,415,112)));

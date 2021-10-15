@@ -10,8 +10,5 @@
     <jsp:include page="/WEB-INF/JSP/fragment/teacher-list.jsp"/>
     </div>
 
-    <div>
-        <button type="button" class="btn create-teacher-btn btn-success btn-sm btn-block">Create new teacher</button>
-    </div>
 </div>
 

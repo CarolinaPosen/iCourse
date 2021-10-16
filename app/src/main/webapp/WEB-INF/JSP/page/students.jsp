@@ -7,8 +7,10 @@
 <div id="teacherList">
 
     <div class="row load-more">
-    <jsp:include page="/WEB-INF/JSP/fragment/teacher-list.jsp"/>
+        <jsp:include page="/WEB-INF/JSP/fragment/student-list.jsp"/>
     </div>
 
+    <div>
+        <button type="button" class="btn create-student-btn btn-success btn-sm btn-block">Create new student</button>
+    </div>
 </div>
-

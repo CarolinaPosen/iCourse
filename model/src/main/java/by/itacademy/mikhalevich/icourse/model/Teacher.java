@@ -1,10 +1,11 @@
 package by.itacademy.mikhalevich.icourse.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Teacher extends Person {
 
-    private List<Integer> salary;
+    private List<Integer> salary = new ArrayList<>();
 
     public Teacher() {
     }

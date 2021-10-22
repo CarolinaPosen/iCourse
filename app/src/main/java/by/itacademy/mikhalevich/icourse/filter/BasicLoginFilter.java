@@ -14,12 +14,16 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/*
 public class BasicLoginFilter implements Filter {
 
-    /**
+    */
+/**
      * List of roles the user must have to authenticate
-     */
-    private final List<String> roleNames = new ArrayList<String>();
+     *//*
+
+   */
+/* private final List<String> roleNames = new ArrayList<String>();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -37,6 +41,8 @@ public class BasicLoginFilter implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp,
                          FilterChain chain) throws IOException, ServletException {
+*//*
+*/
 /*        HttpServletRequest request = (HttpServletRequest)req;
         HttpServletResponse response = (HttpServletResponse)resp;
 
@@ -90,7 +96,9 @@ public class BasicLoginFilter implements Filter {
         } else {
             // login failed
             throwLoginFailed();
-        }*/
+        }*//*
+*/
+/*
     }
 
     @Override
@@ -103,5 +111,6 @@ public class BasicLoginFilter implements Filter {
 
     public static void throwLoginFailed() throws ServletException {
         throw new ServletException("Login failed");
-    }
-}
+    }*//*
+
+}*/

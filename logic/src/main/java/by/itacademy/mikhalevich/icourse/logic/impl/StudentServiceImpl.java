@@ -1,12 +1,16 @@
 package by.itacademy.mikhalevich.icourse.logic.impl;
 
+import by.itacademy.mikhalevich.icourse.jdbc.StudentRepository;
 import by.itacademy.mikhalevich.icourse.logic.StudentService;
 import by.itacademy.mikhalevich.icourse.model.Student;
+import by.itacademy.mikhalevich.icourse.model.Teacher;
 import by.itacademy.mikhalevich.icourse.repository.ListDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class StudentServiceImpl implements StudentService {
 
@@ -20,8 +24,14 @@ class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> listAllStudents() {
-        return null; //dataSource.initStudentModel();
+    public HashMap<Integer, Student> getAllStudents() {
+
+        StudentRepository sr = new StudentRepository();
+
+        return sr.allStudents();
+
     }
+
+
 
 }

@@ -1,7 +1,10 @@
 package by.itacademy.mikhalevich.icourse.model;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
+@Data
 public abstract class AbstractEntity<T> implements Serializable {
 
 	private T id;

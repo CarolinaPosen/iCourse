@@ -9,14 +9,13 @@ import java.util.HashMap;
 
 public class StudentRepository extends AbstractConnection {
 
-    //language=SQL
+    //language=PostgreSQL
     private static final String SELECT_FROM_STUDENT_ALL_FIELDS =
             "select s.id id, s.name title, s.login log, s.password pass, s.role_id role_id," +
                     " stg.student_mark mark, stg.theme_id theme_id "+
                     " from student s " +
                     " join student_theme_group stg" +
                     " on s.id = stg.student_id";
-
 
     public HashMap<Integer, Student> allStudents(){
         HashMap<Integer, Student> students = new HashMap<>();
@@ -42,11 +41,7 @@ public class StudentRepository extends AbstractConnection {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
-            try {
                 close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
         }
         return students;
     }

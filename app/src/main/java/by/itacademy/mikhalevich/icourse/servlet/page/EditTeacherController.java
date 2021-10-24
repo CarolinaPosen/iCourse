@@ -1,6 +1,7 @@
 package by.itacademy.mikhalevich.icourse.servlet.page;
 
 import by.itacademy.mikhalevich.icourse.model.Teacher;
+import by.itacademy.mikhalevich.icourse.model.Trainer;
 import by.itacademy.mikhalevich.icourse.servlet.AbstractController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
 
@@ -17,16 +18,11 @@ public class EditTeacherController extends AbstractController {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Teacher teacher = getTeacherService().getTeacherById(Integer.parseInt(req.getParameter("id")));
+        Trainer trainer = getTeacherService().getTeacherById(Integer.parseInt(req.getParameter("id")));
 
-        Map<Integer, Teacher> teachers = getTeacherService().updateTeacher(new Teacher(
-                Long.parseLong(req.getParameter("id")),
-                req.getParameter("name"),
-                Integer.parseInt(req.getParameter("age")),
-                teacher.getSalary()
-        ));
+        //Map<Integer, Trainer> teachers = getTeacherService().updateTeacher(new Trainer());
 
-        req.setAttribute("teachers", teachers);
+        //req.setAttribute("teachers", teachers);
         RoutingUtils.forwardToPage("teachers.jsp", req, resp);
     }
 }

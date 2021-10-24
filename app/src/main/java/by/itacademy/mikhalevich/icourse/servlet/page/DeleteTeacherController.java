@@ -16,8 +16,8 @@ public class DeleteTeacherController extends AbstractController {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Map<Integer, Teacher> teachers = getTeacherService().deleteTeacher(Integer.parseInt(req.getParameter("id")));
-        req.setAttribute("teachers", teachers);
+        //Map<Integer, Teacher> teachers = getTeacherService().deleteTeacher(Integer.parseInt(req.getParameter("id")));
+        //req.setAttribute("teachers", teachers);
         RoutingUtils.forwardToPage("teachers.jsp", req, resp);
     }
 }

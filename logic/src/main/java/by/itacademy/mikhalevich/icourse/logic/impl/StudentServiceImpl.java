@@ -16,20 +16,10 @@ class StudentServiceImpl implements StudentService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ServiceManager.class);
 
-    private ListDataSource dataSource;
-
-    public StudentServiceImpl(ListDataSource dataSource) {
-        super();
-        this.dataSource = dataSource;
-    }
-
     @Override
     public HashMap<Integer, Student> getAllStudents() {
-
-        StudentRepository sr = new StudentRepository();
-
-        return sr.allStudents();
-
+        StudentRepository studentRepository = new StudentRepository();
+        return studentRepository.allStudents();
     }
 
 

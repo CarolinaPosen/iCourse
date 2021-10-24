@@ -1,17 +1,18 @@
 package by.itacademy.mikhalevich.icourse.logic;
 
 import by.itacademy.mikhalevich.icourse.model.Teacher;
+import by.itacademy.mikhalevich.icourse.model.Trainer;
 
 import java.math.BigDecimal;
 import java.util.Map;
 
 public interface TeacherService {
 
-	Map<Integer, Teacher> readTeachers();
-	Map<Integer, Teacher> updateTeacher(Teacher teacher);
-	Map<Integer, Teacher> createTeacher(Teacher teacher);
-	Map<Integer, Teacher> deleteTeacher(Integer id);
-	Teacher getTeacherById (Integer id);
+	Map<Integer, Trainer> readTeachers();
+	Map<Integer, Trainer> updateTeacher(Teacher teacher);
+	Map<Integer, Trainer> createTeacher(Teacher teacher);
+	Map<Integer, Trainer> deleteTeacher(Integer id);
+	Trainer getTeacherById (Integer id);
 	BigDecimal averageSalary(Integer id, int countOfMonth);
 
 

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-import by.itacademy.mikhalevich.icourse.model.Teacher;
+import by.itacademy.mikhalevich.icourse.model.Trainer;
 import by.itacademy.mikhalevich.icourse.servlet.AbstractController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
 
@@ -16,7 +16,7 @@ public class AllTeachersController extends AbstractController {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Map<Integer, Teacher> teachers = getTeacherService().readTeachers();
+		Map<Integer, Trainer> teachers = getTeacherService().readTeachers();
 		req.setAttribute("teachers", teachers);
 		RoutingUtils.forwardToPage("teachers.jsp", req, resp);
 	}

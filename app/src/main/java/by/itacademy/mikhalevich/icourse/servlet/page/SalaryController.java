@@ -49,9 +49,9 @@ public class SalaryController extends AbstractController {
             req.setAttribute("average", averageSalary);
 
         }
-
+/*
         Teacher teacher = getTeacherService().getTeacherById(id);
-        req.setAttribute("teacher", teacher);
+        req.setAttribute("teacher", teacher);*/
         RoutingUtils.forwardToPage("average.jsp", req, resp);
     }
 }

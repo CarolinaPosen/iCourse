@@ -10,13 +10,14 @@ import by.itacademy.mikhalevich.icourse.logic.TeacherService;
 import by.itacademy.mikhalevich.icourse.logic.calculating.Accounting;
 import by.itacademy.mikhalevich.icourse.logic.exception.LogicalServerErrorException;
 import by.itacademy.mikhalevich.icourse.model.Teacher;
+import by.itacademy.mikhalevich.icourse.model.Trainer;
 import by.itacademy.mikhalevich.icourse.repository.ListDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-class TeacherServiceImpl implements TeacherService {
+class TeacherServiceImpl {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServiceManager.class);
+ /*   private static final Logger LOGGER = LoggerFactory.getLogger(ServiceManager.class);
 
     private ListDataSource dataSource;
     private long incrementId = 99;
@@ -24,13 +25,8 @@ class TeacherServiceImpl implements TeacherService {
     public TeacherServiceImpl() {
     }
 
-    public TeacherServiceImpl(ListDataSource dataSource) {
-        super();
-        this.dataSource = dataSource;
-    }
-
     @Override
-    public Map<Integer, Teacher> readTeachers() {
+    public Map<Integer, Trainer> readTeachers() {
         return getSortedTeachers(dataSource.getTeachersMap());
     }
 
@@ -46,7 +42,7 @@ class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Map<Integer, Teacher> createTeacher(Teacher teacher) {
+    public Map<Integer, Trainer> createTeacher(Trainer teacher) {
         incrementId++;
         teacher.setId(incrementId);
         LOGGER.info("Create new teacher " + teacher);
@@ -54,13 +50,13 @@ class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Map<Integer, Teacher> deleteTeacher(Integer id) {
+    public Map<Integer, Trainer> deleteTeacher(Integer id) {
         LOGGER.info("Delete teacher " + dataSource.getTeacherById(id));
         return dataSource.deleteTeacher(id);
     }
 
     @Override
-    public Teacher getTeacherById(Integer id) {
+    public Trainer getTeacherById(Integer id) {
         return dataSource.getTeacherById(id);
     }
 
@@ -71,13 +67,13 @@ class TeacherServiceImpl implements TeacherService {
         return averageSalary;
     }
 
-    private Map<Integer, Teacher> getSortedTeachers(Map<Integer, Teacher> teachers) {
-        Map<Integer, Teacher> result = teachers.entrySet().stream()
+    private Map<Integer, Trainer> getSortedTeachers(Map<Integer, Trainer> teachers) {
+        Map<Integer, Trainer> result = teachers.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
                         (oldValue, newValue) -> oldValue, LinkedHashMap::new));
         return result;
-    }
+    }*/
 
 
 }

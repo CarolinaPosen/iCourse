@@ -13,6 +13,11 @@
                             NAME: <input type="text" name="name" class="form-control name"><br>
                             LOGIN: <input type="text" name="login" class="form-control login"><br>
                             PASSWORD: <input type="text" name="password" class="form-control password"><br>
+                            ROLE: <p><select name="role" size="3" multiple>
+                            <option selected type="number" value="1"> Administrator</option>
+                            <option type="number" value="2"> Manager</option>
+                            <option type="number" value="3"> User</option>
+                        </select><br>
                         </div>
                     </div>
                 </div>

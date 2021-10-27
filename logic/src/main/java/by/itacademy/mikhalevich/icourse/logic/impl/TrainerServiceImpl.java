@@ -28,22 +28,25 @@ public class TrainerServiceImpl implements TeacherService {
     }
 
     @Override
-    public Map<Integer, Trainer> updateTeacher(Teacher teacher) {
+    public Map<Integer, Trainer> updateTrainer(Trainer trainer) {
+        trainerRepository.save(trainer);
         return null;
     }
 
     @Override
-    public Map<Integer, Trainer> createTeacher(Teacher teacher) {
+    public Map<Integer, Trainer> createTrainer(Trainer trainer) {
+        trainerRepository.save(trainer);
         return null;
     }
 
     @Override
-    public Map<Integer, Trainer> deleteTeacher(Integer id) {
+    public Map<Integer, Trainer> deleteTrainer(Integer id) {
+        trainerRepository.remove(new Trainer().withId(id));
         return null;
     }
 
     @Override
-    public Optional getTeacherById(Integer id) {
+    public Optional getTrainerById(Integer id) {
         return trainerRepository.find(id);
     }
 

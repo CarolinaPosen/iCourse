@@ -11,9 +11,15 @@
             <div class="modal-body row">
                 <div class="col-sm-12">
                     <div class="list-group hidden-xs adv-chars">
-                            <input type="number" class="id" name="id" class="form-control"><br>
-                            <input type="text" name="name" class="form-control name"><br>
-                            <input type="number" name="age" class="form-control age"><br>
+                        ID:<input type="number" name="id" class="id" name="id" class="form-control"><br>
+                        NAME:<input type="text" name="name" class="name" class="form-control"><br>
+                        LOGIN:<input type="text" name="login" class="login" class="form-control"><br>
+                        PASSWORD:<input type="text" name="password" class="password" class="form-control"><br>
+                        ROLE:<p><select name="role" size="3" multiple>
+                        <option selected type="number" value="1"> Administrator</option>
+                        <option type="number" value="2"> Manager</option>
+                        <option type="number" value="3"> User</option>
+                    </select><br>
                     </div>
                 </div>
             </div>

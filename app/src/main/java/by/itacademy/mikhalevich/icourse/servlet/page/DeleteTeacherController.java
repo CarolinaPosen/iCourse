@@ -1,6 +1,6 @@
 package by.itacademy.mikhalevich.icourse.servlet.page;
 
-import by.itacademy.mikhalevich.icourse.model.Teacher;
+import by.itacademy.mikhalevich.icourse.model.Trainer;
 import by.itacademy.mikhalevich.icourse.servlet.AbstractController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
 
@@ -16,8 +16,11 @@ public class DeleteTeacherController extends AbstractController {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //Map<Integer, Teacher> teachers = getTeacherService().deleteTeacher(Integer.parseInt(req.getParameter("id")));
-        //req.setAttribute("teachers", teachers);
+
+        getTeacherService().deleteTrainer(Integer.parseInt(req.getParameter("id")));
+
+        Map<Integer, Trainer> teachers = getTeacherService().readTeachers();
+        req.setAttribute("teachers", teachers);
         RoutingUtils.forwardToPage("teachers.jsp", req, resp);
     }
 }

@@ -1,6 +1,7 @@
 package by.itacademy.mikhalevich.icourse.servlet.page;
 
 import by.itacademy.mikhalevich.icourse.model.Teacher;
+import by.itacademy.mikhalevich.icourse.model.Trainer;
 import by.itacademy.mikhalevich.icourse.servlet.AbstractController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
 
@@ -11,11 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @WebServlet("/salary")
 public class SalaryController extends AbstractController {
 
-    @Override
+  /*  @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer id = Integer.parseInt(req.getParameter("id"));
         BigDecimal averageSalary;
@@ -23,11 +25,18 @@ public class SalaryController extends AbstractController {
         averageSalary = getTeacherService().averageSalary(id, 12);
         req.setAttribute("average", averageSalary);
 
-        if (req.getParameter("month1") != null) {
+        Optional trainer = getTeacherService().getTrainerById(Integer.parseInt(req.getParameter("id")));
 
-            getTeacherService().updateTeacher(new Teacher(
-                    Long.parseLong(req.getParameter("id")),
-                    req.getParameter("name"),
+        if (req.getParameter("month1") != null && trainer.isPresent()) {
+
+                Trainer updateTrainer = (Trainer) trainer.get();
+                updateTrainer
+                        .addSalary());
+
+                getTeacherService().updateTrainer((updateTrainer));
+
+
+
                     Integer.parseInt(req.getParameter("age")),
                     List.of(
                             Integer.parseInt(req.getParameter("month1")),
@@ -49,9 +58,10 @@ public class SalaryController extends AbstractController {
             req.setAttribute("average", averageSalary);
 
         }
-/*
-        Teacher teacher = getTeacherService().getTeacherById(id);
-        req.setAttribute("teacher", teacher);*/
+
+         Optional teacher = getTeacherService().getTrainerById(id);
+
+        req.setAttribute("teacher", teacher.get());
         RoutingUtils.forwardToPage("average.jsp", req, resp);
-    }
+    }*/
 }

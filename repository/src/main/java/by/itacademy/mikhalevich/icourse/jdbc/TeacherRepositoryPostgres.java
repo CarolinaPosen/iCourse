@@ -17,14 +17,14 @@ public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> {
                     " s.id salary_id, s.salary salary, s.date salary_date " +
                     " from teacher t " +
                     " join salary s " +
-                    " on s.id = s.teacher_id ";
+                    " on t.id = s.teacher_id ";
     //language=SQL
     private static final String ONE_ENTITY_FILTER = " where t.id = ?";
     private static final String FIND_EMPLOYEE_BY_ID = SELECT_FROM_TRAINERS_ALL_FIELDS + ONE_ENTITY_FILTER;
     //language=SQL
-    private static final String INSERT_EMPLOYEE_SQL = "insert into teacher (name, login) values (?, ?) returning id";
+    private static final String INSERT_EMPLOYEE_SQL = "insert into teacher (name, login, password, role_id) values (?, ?, ?, ?) returning id";
     //language=SQL
-    private static final String UPDATE_EMPLOYEE_SQL = "update teacher t set name = ?, login = ?" + ONE_ENTITY_FILTER;
+    private static final String UPDATE_EMPLOYEE_SQL = "update teacher t set name = ?, login = ?, password = ?, role_id = ? " + ONE_ENTITY_FILTER;
     //language=SQL
     private static final String DELETE_EMPLOYEE_BY_ID = "delete from teacher t" + ONE_ENTITY_FILTER;
 
@@ -73,11 +73,15 @@ public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> {
     public void insertLogic(Trainer trainer, PreparedStatement ps) throws SQLException {
         ps.setString(1, trainer.getName());
         ps.setString(2, trainer.getLogin());
+        ps.setString(3, trainer.getPassword());
+        ps.setInt(4, trainer.getRole());
     }
 
     public void updateLogic(Trainer trainer, PreparedStatement ps) throws SQLException {
         ps.setString(1, trainer.getName());
         ps.setString(2, trainer.getLogin());
+        ps.setString(3, trainer.getPassword());
+        ps.setInt(4, trainer.getRole());
     }
 
     @Override

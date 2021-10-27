@@ -38,15 +38,15 @@ public class Trainer extends AbstractEntity<Integer> {
         return this;
     }
 
-    public Trainer addSalary(Integer themeId, Integer mark){
-        if(mark!=null){
-            salary.put(themeId, mark);
+    public Trainer addSalary(Integer month, Integer sumPerMonth){
+        if(month!=null){
+            salary.put(month, sumPerMonth);
         }
         return this;
     }
 
     @Override
     public String toString() {
-        return String.format("Student [id=%s, name=%s, login=%s, role=%s]", getId(), name, login, role);
+        return String.format("Trainer [id=%s, name=%s, login=%s, password=%s, role=%s, salary=%s]", getId(), name, login, password, role, salary);
     }
 }

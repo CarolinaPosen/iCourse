@@ -9,8 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @WebServlet("/create-teacher")
@@ -19,10 +17,15 @@ public class CreateTeacherController extends AbstractController {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        long defaultId = 99;
-        //Map<Integer, Trainer> teachers = getTeacherService().createTeacher(new Trainer());
+        getTeacherService().createTrainer(
+                new Trainer()
+                        .withName(req.getParameter("name"))
+                        .withLogin(req.getParameter("login"))
+                        .withPassword(req.getParameter("password"))
+                        .withRole(Integer.parseInt(req.getParameter("role"))));
 
-        //req.setAttribute("teachers", teachers);
+        Map<Integer, Trainer> teachers = getTeacherService().readTeachers();
+        req.setAttribute("teachers", teachers);
         RoutingUtils.forwardToPage("teachers.jsp", req, resp);
     }
 

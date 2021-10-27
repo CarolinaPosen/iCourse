@@ -19,9 +19,13 @@ public abstract class AbstractRepository<T extends AbstractEntity> implements Re
     protected DataSource dataSource;
 
     protected abstract String selectAllFields();
+
     protected abstract String findById();
+
     protected abstract String insertSql();
+
     protected abstract String updateSql();
+
     protected abstract String deleteSql();
 
     protected abstract Map<Integer, T> resultSetToEntities(ResultSet rs) throws SQLException;
@@ -88,7 +92,7 @@ public abstract class AbstractRepository<T extends AbstractEntity> implements Re
         try (Connection con = dataSource.getConnection();
              PreparedStatement ps = con.prepareStatement(updateSql())) {
             updateLogic(entity, ps);
-            ps.setInt(3, (Integer) entity.getId());
+            ps.setInt(5, (Integer) entity.getId());
             if (ps.executeUpdate() > 0) {
                 return entity;
             }

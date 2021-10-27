@@ -9,8 +9,11 @@ $(document).ready(function () {
                 var name = teacher.find('.name').text();
                 $('#updateTeacherPopup .name').val(name);
 
-                var age = teacher.find('.age').text();
-                $('#updateTeacherPopup .age').val(age);
+                var login = teacher.find('.login').text();
+                $('#updateTeacherPopup .login').val(login);
+
+                var password = teacher.find('.password').text();
+                $('#updateTeacherPopup .password').val(password);
 
                 $('#updateTeacherPopup').modal({
                         show:true

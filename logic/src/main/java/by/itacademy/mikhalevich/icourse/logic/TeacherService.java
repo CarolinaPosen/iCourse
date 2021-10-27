@@ -10,10 +10,10 @@ import java.util.Optional;
 public interface TeacherService {
 
 	Map<Integer, Trainer> readTeachers();
-	Map<Integer, Trainer> updateTeacher(Teacher teacher);
-	Map<Integer, Trainer> createTeacher(Teacher teacher);
-	Map<Integer, Trainer> deleteTeacher(Integer id);
-	Optional getTeacherById (Integer id);
+	Map<Integer, Trainer> updateTrainer(Trainer trainer);
+	Map<Integer, Trainer> createTrainer(Trainer trainer);
+	Map<Integer, Trainer> deleteTrainer(Integer id);
+	Optional getTrainerById (Integer id);
 	BigDecimal averageSalary(Integer id, int countOfMonth);
 
 

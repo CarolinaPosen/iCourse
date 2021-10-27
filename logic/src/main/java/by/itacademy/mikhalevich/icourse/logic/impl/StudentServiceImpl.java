@@ -1,27 +1,47 @@
 package by.itacademy.mikhalevich.icourse.logic.impl;
 
-import by.itacademy.mikhalevich.icourse.jdbc.StudentRepository;
+import by.itacademy.mikhalevich.icourse.jdbc.Repository;
+import by.itacademy.mikhalevich.icourse.jdbc.StudentRepositoryPostgres;
 import by.itacademy.mikhalevich.icourse.logic.StudentService;
 import by.itacademy.mikhalevich.icourse.model.Student;
 import by.itacademy.mikhalevich.icourse.model.Teacher;
-import by.itacademy.mikhalevich.icourse.repository.ListDataSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.List;
+import javax.sql.DataSource;
 import java.util.Map;
+import java.util.Optional;
 
 class StudentServiceImpl implements StudentService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServiceManager.class);
+    private Repository studentRepository;
 
-    @Override
-    public HashMap<Integer, Student> getAllStudents() {
-        StudentRepository studentRepository = new StudentRepository();
-        return studentRepository.allStudents();
+    public StudentServiceImpl(DataSource dataSource) {
+        this.studentRepository = StudentRepositoryPostgres.getInstance(dataSource);
     }
 
+    @Override
+    public Map<Integer, Student> readStudents() {
+        return studentRepository.findAll();
+    }
+
+    @Override
+    public Map<Integer, Student> updateStudent(Student student) {
+        return null;
+    }
+
+    @Override
+    public Map<Integer, Student> createStudent(Student student) {
+        return null;
+    }
+
+    @Override
+    public Map<Integer, Student> deleteStudent(Integer id) {
+        return null;
+    }
+
+    @Override
+    public Optional getStudentById(Integer id) {
+        return studentRepository.find(id);
+    }
 
 
 }

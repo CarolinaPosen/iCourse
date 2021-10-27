@@ -16,7 +16,7 @@ public class GroupsController extends AbstractController {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Map<Integer, Group> groups = getGroupService().getAllGroups();
+        Map<Integer, Group> groups = getGroupService().readGroups();
 
         req.setAttribute("groups", groups);
         RoutingUtils.forwardToPage("groups.jsp", req, resp);

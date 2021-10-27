@@ -11,7 +11,8 @@
                     <div class="col-sm-12">
                         <div class="list-group hidden-xs adv-chars">
                             NAME: <input type="text" name="name" class="form-control name"><br>
-                            AGE: <input type="number" name="age" class="form-control age"><br>
+                            LOGIN: <input type="text" name="login" class="form-control login"><br>
+                            PASSWORD: <input type="text" name="password" class="form-control password"><br>
                         </div>
                     </div>
                 </div>

@@ -1,27 +1,46 @@
 package by.itacademy.mikhalevich.icourse.logic.impl;
 
-import by.itacademy.mikhalevich.icourse.jdbc.GroupRepository;
-import by.itacademy.mikhalevich.icourse.jdbc.StudentRepository;
+import by.itacademy.mikhalevich.icourse.jdbc.GroupRepositoryPostgres;
+import by.itacademy.mikhalevich.icourse.jdbc.Repository;
 import by.itacademy.mikhalevich.icourse.logic.GroupService;
 import by.itacademy.mikhalevich.icourse.model.Group;
-import by.itacademy.mikhalevich.icourse.model.Student;
-import by.itacademy.mikhalevich.icourse.repository.ListDataSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
-import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class GroupServiceImpl implements GroupService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServiceManager.class);
+    private Repository groupRepository;
 
-    public GroupServiceImpl() {
+    public GroupServiceImpl(DataSource dataSource) {
+        this.groupRepository = GroupRepositoryPostgres.getInstance(dataSource);
     }
 
     @Override
-    public HashMap<Integer, Group> getAllGroups() {
-        GroupRepository gr = new GroupRepository();
-        return gr.getAllGroups();
+    public Map<Integer, Group> readGroups() {
+        return groupRepository.findAll();
     }
+
+    @Override
+    public Map<Integer, Group> updateGroup(Group teacher) {
+        return null;
+    }
+
+    @Override
+    public Map<Integer, Group> createGroup(Group teacher) {
+        return null;
+    }
+
+    @Override
+    public Map<Integer, Group> deleteGroup(Integer id) {
+        return null;
+    }
+
+    @Override
+    public Optional getGroupById(Integer id) {
+        return groupRepository.find(id);
+    }
+
+
 
 }

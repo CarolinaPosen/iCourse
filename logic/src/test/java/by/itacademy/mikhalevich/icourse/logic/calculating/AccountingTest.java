@@ -5,9 +5,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -16,18 +15,30 @@ public class AccountingTest {
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
+
+        Map<LocalDateTime, Integer> test1 = new HashMap<>() {{
+            put(LocalDateTime.now().plusDays(1), 2);
+            put(LocalDateTime.now().plusDays(2), 2);
+        }};
+
+        Map<LocalDateTime, Integer> test2 = new HashMap<>() {{
+                put(LocalDateTime.now().plusDays(3), 0);
+                put(LocalDateTime.now().plusDays(4), 10);
+        }};
+
         return Arrays.asList(new Object[][]{
-                {List.of(2, 2), 2, new BigDecimal(2)},
-                {List.of(1, 2), 1, new BigDecimal(2)},
-                {List.of(0, 0), 0, new BigDecimal(0)}
+                {test1, 2, new BigDecimal(2)},
+                {test2, 2, new BigDecimal(5)},
+
         });
+
     }
 
-    private final List<Integer> integers;
+    private final HashMap<LocalDateTime, Integer> integers;
     private final int month;
     private final BigDecimal expectedAverage;
 
-    public AccountingTest(List<Integer> integers,
+    public AccountingTest(HashMap<LocalDateTime, Integer> integers,
                           int month,
                           BigDecimal expectedAverage) {
 

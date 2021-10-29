@@ -14,7 +14,7 @@ public interface TeacherService {
 	Map<Integer, Trainer> createTrainer(Trainer trainer);
 	Map<Integer, Trainer> deleteTrainer(Integer id);
 	Optional getTrainerById (Integer id);
-	BigDecimal averageSalary(Integer id, int countOfMonth);
+	BigDecimal averageSalary(Integer id);
 
 
 }

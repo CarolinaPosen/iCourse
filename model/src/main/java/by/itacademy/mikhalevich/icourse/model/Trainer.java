@@ -1,20 +1,25 @@
 package by.itacademy.mikhalevich.icourse.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Trainer extends AbstractEntity<Integer> {
     private String name;
     private String login;
     private String password;
     private int role;
-    private HashMap<Integer, Integer> salary = new HashMap<>();
+    private HashMap<LocalDateTime, Integer> salary = new HashMap<>();
 
     public Trainer withId(Integer id){
         setId(id);
@@ -38,9 +43,9 @@ public class Trainer extends AbstractEntity<Integer> {
         return this;
     }
 
-    public Trainer addSalary(Integer month, Integer sumPerMonth){
-        if(month!=null){
-            salary.put(month, sumPerMonth);
+    public Trainer addSalary(LocalDateTime dateTime, Integer sumPerMonth){
+        if(dateTime!=null){
+            salary.put(dateTime, sumPerMonth);
         }
         return this;
     }

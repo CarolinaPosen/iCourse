@@ -96,7 +96,7 @@ public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> {
                     .withPassword(rs.getString("pass"))
                     .withRole(rs.getInt("role_id")));
 
-            trainersMap.get(tId).addSalary(rs.getInt("salary_id"), rs.getInt("salary"));
+            trainersMap.get(tId).addSalary(rs.getTimestamp("salary_date").toLocalDateTime(), rs.getInt("salary"));
 
         }
         return trainersMap;

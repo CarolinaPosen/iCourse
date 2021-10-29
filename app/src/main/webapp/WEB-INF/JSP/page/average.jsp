@@ -13,15 +13,17 @@
     <div class="row load-more">
         <form action="/web-app/salary" method="post">
             <h2>COUNT OF MONTH:<input name="count" value="12" class="form-control"></h2><br>
+
             <c:forEach var="salary" items="${requestScope.teacher.salary}">
-                <label>
-                    <input name="id" type="hidden" value="${requestScope.teacher.id}" class="form-control">
-                    <input name="name" type="hidden" value="${requestScope.teacher.name}" class="form-control">
-                    <input name="age" type="hidden" value="${requestScope.teacher.age}" class="form-control">
+
+                <input name="id" type="hidden" value="${requestScope.teacher.id}" class="form-control">
+                <input name="name" type="hidden" value="${requestScope.teacher.name}" class="form-control">
+                <input name="login" type="hidden" value="${requestScope.teacher.login}" class="form-control">
+                <input name="password" type="hidden" value="${requestScope.teacher.password}" class="form-control">
+
                     <c:set var="month" value="${month + 1}"/>
-                    MONTH: ${month}
-                    <input type="number" name="month${month}" value="${salary}" class="form-control"><br>
-                </label>
+                    DATE:${salary.key}
+                    <input type="number" name="month${month}" value="${salary.value}" class="form-control"><br>
             </c:forEach>
 
             <button type="submit" class="btn btn-info btn-sm btn-block">Change average salary</button>

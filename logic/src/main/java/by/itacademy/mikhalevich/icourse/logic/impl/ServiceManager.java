@@ -2,10 +2,7 @@ package by.itacademy.mikhalevich.icourse.logic.impl;
 
 import javax.servlet.ServletContext;
 
-import by.itacademy.mikhalevich.icourse.logic.AccountService;
-import by.itacademy.mikhalevich.icourse.logic.GroupService;
-import by.itacademy.mikhalevich.icourse.logic.StudentService;
-import by.itacademy.mikhalevich.icourse.logic.TeacherService;
+import by.itacademy.mikhalevich.icourse.logic.*;
 import by.itacademy.mikhalevich.icourse.repository.LoginPasswordSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
@@ -43,6 +40,9 @@ public class ServiceManager {
 	public GroupService getGroupService() {
 		return groupService;
 	}
+	public SalaryService getSalaryService() {
+		return salaryService;
+	}
 	public AccountService getAccountService() {
 		return accountService;
 	}
@@ -50,6 +50,7 @@ public class ServiceManager {
 	private final TeacherService teacherService;
 	private final StudentService studentService;
 	private final GroupService groupService;
+	private final SalaryService salaryService;
 	private final AccountService accountService;
 
 	private ServiceManager(ServletContext context) {
@@ -59,6 +60,7 @@ public class ServiceManager {
 		teacherService = new TrainerServiceImpl(dataSource);
 		studentService = new StudentServiceImpl(dataSource);
 		groupService = new GroupServiceImpl(dataSource);
+		salaryService = new SalaryServiceImpl(dataSource);
 		accountService = new AccountServiceImpl(new LoginPasswordSource());
 	}
 

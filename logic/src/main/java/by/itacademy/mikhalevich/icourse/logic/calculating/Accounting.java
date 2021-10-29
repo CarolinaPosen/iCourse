@@ -1,6 +1,8 @@
 package by.itacademy.mikhalevich.icourse.logic.calculating;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 
 public class Accounting {
@@ -9,12 +11,22 @@ public class Accounting {
      * @param integers {@link List<Integer>}
      * @return {@link BigDecimal}
      */
-    public static BigDecimal average(List<Integer> integers, int countOfMonth) {
+/*    public static BigDecimal average(List<Integer> integers, int countOfMonth) {
         double average = integers.stream()
                 .mapToInt(i -> i)
                 .skip(integers.size() - countOfMonth)
                 .average()
                 .orElse(0.0);
         return new BigDecimal(average);
+    }*/
+
+    public static BigDecimal average(HashMap<LocalDateTime, Integer> integers, int countOfMonth) {
+        double average = integers.entrySet().stream()
+                .mapToInt(i -> i.getValue())
+                .skip(integers.size() - countOfMonth)
+                .average()
+                .orElse(0.0);
+        return new BigDecimal(average);
     }
+
 }

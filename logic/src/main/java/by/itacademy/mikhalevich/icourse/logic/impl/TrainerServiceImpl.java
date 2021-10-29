@@ -10,6 +10,7 @@ import by.itacademy.mikhalevich.icourse.model.Trainer;
 import javax.sql.DataSource;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -51,11 +52,11 @@ public class TrainerServiceImpl implements TeacherService {
     }
 
     @Override
-    public BigDecimal averageSalary(Integer id, int countOfMonth) {
+    public BigDecimal averageSalary(Integer id) {
 
         Optional<Trainer> optionalTrainer = trainerRepository.find(id);
         Trainer trainer = optionalTrainer.orElseGet(Trainer::new);
-        BigDecimal averageSalary = Accounting.average((List<Integer>) trainer.getSalary(), countOfMonth).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal averageSalary = Accounting.average(trainer.getSalary(), trainer.getSalary().size()).setScale(2, RoundingMode.HALF_UP);
         return averageSalary;
     }
 }

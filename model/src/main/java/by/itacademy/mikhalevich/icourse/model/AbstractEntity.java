@@ -1,20 +1,17 @@
 package by.itacademy.mikhalevich.icourse.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class AbstractEntity<T> implements Serializable {
 
 	private T id;
-
-	public AbstractEntity() {
-	}
-
-	public AbstractEntity(T id) {
-		this.id = id;
-	}
 
 	public T getId() {
 		return id;

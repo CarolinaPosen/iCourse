@@ -13,3 +13,16 @@ $(document).ready(function() {
         });
     });
 });
+
+/*
+var data = JSON.stringify({name: 'dog'});
+$.ajax({
+    type: "POST",
+    url: 'http://localhost:8084/MyApp/JavaScriptInterface',
+    dataType: 'json',
+    data: data,
+    success: function (responseData) {
+        // this prints out your data
+        console.log("successful", responseData);
+    }
+})*/

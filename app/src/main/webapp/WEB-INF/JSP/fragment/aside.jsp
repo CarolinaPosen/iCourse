@@ -11,6 +11,7 @@
         <a href="/web-app/teachers" class="list-group-item"> Teachers </a>
         <a href="/web-app/students" class="list-group-item"> Students </a>
         <a href="/web-app/groups" class="list-group-item"> Groups </a>
+        <a href="/web-app/json" class="list-group-item"> JSON </a>
     </div>
 </div>
 

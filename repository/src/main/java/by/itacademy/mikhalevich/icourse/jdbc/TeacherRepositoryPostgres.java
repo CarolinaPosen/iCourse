@@ -11,21 +11,23 @@ import java.util.*;
 
 @Slf4j
 public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> {
-    //language=SQL
+    //language=PostgreSQL
     private static final String SELECT_FROM_TRAINERS_ALL_FIELDS =
             "select t.id id, t.name title, t.login log, t.password pass, t.role_id role_id," +
                     " s.id salary_id, s.salary salary, s.date salary_date " +
                     " from teacher t " +
-                    " join salary s " +
+                    " left join salary s " +
                     " on t.id = s.teacher_id ";
-    //language=SQL
+
+
     private static final String ONE_ENTITY_FILTER = " where t.id = ?";
+    //language=PostgreSQL
     private static final String FIND_EMPLOYEE_BY_ID = SELECT_FROM_TRAINERS_ALL_FIELDS + ONE_ENTITY_FILTER;
-    //language=SQL
+    //language=PostgreSQL
     private static final String INSERT_EMPLOYEE_SQL = "insert into teacher (name, login, password, role_id) values (?, ?, ?, ?) returning id";
-    //language=SQL
+    //language=PostgreSQL
     private static final String UPDATE_EMPLOYEE_SQL = "update teacher t set name = ?, login = ?, password = ?, role_id = ? " + ONE_ENTITY_FILTER;
-    //language=SQL
+    //language=PostgreSQL
     private static final String DELETE_EMPLOYEE_BY_ID = "delete from teacher t" + ONE_ENTITY_FILTER;
 
     private static volatile TeacherRepositoryPostgres instance;
@@ -96,7 +98,7 @@ public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> {
                     .withPassword(rs.getString("pass"))
                     .withRole(rs.getInt("role_id")));
 
-            trainersMap.get(tId).addSalary(rs.getTimestamp("salary_date").toLocalDateTime(), rs.getInt("salary"));
+            trainersMap.get(tId).addSalary(rs.getTimestamp("salary_date"), rs.getInt("salary"));
 
         }
         return trainersMap;

@@ -7,8 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -19,7 +21,7 @@ public class Trainer extends AbstractEntity<Integer> {
     private String login;
     private String password;
     private int role;
-    private HashMap<LocalDateTime, Integer> salary = new HashMap<>();
+    private Map<Timestamp, Integer> salary = new HashMap<>();
 
     public Trainer withId(Integer id){
         setId(id);
@@ -43,7 +45,7 @@ public class Trainer extends AbstractEntity<Integer> {
         return this;
     }
 
-    public Trainer addSalary(LocalDateTime dateTime, Integer sumPerMonth){
+    public Trainer addSalary(Timestamp dateTime, Integer sumPerMonth){
         if(dateTime!=null){
             salary.put(dateTime, sumPerMonth);
         }

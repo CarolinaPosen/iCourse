@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -34,11 +35,11 @@ public class AccountingTest {
 
     }
 
-    private final HashMap<LocalDateTime, Integer> integers;
+    private final Map<Timestamp, Integer> integers;
     private final int month;
     private final BigDecimal expectedAverage;
 
-    public AccountingTest(HashMap<LocalDateTime, Integer> integers,
+    public AccountingTest(Map<Timestamp, Integer> integers,
                           int month,
                           BigDecimal expectedAverage) {
 

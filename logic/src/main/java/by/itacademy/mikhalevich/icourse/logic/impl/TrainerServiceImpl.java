@@ -4,14 +4,11 @@ import by.itacademy.mikhalevich.icourse.jdbc.Repository;
 import by.itacademy.mikhalevich.icourse.jdbc.TeacherRepositoryPostgres;
 import by.itacademy.mikhalevich.icourse.logic.TeacherService;
 import by.itacademy.mikhalevich.icourse.logic.calculating.Accounting;
-import by.itacademy.mikhalevich.icourse.model.Teacher;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
 
 import javax.sql.DataSource;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -24,7 +21,7 @@ public class TrainerServiceImpl implements TeacherService {
     }
 
     @Override
-    public Map<Integer, Trainer> readTeachers() {
+    public Map readTeachers() {
         return trainerRepository.findAll();
     }
 

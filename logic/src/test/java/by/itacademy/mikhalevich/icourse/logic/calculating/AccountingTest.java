@@ -17,15 +17,8 @@ public class AccountingTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
 
-        Map<LocalDateTime, Integer> test1 = new HashMap<>() {{
-            put(LocalDateTime.now().plusDays(1), 2);
-            put(LocalDateTime.now().plusDays(2), 2);
-        }};
-
-        Map<LocalDateTime, Integer> test2 = new HashMap<>() {{
-                put(LocalDateTime.now().plusDays(3), 0);
-                put(LocalDateTime.now().plusDays(4), 10);
-        }};
+        List<BigDecimal> test1 = List.of(new BigDecimal(2), new BigDecimal(2));
+        List<BigDecimal> test2 = List.of(new BigDecimal(10), new BigDecimal(5));
 
         return Arrays.asList(new Object[][]{
                 {test1, 2, new BigDecimal(2)},
@@ -35,21 +28,21 @@ public class AccountingTest {
 
     }
 
-    private final Map<Timestamp, Integer> integers;
+    private final List<BigDecimal> sum;
     private final int month;
     private final BigDecimal expectedAverage;
 
-    public AccountingTest(Map<Timestamp, Integer> integers,
+    public AccountingTest(List<BigDecimal> sum,
                           int month,
                           BigDecimal expectedAverage) {
 
-        this.integers = integers;
+        this.sum = sum;
         this.month = month;
         this.expectedAverage = expectedAverage;
     }
 
     @Test
     public void shouldReturnCorrectSum() {
-        assertSame(expectedAverage.stripTrailingZeros(), Accounting.average(integers, month).stripTrailingZeros());
+        assertSame(expectedAverage.stripTrailingZeros(), Accounting.average(sum, month).stripTrailingZeros());
     }
 }

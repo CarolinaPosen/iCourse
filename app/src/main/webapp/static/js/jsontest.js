@@ -51,27 +51,27 @@ $('.btn-jsontest').click(function() {
                 var myPara2 = document.createElement('p');
                 var myPara4 = document.createElement('p');
                 var myPara3 = document.createElement('p');
-                //var myList = document.createElement('ul');
+                var myList = document.createElement('ul');
 
                 myH2.textContent = heroes[i].name;
                 myPara1.textContent = 'ID: ' + heroes[i].id;
                 myPara2.textContent = 'NAME: ' + heroes[i].name;
                 myPara4.textContent = 'LOGIN: ' + heroes[i].login;
- //               myPara3.textContent = 'SALARY:';
+                myPara3.textContent = 'SALARY:';
 
-/*                var superPowers = heroes[i].salary;
+                var superPowers = heroes[i].salaries;
                 for (var j = 0; j < superPowers.length; j++) {
                     var listItem = document.createElement('li');
-                    listItem.textContent = superPowers[j];
+                    listItem.textContent = superPowers[j].salary;
                     myList.appendChild(listItem);
-                }*/
+                }
 
                 myArticle.appendChild(myH2);
                 myArticle.appendChild(myPara1);
                 myArticle.appendChild(myPara2);
                 myArticle.appendChild(myPara4);
                 myArticle.appendChild(myPara3);
- //               myArticle.appendChild(myList);
+                myArticle.appendChild(myList);
 
                 section.appendChild(myArticle);
             }

@@ -6,7 +6,6 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="popup" %>
 <popup:update-teacher-popup/>
 
-
 <c:forEach var="teacher" items="${requestScope.teachers}">
     <div class="col-xs-12 col-sm-8 col-md-4">
         <div id="teacher${teacher.key}" class="card mb-4 shadow-sm">
@@ -14,7 +13,7 @@
             <h3 class="name text-center font-weight-lighter">${teacher.value.name}</h3>
             <p class="login text-center font-weight-lighter">${teacher.value.login}</p>
             <p class="password text-center font-weight-lighter">${teacher.value.password}</p>
-            <p class="salary text-center font-weight-lighter">${teacher.value.salary}</p>
+            <p class="salary text-center font-weight-lighter">${teacher.value.salaries}</p>
             <p class="id text-center font-weight-lighter">${teacher.key}</p>
 
 
@@ -26,7 +25,7 @@
                 <input name="id" type="hidden" value="${teacher.key}" class="form-control">
                 <input name="name" type="hidden" value="${teacher.value.name}" class="form-control">
                 <input name="login" type="hidden" value="${teacher.value.login}" class="form-control">
-                <input name="salary" type="hidden" value="${teacher.value.salary}" class="form-control">
+                <input name="salary" type="hidden" value="${teacher.value.salaries}" class="form-control">
                 <button type="submit" class="btn btn-info btn-sm btn-block">Average salary</button>
             </form>
 

@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.jdbc;
 
+import by.itacademy.mikhalevich.icourse.model.Salary;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
 import lombok.extern.slf4j.Slf4j;
 
@@ -91,14 +92,25 @@ public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> {
         Map<Integer, Trainer> trainersMap = new LinkedHashMap<>();
         while (rs.next()) {
             int tId = rs.getInt("id");
-            trainersMap.putIfAbsent(tId, new Trainer()
-                    .withId(tId)
-                    .withName(rs.getString("title"))
-                    .withLogin(rs.getString("log"))
-                    .withPassword(rs.getString("pass"))
-                    .withRole(rs.getInt("role_id")));
+            int sId = rs.getInt("salary_id");
 
-            trainersMap.get(tId).addSalary(rs.getTimestamp("salary_date"), rs.getInt("salary"));
+            Map<Integer, Salary> salaryMap = new HashMap<>();
+
+            trainersMap.putIfAbsent(tId,
+                    new Trainer()
+                            .withId(tId)
+                            .withName(rs.getString("title"))
+                            .withLogin(rs.getString("log"))
+                            .withPassword(rs.getString("pass"))
+                            .withRole(rs.getInt("role_id"))
+                            .addSalary(putIfAbsentAndReturn(salaryMap, sId,
+                                    new Salary()
+                                            .withId(sId)
+                                            .withDate(rs.getTimestamp("salary_date"))
+                                            .withSalary(rs.getBigDecimal("salary")))));
+
+            trainersMap.computeIfPresent(tId, (id, trainer) -> trainer.addSalary(salaryMap.get(sId)));
+
 
         }
         return trainersMap;

@@ -14,11 +14,10 @@ import java.util.HashMap;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Salary extends AbstractEntity<Integer> {
     private BigDecimal salary;
     private Timestamp date;
-    private Integer trainerId;
 
     public Salary withId(Integer id){
         setId(id);
@@ -34,9 +33,6 @@ public class Salary extends AbstractEntity<Integer> {
         return this;
     }
 
-    public Salary withTrainerId(Integer trainerId){
-        setTrainerId(trainerId);
-        return this;
-    }
+
 
 }

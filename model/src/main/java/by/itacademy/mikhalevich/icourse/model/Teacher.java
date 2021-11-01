@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Teacher extends Person {
 
-    private List<Integer> salary = new ArrayList<>();
+    private List<Salary> salary = new ArrayList<>();
 
     public Teacher() {
     }
@@ -14,16 +14,16 @@ public class Teacher extends Person {
         super(id, name, age);
     }
 
-    public Teacher(long id, String name, int age, List<Integer> salary) {
+    public Teacher(long id, String name, int age, List<Salary> salary) {
         super(id, name, age);
         this.salary = salary;
     }
 
-    public List<Integer> getSalary() {
+    public List<Salary> getSalary() {
         return salary;
     }
 
-    public void setSalary(List<Integer> salary) {
+    public void setSalary(List<Salary> salary) {
         this.salary = salary;
     }
 

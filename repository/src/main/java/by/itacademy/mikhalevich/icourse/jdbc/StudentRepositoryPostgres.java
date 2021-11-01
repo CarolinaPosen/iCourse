@@ -19,14 +19,18 @@ public class StudentRepositoryPostgres extends AbstractRepository<Student> {
                     " from student s " +
                     " join student_theme_group stg" +
                     " on s.id = stg.student_id";
-    //language=SQL
+
+    //language=PostgreSQL
     private static final String ONE_ENTITY_FILTER = " where t.id = ?";
     private static final String FIND_EMPLOYEE_BY_ID = SELECT_FROM_STUDENT_ALL_FIELDS + ONE_ENTITY_FILTER;
-    //language=SQL
+
+    //language=PostgreSQL
     private static final String INSERT_EMPLOYEE_SQL = "insert into teacher (name, login) values (?, ?) returning id";
-    //language=SQL
+
+    //language=PostgreSQL
     private static final String UPDATE_EMPLOYEE_SQL = "update teacher t set name = ?, login = ?" + ONE_ENTITY_FILTER;
-    //language=SQL
+
+    //language=PostgreSQL
     private static final String DELETE_EMPLOYEE_BY_ID = "delete from teacher t" + ONE_ENTITY_FILTER;
 
     private static volatile StudentRepositoryPostgres instance;

@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
@@ -21,7 +20,7 @@ public class Trainer extends AbstractEntity<Integer> {
     private String login;
     private String password;
     private int role;
-    private Map<Timestamp, Integer> salary = new HashMap<>();
+    private Set<Salary> salaries = new HashSet<>();
 
     public Trainer withId(Integer id){
         setId(id);
@@ -45,15 +44,15 @@ public class Trainer extends AbstractEntity<Integer> {
         return this;
     }
 
-    public Trainer addSalary(Timestamp dateTime, Integer sumPerMonth){
-        if(dateTime!=null){
-            salary.put(dateTime, sumPerMonth);
+    public Trainer addSalary(Salary salary){
+        if(salary!=null){
+            salaries.add(salary);
         }
         return this;
     }
 
     @Override
     public String toString() {
-        return String.format("Trainer [id=%s, name=%s, login=%s, password=%s, role=%s, salary=%s]", getId(), name, login, password, role, salary);
+        return String.format("Trainer [id=%s, name=%s, login=%s, password=%s, role=%s, salary=%s]", getId(), name, login, password, role, salaries);
     }
 }

@@ -1,6 +1,7 @@
 package by.itacademy.mikhalevich.icourse.jdbc;
 
 import by.itacademy.mikhalevich.icourse.model.Group;
+import by.itacademy.mikhalevich.icourse.model.Salary;
 import by.itacademy.mikhalevich.icourse.model.Student;
 import by.itacademy.mikhalevich.icourse.model.Teacher;
 import lombok.extern.slf4j.Slf4j;
@@ -46,11 +47,13 @@ public class GroupRepositoryPostgres extends AbstractRepository<Group> {
     private static final String ONE_ENTITY_FILTER = " where c.id = ? ";
     //language=PostgreSQL
     public static final String FIND_GROUP_BY_ID = SELECT_FROM_GROUP_ALL_FIELDS + ONE_ENTITY_FILTER;
-    //language=SQL
+
     private static final String INSERT_GROUP_SQL = "insert into class (title) values (?) returning id";
-    //language=SQL
+
+    //language=PostgreSQL
     private static final String UPDATE_GROUP_SQL = "update class c set title = ?" + ONE_ENTITY_FILTER;
-    //language=SQL
+
+    //language=PostgreSQL
     private static final String DELETE_GROUP_BY_ID = "delete from class c" + ONE_ENTITY_FILTER;
 
     private static volatile GroupRepositoryPostgres instance;
@@ -119,7 +122,7 @@ public class GroupRepositoryPostgres extends AbstractRepository<Group> {
             groupMap.putIfAbsent(gId, new Group()
                     .withId(gId)
                     .withTitle(rs.getString(TITLE))
-                    .withTeacher(new Teacher(tId, rs.getString(T_NAME), 30, List.of(10, 22, 36, 48, 54, 61, 75, 88, 97, 160, 211, 112)))
+                    .withTeacher(new Teacher(tId, rs.getString(T_NAME), 30, List.of(new Salary())))
                     .addStudent(sId, putIfAbsentAndReturn(studentsMap, sId,
                             new Student()
                                     .withId(sId)

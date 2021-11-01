@@ -15,18 +15,18 @@ import java.util.Map;
 @Slf4j
 public class SalaryRepositoryPostgres extends AbstractRepository<Salary> {
 
-    //language=SQL
+    //language=PostgreSQL
     private static final String SELECT_FROM_SALARY_ALL_FIELDS =
             "select s.id id, s.salary salary, s.date salary_date, s.teacher_id teacher_id " +
                     " from salary s ";
-    //language=SQL
+    //language=PostgreSQL
     private static final String ONE_ENTITY_FILTER = " where s.id = ?";
     private static final String FIND_SALARY_BY_ID = SELECT_FROM_SALARY_ALL_FIELDS + ONE_ENTITY_FILTER;
-    //language=SQL
+    //language=PostgreSQL
     private static final String INSERT_SALARY_SQL = "insert into salary (salary, date, teacher_id) values (?, ?, ?) returning id";
-    //language=SQL
+    //language=PostgreSQL
     private static final String UPDATE_SALARY_SQL = "update salary s set salary = ?, date = ?, teacher_id = ? " + ONE_ENTITY_FILTER;
-    //language=SQL
+    //language=PostgreSQL
     private static final String DELETE_SALARY_BY_ID = "delete from salary s" + ONE_ENTITY_FILTER;
 
 
@@ -75,14 +75,11 @@ public class SalaryRepositoryPostgres extends AbstractRepository<Salary> {
     public void insertLogic(Salary salary, PreparedStatement ps) throws SQLException {
         ps.setBigDecimal(1, salary.getSalary());
         ps.setTimestamp(2, salary.getDate());
-        ps.setInt(3, salary.getTrainerId());
     }
 
     public void updateLogic(Salary salary, PreparedStatement ps) throws SQLException {
         ps.setBigDecimal(1, salary.getSalary());
         ps.setTimestamp(2, salary.getDate());
-        ps.setInt(3, salary.getTrainerId());
-
     }
 
     @Override
@@ -93,8 +90,7 @@ public class SalaryRepositoryPostgres extends AbstractRepository<Salary> {
             salaryMap.putIfAbsent(tId, new Salary()
                     .withId(tId)
                     .withSalary(rs.getBigDecimal("salary"))
-                    .withDate(rs.getTimestamp("salary_date"))
-                    .withTrainerId(rs.getInt("teacher_id")));
+                    .withDate(rs.getTimestamp("salary_date")));
         }
         return salaryMap;
     }

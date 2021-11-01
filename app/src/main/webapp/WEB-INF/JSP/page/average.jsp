@@ -14,7 +14,7 @@
         <form action="/web-app/salary" method="post">
             <h2>COUNT OF MONTH:<input name="count" value="12" class="form-control"></h2><br>
 
-            <c:forEach var="salary" items="${requestScope.teacher.salary}">
+            <c:forEach var="salary" items="${requestScope.teacher.salaries}">
 
                 <input name="id" type="hidden" value="${requestScope.teacher.id}" class="form-control">
                 <input name="name" type="hidden" value="${requestScope.teacher.name}" class="form-control">
@@ -22,8 +22,8 @@
                 <input name="password" type="hidden" value="${requestScope.teacher.password}" class="form-control">
 
                     <c:set var="month" value="${month + 1}"/>
-                    DATE:${salary.key}
-                    <input type="number" name="month${month}" value="${salary.value}" class="form-control"><br>
+                    DATE:${salary.date}
+                    <input type="number" name="month${month}" value="${salary.salary}" class="form-control"><br>
             </c:forEach>
 
             <button type="submit" class="btn btn-info btn-sm btn-block">Change average salary</button>

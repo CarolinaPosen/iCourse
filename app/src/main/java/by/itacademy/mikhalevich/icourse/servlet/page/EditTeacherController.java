@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.servlet.page;
 
+import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
 import by.itacademy.mikhalevich.icourse.servlet.AbstractController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
@@ -26,7 +27,7 @@ public class EditTeacherController extends AbstractController {
                     .withName(req.getParameter("name"))
                     .withLogin(req.getParameter("login"))
                     .withPassword(req.getParameter("password"))
-                    .withRole(Integer.parseInt(req.getParameter("role")));
+                    .withRole(new Role().withId(Integer.parseInt(req.getParameter("role"))));
 
             getTeacherService().updateTrainer((updateTrainer));
         }

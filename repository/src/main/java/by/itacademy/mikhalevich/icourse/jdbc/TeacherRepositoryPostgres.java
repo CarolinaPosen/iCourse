@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.jdbc;
 
+import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Salary;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
 import lombok.extern.slf4j.Slf4j;
@@ -77,14 +78,14 @@ public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> {
         ps.setString(1, trainer.getName());
         ps.setString(2, trainer.getLogin());
         ps.setString(3, trainer.getPassword());
-        ps.setInt(4, trainer.getRole());
+        ps.setInt(4, trainer.getRole().getId());
     }
 
     public void updateLogic(Trainer trainer, PreparedStatement ps) throws SQLException {
         ps.setString(1, trainer.getName());
         ps.setString(2, trainer.getLogin());
         ps.setString(3, trainer.getPassword());
-        ps.setInt(4, trainer.getRole());
+        ps.setInt(4, trainer.getRole().getId());
     }
 
     @Override
@@ -102,7 +103,9 @@ public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> {
                             .withName(rs.getString("title"))
                             .withLogin(rs.getString("log"))
                             .withPassword(rs.getString("pass"))
-                            .withRole(rs.getInt("role_id"))
+                            .withRole(new Role()
+                            .withId(rs.getInt("role_id"))
+                            .withName("Role"))
                             .addSalary(putIfAbsentAndReturn(salaryMap, sId,
                                     new Salary()
                                             .withId(sId)

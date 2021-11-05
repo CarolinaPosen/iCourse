@@ -3,9 +3,7 @@ package by.itacademy.mikhalevich.icourse.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -19,7 +17,7 @@ public class Trainer extends AbstractEntity<Integer> {
     private String name;
     private String login;
     private String password;
-    private int role;
+    private Role role;
     private Set<Salary> salaries = new HashSet<>();
 
     public Trainer withId(Integer id){
@@ -39,7 +37,7 @@ public class Trainer extends AbstractEntity<Integer> {
         setPassword(password);
         return this;
     }
-    public Trainer withRole(int role){
+    public Trainer withRole(Role role){
         setRole(role);
         return this;
     }

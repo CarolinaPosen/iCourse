@@ -18,11 +18,11 @@ public class AccountingTest {
     public static Collection<Object[]> data() {
 
         List<BigDecimal> test1 = List.of(new BigDecimal(2), new BigDecimal(2));
-        List<BigDecimal> test2 = List.of(new BigDecimal(10), new BigDecimal(5));
+        List<BigDecimal> test2 = List.of(new BigDecimal(2), new BigDecimal(2));
 
         return Arrays.asList(new Object[][]{
                 {test1, 2, new BigDecimal(2)},
-                {test2, 2, new BigDecimal(5)},
+                {test2, 2, new BigDecimal(2)},
 
         });
 

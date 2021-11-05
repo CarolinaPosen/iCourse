@@ -1,0 +1,30 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name = "by.itacademy.mikhalevich.icourse.model.Trainer" table = "teacher">
+
+        <id name = "id" type = "int">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+
+        <property name="name" column="name"/>
+        <property name="login" column="login"/>
+        <property name="password" column="password"/>
+
+        <one-to-one name="role" class="by.itacademy.mikhalevich.icourse.model.Role" cascade="all" />
+
+<!--        <many-to-one name="role" class="by.itacademy.mikhalevich.icourse.model.Role" fetch="select">-->
+<!--            <column name="id" not-null="true" />-->
+<!--        </many-to-one>-->
+
+<!--        <set name="role" table="role" inverse="true">
+            <key column="department_id"/>
+            <many-to-many column="employee_id" class="com.dbit.model.Employee"/>
+        </set>-->
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name = "by.itacademy.mikhalevich.icourse.model.Theme" table = "theme">
+
+        <id name = "id" type = "int">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+
+        <property name="title" column="title"/>
+
+        <set name="groups" table="student_theme_class"
+             inverse="true"  cascade="all">
+            <key column="theme_id"/>
+            <many-to-many column="class_id"
+                          class="by.itacademy.mikhalevich.icourse.model.Group"/>
+        </set>
+
+    </class>
+</hibernate-mapping>

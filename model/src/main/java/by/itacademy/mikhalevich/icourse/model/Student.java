@@ -1,27 +1,21 @@
 package by.itacademy.mikhalevich.icourse.model;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class Student extends AbstractEntity<Integer>{
 
     private String name;
     private String login;
     private String password;
-    private int role;
-    private HashMap<Integer, Integer> marks = new HashMap<>();
+    private Role role;
+    private Set<Mark> marks = new HashSet<>();
+    private Set<Group> groups = new HashSet<>();
 
     public Student withId(Integer id){
         setId(id);
@@ -40,14 +34,21 @@ public class Student extends AbstractEntity<Integer>{
         setPassword(password);
         return this;
     }
-    public Student withRole(int role){
+    public Student withRole(Role role){
         setRole(role);
         return this;
     }
 
-    public Student addMark(Integer themeId, Integer mark){
+    public Student addMark(Mark mark){
         if(mark!=null){
-            marks.put(themeId, mark);
+            marks.add(mark);
+        }
+        return this;
+    }
+
+    public Student addGroup(Group group){
+        if(group!=null){
+            groups.add(group);
         }
         return this;
     }

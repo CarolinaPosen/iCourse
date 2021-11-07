@@ -1,5 +1,7 @@
 package by.itacademy.mikhalevich.icourse.jdbc;
 
+import by.itacademy.mikhalevich.icourse.model.Mark;
+import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Student;
 import lombok.extern.slf4j.Slf4j;
 
@@ -7,6 +9,8 @@ import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -15,7 +19,7 @@ public class StudentRepositoryPostgres extends AbstractRepository<Student> {
     //language=PostgreSQL
     private static final String SELECT_FROM_STUDENT_ALL_FIELDS =
             "select s.id id, s.name title, s.login log, s.password pass, s.role_id role_id," +
-                    " stg.student_mark mark, stg.theme_id theme_id "+
+                    " stg.student_mark mark, stg.theme_id theme_id " +
                     " from student s " +
                     " join student_theme_group stg" +
                     " on s.id = stg.student_id";
@@ -95,9 +99,14 @@ public class StudentRepositoryPostgres extends AbstractRepository<Student> {
                     .withName(rs.getString("title"))
                     .withLogin(rs.getString("log"))
                     .withPassword(rs.getString("pass"))
-                    .withRole(rs.getInt("role_id")));
+                    .withRole(new Role()
+                            .withId(rs.getInt("role_id"))
+                            .withName("Role")));
 
-            studentMap.get(sId).addMark(rs.getInt("theme_id"), rs.getInt("mark"));
+            studentMap.get(sId).addMark(new Mark()
+                    .withId(rs.getInt("theme_id"))
+                    .withMark(777)
+                    .withDate(Timestamp.valueOf(LocalDateTime.now())));
 
         }
         return studentMap;

@@ -27,6 +27,10 @@
         <!-- mapping files -->
         <mapping resource="Role.hbm.xml"/>
         <mapping resource="Trainer.hbm.xml"/>
+        <mapping resource="Student.hbm.xml"/>
+        <mapping resource="Class.hbm.xml"/>
+        <mapping resource="Theme.hbm.xml"/>
+        <mapping resource="Mark.hbm.xml"/>
 
 
     </session-factory>

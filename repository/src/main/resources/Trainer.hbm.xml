@@ -11,20 +11,14 @@
             <generator class="identity"/>
         </id>
 
+
         <property name="name" column="name"/>
         <property name="login" column="login"/>
         <property name="password" column="password"/>
 
-        <one-to-one name="role" class="by.itacademy.mikhalevich.icourse.model.Role" cascade="all" />
-
-<!--        <many-to-one name="role" class="by.itacademy.mikhalevich.icourse.model.Role" fetch="select">-->
-<!--            <column name="id" not-null="true" />-->
-<!--        </many-to-one>-->
-
-<!--        <set name="role" table="role" inverse="true">
-            <key column="department_id"/>
-            <many-to-many column="employee_id" class="com.dbit.model.Employee"/>
-        </set>-->
+        <many-to-one name="role" class="by.itacademy.mikhalevich.icourse.model.Role"
+                     column="role_id"
+                     cascade="all" />
 
     </class>
 </hibernate-mapping>

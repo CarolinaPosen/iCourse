@@ -13,12 +13,17 @@
 
         <property name="title" column="title"/>
 
-        <set name="groups" table="student_theme_class"
+        <set name="groups" table="theme_class"
              inverse="true"  cascade="all">
             <key column="theme_id"/>
             <many-to-many column="class_id"
                           class="by.itacademy.mikhalevich.icourse.model.Group"/>
         </set>
+
+<!--        <set name="marks" cascade="all" >
+            <key column="theme_id" not-null="false"/>
+            <one-to-many class="by.itacademy.mikhalevich.icourse.model.Mark"/>
+        </set>-->
 
     </class>
 </hibernate-mapping>

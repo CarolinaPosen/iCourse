@@ -1,20 +1,11 @@
 package by.itacademy.mikhalevich.icourse.generator;
 
 import by.itacademy.mikhalevich.icourse.model.*;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 import javax.persistence.*;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.SystemException;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Set;
 
 public class TestDataGenerator {
@@ -41,120 +32,177 @@ public class TestDataGenerator {
                 .withName("Красильникова Любава Аристарховна")
                 .withLogin("Ethande@google.com")
                 .withPassword("Asp")
-                .withRole(admin);
+                .withRole(manager);
 
         Trainer trainer3 = new Trainer()
                 .withName("Сафонова Габи Авксентьевна")
                 .withLogin("Noahchie@mail.ru")
                 .withPassword("Asphodel")
-                .withRole(admin);
-
-        Trainer trainer4 = new Trainer()
-                .withName("Иванов Иван Иванович")
-                .withLogin("Ivanox@ivan.iva")
-                .withPassword("IVNV")
                 .withRole(manager);
 
+        Set<Theme> themes0 = new HashSet<>();
+        Theme theme0 = new Theme();
+        theme0.setTitle("ПРОЕКТИРОВАНИЕ 3-Х УРОВНЕВОЙ АРХИТЕКТУРЫ");
+        Theme theme1 = new Theme();
+        theme1.setTitle("ОСНОВЫ APACHE MAVEN");
+        Theme theme2 = new Theme();
+        theme2.setTitle("APACHE TOMCAT СЕРВЕР");
+
+        Set<Theme> themes1 = new HashSet<>();
+        Theme theme3 = new Theme();
+        theme3.setTitle("ОСНОВЫ GIT");
+        Theme theme4 = new Theme();
+        theme4.setTitle("Работа с базами данных");
+        Theme theme5 = new Theme();
+        theme5.setTitle("Сервлеты");
+
+        Set<Theme> themes2 = new HashSet<>();
+        Theme theme6 = new Theme();
+        theme6.setTitle("ОСНОВЫ GIT");
+        Theme theme7 = new Theme();
+        theme7.setTitle("Работа с базами данных");
+        Theme theme8 = new Theme();
+        theme8.setTitle("Сервлеты");
+
+        themes0.add(theme0);
+        themes0.add(theme1);
+        themes0.add(theme2);
+
+        themes1.add(theme3);
+        themes1.add(theme4);
+        themes1.add(theme5);
+
+        themes2.add(theme6);
+        themes2.add(theme7);
+        themes2.add(theme8);
+
+
         Student student0 = new Student()
-                .withName("Student Stufent Student")
-                .withLogin("Student@stu.stu")
-                .withPassword("STDNT")
+                .withName("Осипов Вилен")
+                .withLogin("Asp@google.com")
+                .withPassword("Asp")
                 .withRole(user);
+
+        student0.setMarks(getMarks(themes0));
 
         Student student1 = new Student()
-                .withName("Denisov Denis Denisovich")
-                .withLogin("Denis@den.den")
-                .withPassword("DNS")
+                .withName("Рыбаков Тимофей")
+                .withLogin("Odel@yandex.ru")
+                .withPassword("Odel")
                 .withRole(user);
 
+        student1.setMarks(getMarks(themes0));
+
         Student student2 = new Student()
-                .withName("Anutina Ania Annovna")
+                .withName("Исаков Савелий")
                 .withLogin("Ania@ann.an")
                 .withPassword("NN")
                 .withRole(user);
 
-        Mark mark0 = new Mark()
-                .withMark(100)
-                .withDate(Timestamp.valueOf(LocalDateTime.now()));
+        student2.setMarks(getMarks(themes0));
 
-        Mark mark1 = new Mark()
-                .withMark(10)
-                .withDate(Timestamp.valueOf(LocalDateTime.now()));
+        Set<Student> students0 = new HashSet<>();
+        students0.add(student0);
+        students0.add(student1);
+        students0.add(student2);
 
-        Mark mark2 = new Mark()
-                .withMark(65)
-                .withDate(Timestamp.valueOf(LocalDateTime.now()));
-
-        Mark mark3 = new Mark()
-                .withMark(70)
-                .withDate(Timestamp.valueOf(LocalDateTime.now()));
-
-        Set<Mark> marks = new HashSet<>();
-        marks.add(mark0);
-        marks.add(mark1);
-        marks.add(mark2);
-        marks.add(mark3);
 
         Student student3 = new Student()
-                .withName("Shishkin Maksim")
-                .withLogin("maks@maks.mk")
-                .withPassword("Maks")
+                .withName("Исаков Савелий")
+                .withLogin("Camellia@tut.by")
+                .withPassword("Camellia")
                 .withRole(user);
 
-        student3.setMarks(marks);
-        student2.setMarks(marks);
+        student3.setMarks(getMarks(themes1));
 
-        Set<Student> students = new HashSet<>();
-        students.add(student0);
-        students.add(student1);
-        students.add(student2);
-        students.add(student3);
+        Student student4 = new Student()
+                .withName("Вишняков Евгений")
+                .withLogin("Halcyo@tut.by")
+                .withPassword("Halcyo")
+                .withRole(user);
 
-        Theme theme0 = new Theme();
-        theme0.setTitle("Theme3");
-        Theme theme1 = new Theme();
-        theme0.setTitle("Theme2");
-        Theme theme2 = new Theme();
-        theme0.setTitle("Theme1");
+        student4.setMarks(getMarks(themes1));
 
-        Set<Theme> themes = new HashSet<>();
-        themes.add(theme0);
-        themes.add(theme1);
-        themes.add(theme2);
+        Student student5 = new Student()
+                .withName("Нестерова Жюли")
+                .withLogin("Anem@google.com")
+                .withPassword("Anem")
+                .withRole(user);
+
+        student5.setMarks(getMarks(themes1));
+
+        Set<Student> students1 = new HashSet<>();
+        students1.add(student3);
+        students1.add(student4);
+        students1.add(student5);
+
+        Student student6 = new Student()
+                .withName("Фомичёва Зинаида")
+                .withLogin("Chalice@yandex.ru")
+                .withPassword("Chalice")
+                .withRole(user);
+        student6.setMarks(getMarks(themes2));
+
+        Student student7 = new Student()
+                .withName("Родионова Милена")
+                .withLogin("Fawn@mail.ru")
+                .withPassword("Fawn")
+                .withRole(user);
+
+        student7.setMarks(getMarks(themes2));
+
+        Student student8 = new Student()
+                .withName("Нестерова Жюли")
+                .withLogin("Anem@google.com")
+                .withPassword("Anem")
+                .withRole(user);
+
+        student8.setMarks(getMarks(themes2));
+
+        Student student9 = new Student()
+                .withName("Самойлова Жаклин")
+                .withLogin("Tranquil@mail.ru")
+                .withPassword("Tranquil")
+                .withRole(user);
+
+        student9.setMarks(getMarks(themes2));
+
+        Student student10 = new Student()
+                .withName("Родионова Милена")
+                .withLogin("Fawn@mail.ru")
+                .withPassword("Fawn")
+                .withRole(user);
+
+        student10.setMarks(getMarks(themes2));
+
+        Set<Student> students2 = new HashSet<>();
+        students2.add(student6);
+        students2.add(student7);
+        students2.add(student8);
+        students2.add(student9);
+        students2.add(student10);
 
         Group group0 = new Group();
         group0.setTitle("A1");
-        group0.setTrainer(trainer2);
-        group0.setStudents(students);
-        group0.setThemes(themes);
+        group0.setTrainer(trainer1);
+        group0.setStudents(students0);
+        group0.setThemes(themes0);
 
         Group group1 = new Group();
-        group1.setTitle("Group1");
-        group1.setTrainer(trainer3);
-        group1.setStudents(students);
-        group1.setThemes(themes);
+        group1.setTitle("B2");
+        group1.setTrainer(trainer2);
+        group1.setStudents(students1);
+        group1.setThemes(themes1);
 
-        Group group2 = new Group()
-                .withId(3)
-                .withTitle("C3")
-                .withTeacher(trainer2);
+        Group group2 = new Group();
+        group2.setTitle("B2");
+        group2.setTrainer(trainer3);
+        group2.setStudents(students2);
+        group2.setThemes(themes2);
 
         em.persist(group0);
         em.persist(group1);
-//        em.persist(group2);
-//        em.persist(trainer2);
-//        em.persist(trainer4);
-//        em.persist(student0);
-//        em.persist(student1);
-//        em.persist(student2);
-
-//        TypedQuery<Trainer> oneTrainerQuery = em.createQuery("from Trainer where name = 'Svetlana Borisovna Ivanova'", Trainer.class);
-//        Trainer trainer = oneTrainerQuery.getSingleResult();
-//
-//
-//        System.out.println(trainer);
-        //System.out.println(role);
-
+        em.persist(group2);
         tx.commit();
         em.close();
 
@@ -167,20 +215,20 @@ public class TestDataGenerator {
 
         try {
             tx.begin();
+            Query q5 = em.createQuery("DELETE FROM Mark ");
             Query q0 = em.createQuery("DELETE FROM Group ");
             Query q1 = em.createQuery("DELETE FROM Student");
             Query q2 = em.createQuery("DELETE FROM Trainer ");
             Query q3 = em.createQuery("DELETE FROM Role");
             Query q4 = em.createQuery("DELETE FROM Theme");
-            Query q5 = em.createQuery("DELETE FROM Mark ");
 //            Query q4 = em.createQuery("DELETE FROM BomItem");
 
+            q5.executeUpdate();
             q0.executeUpdate();
             q1.executeUpdate();
             q2.executeUpdate();
             q3.executeUpdate();
             q4.executeUpdate();
-            q5.executeUpdate();
 
         } catch (SecurityException | IllegalStateException | RollbackException e) {
             e.printStackTrace();
@@ -190,4 +238,23 @@ public class TestDataGenerator {
         }
 
     }
+
+    private static Set<Mark> getMarks(Set<Theme> themes) {
+        Set<Mark> marks = new HashSet<>();
+
+        long offset = Timestamp.valueOf("2020-01-01 00:00:00").getTime();
+        long end = Timestamp.valueOf("2022-01-01 00:00:00").getTime();
+        long diff = end - offset + 1;
+
+        Iterator<Theme> i = themes.iterator();
+        while (i.hasNext()) {
+            marks.add(new Mark()
+                    .withMark((int) (Math.random() * 100))
+                    .withDate(new Timestamp(offset + (long) (Math.random() * diff)))
+                    .withTheme(i.next()));
+        }
+
+        return marks;
+    }
+
 }

@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.util.*;
 
+@ToString(callSuper = true, exclude = "marks")
+@EqualsAndHashCode(callSuper = true, exclude = "marks")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -46,12 +48,12 @@ public class Student extends AbstractEntity<Integer>{
         return this;
     }
 
-    public Student addGroup(Group group){
+/*    public Student addGroup(Group group){
         if(group!=null){
             groups.add(group);
         }
         return this;
-    }
+    }*/
 
     @Override
     public String toString() {

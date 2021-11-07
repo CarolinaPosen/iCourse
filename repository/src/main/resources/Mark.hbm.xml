@@ -14,5 +14,13 @@
         <property name="mark" column="mark"/>
         <property name="date" column="date"/>
 
+<!--        <many-to-one name="student" class="by.itacademy.mikhalevich.icourse.model.Student"-->
+<!--                     column="student_id"-->
+<!--                     cascade="all" />-->
+
+        <many-to-one name="theme" class="by.itacademy.mikhalevich.icourse.model.Theme"
+                     column="theme_id"
+                     cascade="all" />
+
     </class>
 </hibernate-mapping>

@@ -13,6 +13,7 @@ import java.util.Set;
 public class Theme extends AbstractEntity {
     private String title;
     private Set<Group> groups = new HashSet<>();
+   // private Set<Mark> marks = new HashSet<>();
 
     public Theme withId(Integer id){
         setId(id);

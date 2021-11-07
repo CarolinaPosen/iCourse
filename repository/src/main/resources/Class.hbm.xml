@@ -17,14 +17,14 @@
                      column="teacher_id"
                      cascade="all" />
 
-        <set name="students" table="student_theme_class"
+        <set name="students" table="student_class"
              inverse="false"  cascade="all">
             <key column="class_id"/>
             <many-to-many column="student_id"
                           class="by.itacademy.mikhalevich.icourse.model.Student"/>
         </set>
 
-        <set name="themes" table="student_theme_class"
+        <set name="themes" table="theme_class"
              inverse="false"  cascade="all">
             <key column="class_id"/>
             <many-to-many column="theme_id"

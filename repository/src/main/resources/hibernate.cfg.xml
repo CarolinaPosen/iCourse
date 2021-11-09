@@ -31,7 +31,7 @@
         <mapping resource="Class.hbm.xml"/>
         <mapping resource="Theme.hbm.xml"/>
         <mapping resource="Mark.hbm.xml"/>
-
+        <mapping resource="Salary.hbm.xml"/>
 
     </session-factory>
 

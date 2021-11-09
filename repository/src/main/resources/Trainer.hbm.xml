@@ -19,5 +19,12 @@
                      column="role_id"
                      cascade="all" />
 
+        <set name="salaries" cascade="all">
+            <key column="teacher_id" not-null="false"/>
+            <one-to-many class="by.itacademy.mikhalevich.icourse.model.Salary"/>
+        </set>
+
+
+
     </class>
 </hibernate-mapping>

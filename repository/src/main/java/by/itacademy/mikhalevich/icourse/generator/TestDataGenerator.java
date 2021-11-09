@@ -3,6 +3,7 @@ package by.itacademy.mikhalevich.icourse.generator;
 import by.itacademy.mikhalevich.icourse.model.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -27,18 +28,21 @@ public class TestDataGenerator {
                 .withLogin("Noahchie@mail.ru")
                 .withPassword("Asphodel")
                 .withRole(admin);
+        trainer1.setSalaries(getSalaries());
 
         Trainer trainer2 = new Trainer()
                 .withName("Красильникова Любава Аристарховна")
                 .withLogin("Ethande@google.com")
                 .withPassword("Asp")
                 .withRole(manager);
+        trainer2.setSalaries(getSalaries());
 
         Trainer trainer3 = new Trainer()
                 .withName("Сафонова Габи Авксентьевна")
                 .withLogin("Noahchie@mail.ru")
                 .withPassword("Asphodel")
                 .withRole(manager);
+        trainer3.setSalaries(getSalaries());
 
         Set<Theme> themes0 = new HashSet<>();
         Theme theme0 = new Theme();
@@ -215,20 +219,21 @@ public class TestDataGenerator {
 
         try {
             tx.begin();
-            Query q5 = em.createQuery("DELETE FROM Mark ");
-            Query q0 = em.createQuery("DELETE FROM Group ");
-            Query q1 = em.createQuery("DELETE FROM Student");
-            Query q2 = em.createQuery("DELETE FROM Trainer ");
-            Query q3 = em.createQuery("DELETE FROM Role");
-            Query q4 = em.createQuery("DELETE FROM Theme");
-//            Query q4 = em.createQuery("DELETE FROM BomItem");
+            Query q0 = em.createQuery("DELETE FROM Salary ");
+            Query q1 = em.createQuery("DELETE FROM Mark ");
+            Query q2 = em.createQuery("DELETE FROM Group ");
+            Query q3 = em.createQuery("DELETE FROM Student");
+            Query q4 = em.createQuery("DELETE FROM Trainer ");
+            Query q5 = em.createQuery("DELETE FROM Role");
+            Query q6 = em.createQuery("DELETE FROM Theme");
 
-            q5.executeUpdate();
             q0.executeUpdate();
             q1.executeUpdate();
             q2.executeUpdate();
             q3.executeUpdate();
             q4.executeUpdate();
+            q5.executeUpdate();
+            q6.executeUpdate();
 
         } catch (SecurityException | IllegalStateException | RollbackException e) {
             e.printStackTrace();
@@ -255,6 +260,21 @@ public class TestDataGenerator {
         }
 
         return marks;
+    }
+
+    private static Set<Salary> getSalaries() {
+        Set<Salary> salaries = new HashSet<>();
+
+        long offset = Timestamp.valueOf("2020-01-01 00:00:00").getTime();
+        long end = Timestamp.valueOf("2022-01-01 00:00:00").getTime();
+        long diff = end - offset + 1;
+
+        for (int i = 0; i < 12; i++) {
+            salaries.add(new Salary()
+                    .withSalary(new BigDecimal (Math.random() * 1000))
+                    .withDate(new Timestamp(offset + (long) (Math.random() * diff))));
+        }
+        return salaries;
     }
 
 }

@@ -1,9 +1,6 @@
 package by.itacademy.mikhalevich.icourse.jdbc;
 
-import by.itacademy.mikhalevich.icourse.model.Group;
-import by.itacademy.mikhalevich.icourse.model.Salary;
-import by.itacademy.mikhalevich.icourse.model.Student;
-import by.itacademy.mikhalevich.icourse.model.Teacher;
+import by.itacademy.mikhalevich.icourse.model.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
@@ -117,23 +114,31 @@ public class GroupRepositoryPostgres extends AbstractRepository<Group> {
             Integer tId = rs.getInt(T_ID);
 
             HashMap<Integer, Student> studentsMap = new HashMap<>();
-            HashMap<Integer, String> themesMap = new HashMap<>();
+            HashMap<Integer, Theme> themesMap = new HashMap<>();
 
             groupMap.putIfAbsent(gId, new Group()
                     .withId(gId)
                     .withTitle(rs.getString(TITLE))
-                    .withTeacher(new Teacher(tId, rs.getString(T_NAME), 30, List.of(new Salary())))
-                    .addStudent(sId, putIfAbsentAndReturn(studentsMap, sId,
+                    .withTeacher(new Trainer()
+                            .withId(tId)
+                            .withName(rs.getString("t_name"))
+                            .withLogin(rs.getString("t_login")))
+                    .addStudent(putIfAbsentAndReturn(studentsMap, sId,
                             new Student()
                                     .withId(sId)
                                     .withName(rs.getString(TITLE))
                                     .withLogin(rs.getString(LOGIN))
                                     .withPassword(rs.getString(PASSWORD))
-                                    .withRole(rs.getInt(ROLE_ID))))
-                    .addTheme(thId, putIfAbsentAndReturn(themesMap, thId, rs.getString(THEME_TITLE))));
+                                    .withRole(new Role()
+                                            .withId(rs.getInt("role_id"))
+                                            .withName("Role"))))
+                    .addTheme(putIfAbsentAndReturn(themesMap, thId,
+                            new Theme()
+                                    .withId(thId)
+                                    .withTitle(rs.getString(THEME_TITLE)))));
 
-            groupMap.computeIfPresent(gId, (id, groups)->groups.addTheme(thId, themesMap.get(thId)));
-            groupMap.computeIfPresent(gId, (id, groups)->groups.addStudent(sId, studentsMap.get(sId)));
+            groupMap.computeIfPresent(gId, (id, groups) -> groups.addTheme(themesMap.get(thId)));
+            groupMap.computeIfPresent(gId, (id, groups) -> groups.addStudent(studentsMap.get(sId)));
 
         }
         return groupMap;

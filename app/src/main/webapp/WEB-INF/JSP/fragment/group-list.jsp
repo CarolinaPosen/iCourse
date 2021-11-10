@@ -11,7 +11,7 @@
 
             <p class="id text-center font-weight-lighter">${group.key}</p>
             <h3 class="name text-center font-weight-lighter">${group.value.title}</h3>
-            <p class="age text-center font-weight-lighter">${group.value.teacher}</p>
+            <p class="age text-center font-weight-lighter">${group.value.trainer}</p>
             <p class="salary text-center font-weight-lighter">${group.value.students}</p>
             <p class="salary text-center font-weight-lighter">${group.value.themes}</p>
 
@@ -23,7 +23,7 @@
             <form action="/web-app/salary" method="post">
                 <input name="id" type="hidden" value="${group.key}" class="form-control">
                 <input name="name" type="hidden" value="${group.value.title}" class="form-control">
-                <input name="age" type="hidden" value="${group.value.teacher}" class="form-control">
+                <input name="age" type="hidden" value="${group.value.trainer}" class="form-control">
                 <input name="salary" type="hidden" value="${group.value.students}" class="form-control">
                 <button type="submit" class="btn btn-info btn-sm btn-block">Average salary</button>
             </form>

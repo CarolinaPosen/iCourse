@@ -15,16 +15,16 @@
         <property name="login" column="login"/>
         <property name="password" column="password"/>
 
-        <one-to-one name="role" class="by.itacademy.mikhalevich.icourse.model.Role" cascade="all" />
+        <many-to-one name="role" class="by.itacademy.mikhalevich.icourse.model.Role"
+                     column="role_id"
+                     cascade="all" />
 
-<!--        <many-to-one name="role" class="by.itacademy.mikhalevich.icourse.model.Role" fetch="select">-->
-<!--            <column name="id" not-null="true" />-->
-<!--        </many-to-one>-->
+        <set name="salaries" cascade="all">
+            <key column="teacher_id" not-null="false"/>
+            <one-to-many class="by.itacademy.mikhalevich.icourse.model.Salary"/>
+        </set>
 
-<!--        <set name="role" table="role" inverse="true">
-            <key column="department_id"/>
-            <many-to-many column="employee_id" class="com.dbit.model.Employee"/>
-        </set>-->
+
 
     </class>
 </hibernate-mapping>

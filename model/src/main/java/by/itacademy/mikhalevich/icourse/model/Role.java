@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -14,7 +15,8 @@ import java.util.Set;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Role extends AbstractEntity<Integer>{
         private String title;
-        private Set<Trainer> trainers = new LinkedHashSet<>();
+//        Set<Trainer> trainers = new HashSet<>();
+
 
         public Role withId(Integer id){
             setId(id);
@@ -26,10 +28,10 @@ public class Role extends AbstractEntity<Integer>{
             return this;
         }
 
-    public Role addTrainer(Trainer trainer) {
-        trainers.add(trainer);
-        return this;
-    }
+//    public Role addTrainer(Trainer trainer) {
+//        trainers.add(trainer);
+//        return this;
+//    }
 
         @Override
         public String toString() {

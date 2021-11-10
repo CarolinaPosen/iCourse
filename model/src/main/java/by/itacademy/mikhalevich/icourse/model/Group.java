@@ -3,16 +3,17 @@ package by.itacademy.mikhalevich.icourse.model;
 import lombok.*;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
 public class Group extends AbstractEntity<Integer> {
     private String title;
-    private Teacher teacher;
-    private HashMap<Integer, String> themes = new HashMap<>();
-    private HashMap<Integer, Student> students = new HashMap<>();
+    private Trainer trainer;
+    private Set<Theme> themes = new HashSet<>();
+    private Set<Student> students = new HashSet<>();
 
     public Group withId(Integer id){
         setId(id);
@@ -24,18 +25,18 @@ public class Group extends AbstractEntity<Integer> {
         return this;
     }
 
-    public Group withTeacher(Teacher teacher){
-        setTeacher(teacher);
+    public Group withTeacher(Trainer trainer){
+        setTrainer(trainer);
         return this;
     }
 
-    public Group addTheme(Integer id, String theme){
-        themes.put(id, theme);
+    public Group addTheme(Theme theme){
+        themes.add(theme);
         return this;
     }
 
-    public Group addStudent(Integer id, Student student){
-        students.put(id, student);
+    public Group addStudent(Student student){
+        students.add(student);
         return this;
     }
 

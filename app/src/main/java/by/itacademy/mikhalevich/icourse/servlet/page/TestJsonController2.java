@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @WebServlet("/json2")
 public class TestJsonController2 extends JsonController {
@@ -59,14 +60,13 @@ public class TestJsonController2 extends JsonController {
         //ObjectMapper mapper = new ObjectMapper();
         //Trainer trainer = mapper.readValue(body, Trainer.class);
 
-
-
         Trainer trainer = toEntity(Trainer.class, req);
 
-        getTeacherService().createTrainer(trainer);
-
-        writeEntityToBody(getTeacherService().createTrainer(trainer), resp);
-        writeEntityToBody(trainer, resp);
+        System.out.println(trainer);
+//
+//        getTeacherService().createTrainer(trainer);
+//        writeEntityToBody(getTeacherService().createTrainer(trainer), resp);
+//        writeEntityToBody(trainer, resp);
     }
 
     @Override

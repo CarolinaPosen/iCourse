@@ -5,60 +5,48 @@
 <popup:update-salary-popup/>
 <c:set var="month" value="0"/>
 
-<div id="teacherList">
-
-    <h1>NAME: ${requestScope.teacher.name}</h1>
-    <h2>AVERAGE SALARY: ${requestScope.average}</h2>
-
-    <div class="row load-more">
-        <form action="/web-app/salary" method="post">
-            <h2>COUNT OF MONTH:<input name="count" value="12" class="form-control"></h2><br>
-
-            <c:forEach var="salary" items="${requestScope.teacher.salaries}">
-
-                <%-- <input name="id" type="hidden" value="${requestScope.teacher.id}" class="form-control">
-                 <input name="name" type="hidden" value="${requestScope.teacher.name}" class="form-control">
-                 <input name="login" type="hidden" value="${requestScope.teacher.login}" class="form-control">
-                 <input name="password" type="hidden" value="${requestScope.teacher.password}" class="form-control">
-
-                     <c:set var="month" value="${month + 1}"/>
-                     DATE:${salary.date}
-                     <input type="number" name="month${month}" value="${salary.salary}" class="form-control"><br>--%>
-
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div id="salary${salary.id}" class="card mb-12 shadow-sm">
-
-                        <h3 class="id text-center font-weight-lighter">${salary.id}</h3>
-                        <p class="salary text-center font-weight-lighter">${salary.salary}</p>
-                        <p class="date text-center font-weight-lighter">${salary.date}</p>
-
-
-                        <button type="button" class="btn change-salary-btn btn-success btn-sm btn-block"
-                                data-id-salary="${salary.id}">Change salary
-                        </button>
-
-
-                        <form action="/web-app/delete-salary" method="post">
-                            <input name="id" type="hidden" value="${salary.id}" class="form-control">
-                            <button type="submit" class="btn btn-warning btn-sm btn-block">Delete</button>
-                        </form>
-                    </div>
-                </div>
-
-            </c:forEach>
-
-<%--            <script>--%>
-<%--                var jsonBlob = {--%>
-<%--                    <c:forEach items="${requestScope.teacher.salaries}" var="state" varStatus="loop">--%>
-<%--                    "${state.id}": ${state.salary} ${not loop.last ? ',' : ''}--%>
-<%--                    </c:forEach>--%>
-<%--                };--%>
-<%--            </script>--%>
-
-            <button type="submit" class="btn btn-info btn-sm btn-block">Change average salary</button>
-        </form>
+<div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-4">
+            <div class="card mb-8 shadow-sm">
+            <h1>NAME: ${requestScope.teacher.name}</h1>
+            <h2>AVERAGE SALARY: ${requestScope.average}</h2>
+            </div>
+            <div class="card mb-4 shadow-sm">
+                <form action="/web-app/salary" method="post">
+                    <h2>COUNT OF MONTH:<input name="month" class="form-control">
+                        <input name="id" type="hidden" value="${requestScope.teacher.id}"></h2>
+                    <button type="submit" class="btn btn-info btn-sm btn-block">Calculate average salary</button>
+                </form>
+            </div>
+        </div>
     </div>
+
+    <br>
+
+    <div class="row">
+        <c:forEach var="salary" items="${requestScope.teacher.salaries}">
+            <div class="col-xs-12 col-sm-8 col-md-4">
+
+                <div id="salary${salary.id}" class="card mb-4 shadow-sm">
+
+                    <p class="id font-weight-lighter">${salary.id}</p>
+                    <h2 class="salary  font-weight-lighter">${salary.salary}</h2>
+                    <p class="date  font-weight-lighter">${salary.date}</p>
+                    <p class="trainer  font-weight-lighter">${requestScope.teacher.id}</p>
+
+                    <button type="button" class="btn change-salary-btn btn-success btn-block "
+                            data-id-salary="${salary.id}">Change salary
+                    </button>
+
+                    <form action="${pageContext.request.contextPath}/delete-salary" method="post">
+                        <input name="id" type="hidden" value="${salary.id}" class="form-control">
+                        <input type="hidden" name="teacher" class="teacher" value="${requestScope.teacher.id}">
+                        <button type="submit" class="btn btn-warning btn-sm btn-block">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </c:forEach>
+    </div>
+
 </div>
-
-
-

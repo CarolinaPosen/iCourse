@@ -8,7 +8,6 @@ import java.util.Map;
 
 public class ListDataSource {
 
-
     private Map<Integer, Trainer> teachersMap;
 
     public ListDataSource() {

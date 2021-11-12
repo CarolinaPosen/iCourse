@@ -29,14 +29,13 @@ public class SignInController extends AbstractController {
 		if (SessionUtils.isCurrentAccountCreated(req)) {
 			RoutingUtils.redirect("/web-app/teachers", req, resp);
 		} else {
-
 			CurrentAccount currentAccount =
 					getAccountService().authentificate(req.getParameter("login"), req.getParameter("password"));
 
-			if (currentAccount!=null){
+			if (currentAccount != null){
 				SessionUtils.setCurrentAccount(req, currentAccount);
 				RoutingUtils.redirect("/web-app/teachers", req, resp);
-			}else{
+			} else {
 				req.getRequestDispatcher("/WEB-INF/JSP/page/sign-in.jsp").forward(req, resp);
 			}
 		}

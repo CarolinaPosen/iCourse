@@ -12,7 +12,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@EqualsAndHashCode(callSuper = true)
 public class Role extends AbstractEntity<Integer>{
         private String title;
 //        Set<Trainer> trainers = new HashSet<>();

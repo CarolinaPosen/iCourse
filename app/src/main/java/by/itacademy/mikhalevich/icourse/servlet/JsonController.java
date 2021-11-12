@@ -1,19 +1,11 @@
 package by.itacademy.mikhalevich.icourse.servlet;
 
-import by.itacademy.mikhalevich.icourse.model.Salary;
-import by.itacademy.mikhalevich.icourse.model.Teacher;
-import by.itacademy.mikhalevich.icourse.model.Trainer;
-import by.itacademy.mikhalevich.icourse.servlet.AbstractController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.Optional;
 import java.util.stream.Collectors;
 

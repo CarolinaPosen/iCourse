@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.generator;
 
+import by.itacademy.mikhalevich.icourse.jdbc.EntityManagerHelper;
 import by.itacademy.mikhalevich.icourse.model.*;
 
 import javax.persistence.*;
@@ -38,9 +39,9 @@ public class TestDataGenerator {
         trainer2.setSalaries(getSalaries());
 
         Trainer trainer3 = new Trainer()
-                .withName("Сафонова Габи Авксентьевна")
-                .withLogin("Noahchie@mail.ru")
-                .withPassword("Asphodel")
+                .withName("Волков Евгений Мэлорович")
+                .withLogin("Mica@yandex.ru")
+                .withPassword("Odel")
                 .withRole(manager);
         trainer3.setSalaries(getSalaries());
 
@@ -62,11 +63,11 @@ public class TestDataGenerator {
 
         Set<Theme> themes2 = new HashSet<>();
         Theme theme6 = new Theme();
-        theme6.setTitle("ОСНОВЫ GIT");
+        theme6.setTitle("Обмен информацией. Cookie и сессии");
         Theme theme7 = new Theme();
-        theme7.setTitle("Работа с базами данных");
+        theme7.setTitle("Обработка данных сервлетами");
         Theme theme8 = new Theme();
-        theme8.setTitle("Сервлеты");
+        theme8.setTitle("Java Server Pages");
 
         themes0.add(theme0);
         themes0.add(theme1);
@@ -199,7 +200,7 @@ public class TestDataGenerator {
         group1.setThemes(themes1);
 
         Group group2 = new Group();
-        group2.setTitle("B2");
+        group2.setTitle("C3");
         group2.setTrainer(trainer3);
         group2.setStudents(students2);
         group2.setThemes(themes2);

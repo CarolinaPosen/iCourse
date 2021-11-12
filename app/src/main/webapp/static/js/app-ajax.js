@@ -1,3 +1,39 @@
+// $(document).ready(function () {
+//     $('.change-salary-btn').click(function () {
+//         //var trainer = $('#data-id-trainer').val();
+//
+//         var idPerson = $(this).attr('data-id-trainer');
+//         var teacher = $('#teacher');
+//
+//         var id = teacher.find('.id').text();
+//
+//         alert("1MESSAGE!!"+id);
+//
+//     })
+// })
+
+/*function submitForm(thisObj, thisEvent) {
+    var name = $('#name').val();
+    var password = $('#password').val();
+
+    var myData = {
+        "mydata": {
+            "name": name,
+            "password": password
+        }
+    };
+    $.ajax({
+        type: "POST",
+        url: "/Aasd",
+        data: {
+            jsonData: JSON.stringify(myData)
+        },
+        dataType: "json"
+    });
+    return false;
+}*/
+
+
 // // вызов функции по завершению загрузки страницы
 // $(document).ready(function() {
 //     $('button').click(function() {
@@ -14,50 +50,15 @@
 //     });
 // });
 
-
-
-    $('.dog-btn').click(function() {
-
-        var idPerson = $(this).attr('data-id-teacher');
-        alert(idPerson)
-
-        var data = JSON.stringify({
-
-            "id": 108,
-            "name": "Сафонова Габи Авксентьевна",
-            "login": "Noahchie@mail.ru",
-            "password": "Asphodel",
-            "role": {
-            "id": 1,
-                "title": "Role"
-        },
-            "salaries": [
-            {
-                "id": 6,
-                "salary": 409,
-                "date": 1608591687451
-            },
-            {
-                "id": 15,
-                "salary": 370,
-                "date": 1614929519963
-            }
-            ]
-
-        });
-        $.ajax({
-            type: "POST",
-            url: '/web-app/json2',
-            dataType: 'json',
-            data: data,
-            success: function (responseData) {
-                // this prints out your data
-                console.log("successful", responseData);
-            }
-        })
-    });
-
-
-
-
-
+/*
+var data = JSON.stringify({name: 'dog'});
+$.ajax({
+    type: "POST",
+    url: 'http://localhost:8084/MyApp/JavaScriptInterface',
+    dataType: 'json',
+    data: data,
+    success: function (responseData) {
+        // this prints out your data
+        console.log("successful", responseData);
+    }
+})*/

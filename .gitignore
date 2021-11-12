@@ -1,6 +1,5 @@
 /.idea/
 *.class
-*.jpr
 *.jar
 *.iml
 /target/

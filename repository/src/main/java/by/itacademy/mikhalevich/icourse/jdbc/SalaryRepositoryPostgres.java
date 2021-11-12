@@ -80,6 +80,7 @@ public class SalaryRepositoryPostgres extends AbstractRepository<Salary> {
     public void updateLogic(Salary salary, PreparedStatement ps) throws SQLException {
         ps.setBigDecimal(1, salary.getSalary());
         ps.setTimestamp(2, salary.getDate());
+        ps.setInt(3, salary.getTrainer().getId());
     }
 
     @Override

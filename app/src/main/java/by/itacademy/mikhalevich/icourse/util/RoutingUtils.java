@@ -19,6 +19,6 @@ public final class RoutingUtils {
 	}
 
 	public static void redirect(String url, HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		resp.sendRedirect(url);
+		resp.sendRedirect(req.getContextPath() + url);
 	}
 }

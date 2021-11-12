@@ -10,5 +10,5 @@ public interface SalaryService {
     Map<Integer, Salary> updateSalary(Salary salary);
     Map<Integer, Salary> createSalary(Salary salary);
     Map<Integer, Salary> deleteSalary(Integer id);
-    Optional getSalaryById (Integer id);
+    Salary getSalaryById (Integer id);
 }

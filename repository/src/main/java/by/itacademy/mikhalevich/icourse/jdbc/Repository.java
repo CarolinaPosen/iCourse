@@ -7,6 +7,6 @@ import java.util.Optional;
 public interface Repository<T> {
     Map<Integer, T> findAll();
     Optional<T> find(int id);
-    T save(T entity);
+    T save(T entity, int parameterIndex);
     Optional<T> remove(T entity);
 }

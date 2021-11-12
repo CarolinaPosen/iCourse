@@ -68,8 +68,8 @@ public abstract class AbstractRepository<T extends AbstractEntity> implements Re
     }
 
     @Override
-    public T save(T entity) {
-        return entity.getId() == null ? insert(entity) : update(entity);
+    public T save(T entity, int parameterIndex) {
+        return entity.getId() == null ? insert(entity) : update(entity, parameterIndex);
     }
 
     private T insert(T entity) {
@@ -88,11 +88,11 @@ public abstract class AbstractRepository<T extends AbstractEntity> implements Re
         }
     }
 
-    private T update(T entity) {
+    private T update(T entity, int parameterIndex) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement ps = con.prepareStatement(updateSql())) {
             updateLogic(entity, ps);
-            ps.setInt(5, (Integer) entity.getId());
+            ps.setInt(parameterIndex, (Integer) entity.getId());
             if (ps.executeUpdate() > 0) {
                 return entity;
             }

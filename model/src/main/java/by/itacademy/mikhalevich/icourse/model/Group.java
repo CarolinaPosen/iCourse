@@ -9,6 +9,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Group extends AbstractEntity<Integer> {
     private String title;
     private Trainer trainer;

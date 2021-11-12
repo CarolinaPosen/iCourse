@@ -1,4 +1,4 @@
-package by.itacademy.mikhalevich.icourse.generator;
+package by.itacademy.mikhalevich.icourse.jdbc;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

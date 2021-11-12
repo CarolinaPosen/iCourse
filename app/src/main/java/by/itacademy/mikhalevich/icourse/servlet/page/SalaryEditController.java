@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.servlet.page;
 
+import by.itacademy.mikhalevich.icourse.model.Salary;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
 import by.itacademy.mikhalevich.icourse.servlet.AbstractController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Optional;
 
 @WebServlet("/salary-edit")
@@ -20,46 +22,22 @@ public class SalaryEditController extends AbstractController {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer id = Integer.parseInt(req.getParameter("id"));
-        BigDecimal averageSalary;
+        Integer trainerId = Integer.parseInt(req.getParameter("trainer"));
 
-        averageSalary = getTeacherService().averageSalary(id);
-        req.setAttribute("average", averageSalary);
+        Salary salary = getSalaryService().getSalaryById(id);
 
-/*        if (req.getParameter("month1") != null && trainer.isPresent()) {
+        Trainer trainer = getTeacherService().getTrainerById(trainerId);
 
-                Trainer updateTrainer = (Trainer) trainer.get();
-                updateTrainer
-                        .addSalary());
+        getSalaryService().updateSalary(new Salary()
+                .withId(id)
+                .withSalary(new BigDecimal(req.getParameter("salary")))
+                .withDate(salary.getDate())
+                .withTrainer(trainer));
 
-                getTeacherService().updateTrainer((updateTrainer));
+        Trainer updateTrainer = getTeacherService().getTrainerById(trainerId);
 
-
-
-                    Integer.parseInt(req.getParameter("age")),
-                    List.of(
-                            Integer.parseInt(req.getParameter("month1")),
-                            Integer.parseInt(req.getParameter("month2")),
-                            Integer.parseInt(req.getParameter("month3")),
-                            Integer.parseInt(req.getParameter("month4")),
-                            Integer.parseInt(req.getParameter("month5")),
-                            Integer.parseInt(req.getParameter("month6")),
-                            Integer.parseInt(req.getParameter("month7")),
-                            Integer.parseInt(req.getParameter("month8")),
-                            Integer.parseInt(req.getParameter("month9")),
-                            Integer.parseInt(req.getParameter("month10")),
-                            Integer.parseInt(req.getParameter("month11")),
-                            Integer.parseInt(req.getParameter("month12"))
-                    )));
-
-            averageSalary = getTeacherService().averageSalary
-                    (id, Integer.parseInt(req.getParameter("count")));
-            req.setAttribute("average", averageSalary);
-
-        }*/
-
-        Optional teacher = getTeacherService().getTrainerById(id);
-
-        req.setAttribute("teacher", teacher.get());
+        req.setAttribute("teacher", updateTrainer);
         RoutingUtils.forwardToPage("average.jsp", req, resp);
     }
+
 }

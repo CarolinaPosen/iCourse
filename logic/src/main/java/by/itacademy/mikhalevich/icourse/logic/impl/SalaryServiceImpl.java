@@ -4,13 +4,17 @@ import by.itacademy.mikhalevich.icourse.jdbc.Repository;
 import by.itacademy.mikhalevich.icourse.jdbc.SalaryRepositoryPostgres;
 import by.itacademy.mikhalevich.icourse.logic.SalaryService;
 import by.itacademy.mikhalevich.icourse.model.Salary;
+import by.itacademy.mikhalevich.icourse.model.Trainer;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
 import java.util.Map;
 import java.util.Optional;
 
+@Slf4j
 public class SalaryServiceImpl implements SalaryService {
 
+    public static final int PARAMETER_INDEX = 4;
     private Repository salaryRepository;
 
     public SalaryServiceImpl(DataSource dataSource) {
@@ -24,23 +28,32 @@ public class SalaryServiceImpl implements SalaryService {
 
     @Override
     public Map<Integer, Salary> updateSalary(Salary salary) {
-        salaryRepository.save(salary);
+        salaryRepository.save(salary, PARAMETER_INDEX);
         return null;
     }
 
     @Override
     public Map<Integer, Salary> createSalary(Salary salary) {
-        salaryRepository.save(salary);
+        salaryRepository.save(salary, PARAMETER_INDEX);
         return null;
     }
 
     @Override
     public Map<Integer, Salary> deleteSalary(Integer id) {
+        salaryRepository.remove(new Salary().withId(id));
         return null;
     }
 
     @Override
-    public Optional getSalaryById(Integer id) {
-        return salaryRepository.find(id);
+    public Salary getSalaryById(Integer id) {
+
+        Optional salary = salaryRepository.find(id);
+
+        if (salary.isPresent()) {
+            return (Salary) salary.get();
+        } else {
+            log.error("Salary id: "+ id +" not exists");
+            return null;
+        }
     }
 }

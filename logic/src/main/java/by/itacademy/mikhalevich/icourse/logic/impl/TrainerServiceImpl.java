@@ -6,6 +6,7 @@ import by.itacademy.mikhalevich.icourse.logic.TeacherService;
 import by.itacademy.mikhalevich.icourse.logic.calculating.Accounting;
 import by.itacademy.mikhalevich.icourse.model.Salary;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
 import java.math.BigDecimal;
@@ -15,8 +16,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class TrainerServiceImpl implements TeacherService {
 
+    public static final int PARAMETER_INDEX = 5;
     private Repository trainerRepository;
 
     public TrainerServiceImpl(DataSource dataSource) {
@@ -30,13 +33,13 @@ public class TrainerServiceImpl implements TeacherService {
 
     @Override
     public Map<Integer, Trainer> updateTrainer(Trainer trainer) {
-        trainerRepository.save(trainer);
+        trainerRepository.save(trainer, PARAMETER_INDEX);
         return null;
     }
 
     @Override
     public Map<Integer, Trainer> createTrainer(Trainer trainer) {
-        trainerRepository.save(trainer);
+        trainerRepository.save(trainer, PARAMETER_INDEX);
         return null;
     }
 
@@ -47,12 +50,20 @@ public class TrainerServiceImpl implements TeacherService {
     }
 
     @Override
-    public Optional getTrainerById(Integer id) {
-        return trainerRepository.find(id);
+    public Trainer getTrainerById(Integer id) {
+
+        Optional trainer = trainerRepository.find(id);
+
+        if (trainer.isPresent()) {
+            return (Trainer) trainer.get();
+        } else {
+            log.error("Trainer id: "+ id +" not exists");
+            return null;
+        }
     }
 
     @Override
-    public BigDecimal averageSalary(Integer id) {
+    public BigDecimal averageSalary(Integer id, int perMonth) {
 
         Optional<Trainer> optionalTrainer = trainerRepository.find(id);
         Trainer trainer = optionalTrainer.orElseGet(Trainer::new);
@@ -62,7 +73,7 @@ public class TrainerServiceImpl implements TeacherService {
                 .map(Salary::getSalary)
                 .collect(Collectors.toList());
 
-        BigDecimal averageSalary = Accounting.average(list, trainer.getSalaries().size());
+        BigDecimal averageSalary = Accounting.average(list, perMonth);
         return averageSalary;
     }
 }

@@ -4,30 +4,39 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="popup" %>
+<popup:update-student-popup/>
 
 <c:forEach var="student" items="${requestScope.students}">
     <div class="col-xs-12 col-sm-8 col-md-4">
         <div id="student${student.key}" class="card mb-4 shadow-sm">
 
-            <p class="id text-center font-weight-lighter">${student.key}</p>
+
             <h3 class="name text-center font-weight-lighter">${student.value.name}</h3>
-            <p class="age text-center font-weight-lighter">${student.value.login}</p>
-            <p class="salary text-center font-weight-lighter">${student.value.marks}</p>
+            <p class="login text-center font-weight-lighter">${student.value.login}</p>
+            <p class="password text-center font-weight-lighter">${student.value.password}</p>
+                <%--<p class="salary text-center font-weight-lighter">${teacher.value.salaries}</p>--%>
+            <p class="id text-center font-weight-lighter">${student.key}</p>
 
 
             <button type="button" class="btn change-btn btn-success btn-sm btn-block"
-                    data-id-teacher="${student.key}">Change attribute
+                    data-id-student="${student.key}">Change student data
             </button>
 
-            <form action="/web-app/salary" method="post">
+            <form action="${pageContext.request.contextPath}/salary" method="post">
                 <input name="id" type="hidden" value="${student.key}" class="form-control">
                 <input name="name" type="hidden" value="${student.value.name}" class="form-control">
-                <input name="age" type="hidden" value="${student.value.login}" class="form-control">
+                <input name="login" type="hidden" value="${student.value.login}" class="form-control">
                 <input name="salary" type="hidden" value="${student.value.marks}" class="form-control">
-                <button type="submit" class="btn btn-info btn-sm btn-block">Average salary</button>
+                <button type="submit" class="btn btn-info btn-sm btn-block">Show marks</button>
             </form>
 
-            <form action="/web-app/delete-teacher" method="post">
+<%--                <c:forEach var="mark" items="${student.value.marks}">--%>
+<%--                    <input name="mark" value="${mark.mark}" class="form-control">--%>
+<%--                    <input name="mark" value="${mark.theme.title}" class="form-control">--%>
+<%--                </c:forEach>--%>
+
+
+            <form action="${pageContext.request.contextPath}/delete-student" method="post">
                 <input name="id" type="hidden" value="${student.key}" class="form-control">
                 <button type="submit" class="btn btn-warning btn-sm btn-block">Delete</button>
             </form>

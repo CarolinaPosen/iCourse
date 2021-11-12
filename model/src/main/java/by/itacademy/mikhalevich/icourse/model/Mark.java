@@ -36,6 +36,6 @@ public class Mark extends AbstractEntity {
 
     @Override
     public String toString() {
-        return String.format("Mark [id=%s, mark=%s, date=%s]", getId(), mark, date);
+        return String.format("Mark [id=%s, mark=%s, date=%s, theme=%s]", getId(), mark, date, theme);
     }
 }

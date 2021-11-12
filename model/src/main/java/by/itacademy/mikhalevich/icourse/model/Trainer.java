@@ -12,7 +12,8 @@ import java.util.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@EqualsAndHashCode(callSuper = true, exclude = "salaries")
+
 public class Trainer extends AbstractEntity<Integer> {
     private String name;
     private String login;

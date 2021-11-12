@@ -1,20 +1,5 @@
 package by.itacademy.mikhalevich.icourse.logic.impl;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import by.itacademy.mikhalevich.icourse.logic.TeacherService;
-import by.itacademy.mikhalevich.icourse.logic.calculating.Accounting;
-import by.itacademy.mikhalevich.icourse.logic.exception.LogicalServerErrorException;
-import by.itacademy.mikhalevich.icourse.model.Teacher;
-import by.itacademy.mikhalevich.icourse.model.Trainer;
-import by.itacademy.mikhalevich.icourse.repository.ListDataSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 class TeacherServiceImpl {
 
  /*   private static final Logger LOGGER = LoggerFactory.getLogger(ServiceManager.class);
@@ -32,10 +17,10 @@ class TeacherServiceImpl {
 
     @Override
     public Map<Integer, Teacher> updateTeacher(Teacher teacher) {
-        if (teacher==null || teacher.getName().isEmpty()) {
+        if (teacher == null || teacher.getName().isEmpty()) {
             LOGGER.error("Can't update teacher");
             throw new LogicalServerErrorException("Can't update teacher");
-        }else{
+        } else {
             LOGGER.info("Update teachers attribute " + teacher);
             return getSortedTeachers(dataSource.updateTeacher(teacher));
         }

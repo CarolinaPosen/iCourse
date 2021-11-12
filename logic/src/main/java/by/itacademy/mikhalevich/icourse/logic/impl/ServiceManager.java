@@ -22,6 +22,12 @@ public class ServiceManager {
 	private final Properties applicationProperties = new Properties();
 	private BasicDataSource dataSource;
 
+	private final TeacherService teacherService;
+	private final StudentService studentService;
+	private final GroupService groupService;
+	private final SalaryService salaryService;
+	private final AccountService accountService;
+
 	public static ServiceManager getInstance(ServletContext context) {
 		ServiceManager instance = (ServiceManager) context.getAttribute("SERVICE_MANAGER");
 		if (instance == null) {
@@ -43,15 +49,10 @@ public class ServiceManager {
 	public SalaryService getSalaryService() {
 		return salaryService;
 	}
+
 	public AccountService getAccountService() {
 		return accountService;
 	}
-
-	private final TeacherService teacherService;
-	private final StudentService studentService;
-	private final GroupService groupService;
-	private final SalaryService salaryService;
-	private final AccountService accountService;
 
 	private ServiceManager(ServletContext context) {
 		loadApplicationProperties();

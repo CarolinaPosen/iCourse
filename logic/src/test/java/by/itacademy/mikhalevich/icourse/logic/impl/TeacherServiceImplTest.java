@@ -1,13 +1,5 @@
 package by.itacademy.mikhalevich.icourse.logic.impl;
 
-import by.itacademy.mikhalevich.icourse.logic.exception.LogicalServerErrorException;
-import by.itacademy.mikhalevich.icourse.model.Teacher;
-import by.itacademy.mikhalevich.icourse.repository.ListDataSource;
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Test;
-import java.util.*;
-
 public class TeacherServiceImplTest {
 
 /*    private ListDataSource dataSource = new ListDataSource();

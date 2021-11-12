@@ -1,6 +1,9 @@
 package by.itacademy.mikhalevich.icourse.model;
 
+import lombok.EqualsAndHashCode;
+
 import java.util.Objects;
+
 
 public abstract class Person implements Printable {
     private long id;

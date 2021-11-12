@@ -15,13 +15,13 @@ public class LoginPasswordSource {
 
         HashMap<Long, Account> account = new HashMap<>();
 
-        Account account1 = new Account((long) 1,"Yauheni", "admin@admin", "admin");
-        Account account2 = new Account((long) 2,"Kirill", "Kirill@gmail.ru", "1");
-        Account account3 = new Account((long) 3,"Yauheni", "Eva@mail.ru", "2");
+//        Account account1 = new Account((long) 1,"Yauheni", "admin@admin", "admin");
+//        Account account2 = new Account((long) 2,"Kirill", "Kirill@gmail.ru", "1");
+//        Account account3 = new Account((long) 3,"Yauheni", "Eva@mail.ru", "2");
 
-        account.put(account1.getId(), account1);
-        account.put(account2.getId(), account2);
-        account.put(account3.getId(), account3);
+//        account.put(account1.getId(), account1);
+//        account.put(account2.getId(), account2);
+//        account.put(account3.getId(), account3);
         return account;
     }
 

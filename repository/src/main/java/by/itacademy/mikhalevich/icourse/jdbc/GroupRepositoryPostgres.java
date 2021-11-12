@@ -32,14 +32,16 @@ public class GroupRepositoryPostgres extends AbstractRepository<Group> {
                     " th.id th_id, th.title theme_title," +
                     " t.id t_id, t.name t_name, t.login t_login" +
                     " from class c" +
-                    " join student_theme_group stg" +
-                    " on c.id = stg.group_id" +
-                    " join student s " +
-                    " on stg.student_id = s.id" +
+                    " join theme_class thc" +
+                    " on c.id = thc.class_id" +
                     " join theme th " +
-                    " on stg.theme_id = th.id" +
+                    " on th.id = thc.theme_id" +
                     " join teacher t " +
-                    " on c.teacher_id = t.id";
+                    " on c.teacher_id = t.id" +
+                    " join student_class sc " +
+                    " on sc.class_id = c.id" +
+                    " join student s " +
+                    " on sc.student_id = s.id";
     //language=PostgreSQL
     private static final String ONE_ENTITY_FILTER = " where c.id = ? ";
     //language=PostgreSQL

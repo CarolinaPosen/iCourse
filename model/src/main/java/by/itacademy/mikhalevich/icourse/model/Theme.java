@@ -1,8 +1,6 @@
 package by.itacademy.mikhalevich.icourse.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +8,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = true, exclude = "groups")
 public class Theme extends AbstractEntity {
     private String title;
     private Set<Group> groups = new HashSet<>();

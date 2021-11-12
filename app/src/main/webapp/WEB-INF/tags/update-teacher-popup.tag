@@ -1,10 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 
+
+
 <div id="updateTeacherPopup" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form action="/web-app/teacher-edit" method="post">
+            <form action="${pageContext.request.contextPath}/teacher-edit" method="post">
             <div class="modal-header">
                 <h4 class="modal-title">Send changes</h4>
             </div>

@@ -14,23 +14,20 @@ import java.util.Map;
 import java.util.Optional;
 
 @WebServlet("/teacher-edit")
-public class EditTeacherController extends AbstractController {
+public class TeacherEditController extends AbstractController {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Optional trainer = getTeacherService().getTrainerById(Integer.parseInt(req.getParameter("id")));
+        Trainer trainer = getTeacherService().getTrainerById(Integer.parseInt(req.getParameter("id")));
 
-        if (trainer.isPresent()) {
-            Trainer updateTrainer = (Trainer) trainer.get();
-            updateTrainer
+            trainer
                     .withName(req.getParameter("name"))
                     .withLogin(req.getParameter("login"))
                     .withPassword(req.getParameter("password"))
                     .withRole(new Role().withId(Integer.parseInt(req.getParameter("role"))));
 
-            getTeacherService().updateTrainer((updateTrainer));
-        }
+            getTeacherService().updateTrainer((trainer));
 
         Map<Integer, Trainer> teachers = getTeacherService().readTeachers();
         req.setAttribute("teachers", teachers);

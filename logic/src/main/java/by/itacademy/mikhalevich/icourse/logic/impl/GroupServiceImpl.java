@@ -1,7 +1,7 @@
 package by.itacademy.mikhalevich.icourse.logic.impl;
 
 import by.itacademy.mikhalevich.icourse.jdbc.GroupRepositoryPostgres;
-import by.itacademy.mikhalevich.icourse.jdbc.Repository;
+import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.logic.GroupService;
 import by.itacademy.mikhalevich.icourse.model.Group;
 

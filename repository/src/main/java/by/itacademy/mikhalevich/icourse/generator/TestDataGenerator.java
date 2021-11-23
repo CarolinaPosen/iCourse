@@ -15,14 +15,19 @@ public class TestDataGenerator {
     public static void main(String[] args) {
 
         clearDataBase();
+//        fillDb();
+
+    }
+
+    private static void fillDb() {
+        Role admin = new Role().withId(1).withName("Admin");
+        Role manager = new Role().withId(2).withName("Manager");
+        Role user = new Role().withId(3).withName("User");
 
         EntityManager em = EntityManagerHelper.getInstance().getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
-        Role admin = new Role().withId(1).withName("Admin");
-        Role manager = new Role().withId(2).withName("Manager");
-        Role user = new Role().withId(3).withName("User");
 
         Trainer trainer1 = new Trainer()
                 .withName("Сафонова Габи Авксентьевна")
@@ -210,7 +215,6 @@ public class TestDataGenerator {
         em.persist(group2);
         tx.commit();
         em.close();
-
     }
 
     private static void clearDataBase() {

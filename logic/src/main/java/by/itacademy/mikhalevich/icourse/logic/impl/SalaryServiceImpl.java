@@ -1,10 +1,9 @@
 package by.itacademy.mikhalevich.icourse.logic.impl;
 
-import by.itacademy.mikhalevich.icourse.jdbc.Repository;
+import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.jdbc.SalaryRepositoryPostgres;
 import by.itacademy.mikhalevich.icourse.logic.SalaryService;
 import by.itacademy.mikhalevich.icourse.model.Salary;
-import by.itacademy.mikhalevich.icourse.model.Trainer;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;

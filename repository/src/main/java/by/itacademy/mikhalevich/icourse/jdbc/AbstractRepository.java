@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.jdbc;
 
+import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.exception.DataBaseErrorException;
 import by.itacademy.mikhalevich.icourse.model.AbstractEntity;
 import lombok.extern.slf4j.Slf4j;

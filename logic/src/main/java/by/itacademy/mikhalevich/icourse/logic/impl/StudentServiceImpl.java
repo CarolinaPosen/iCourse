@@ -1,6 +1,7 @@
 package by.itacademy.mikhalevich.icourse.logic.impl;
 
-import by.itacademy.mikhalevich.icourse.jdbc.Repository;
+import by.itacademy.mikhalevich.icourse.jdbc.MarkRepositoryPostgres;
+import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.jdbc.StudentRepositoryPostgres;
 import by.itacademy.mikhalevich.icourse.logic.StudentService;
 import by.itacademy.mikhalevich.icourse.model.Student;
@@ -13,11 +14,14 @@ import java.util.Optional;
 @Slf4j
 class StudentServiceImpl implements StudentService {
 
-    public static final int PARAMETER_INDEX = 5;
+    public static final int PARAMETER_INDEX_STUDENT = 5;
+    public static final int PARAMETER_INDEX_SALARY = 4;
     private Repository studentRepository;
+    private Repository markRepository;
 
     public StudentServiceImpl(DataSource dataSource) {
         this.studentRepository = StudentRepositoryPostgres.getInstance(dataSource);
+        this.markRepository = MarkRepositoryPostgres.getInstance(dataSource);
     }
 
     @Override
@@ -27,7 +31,7 @@ class StudentServiceImpl implements StudentService {
 
     @Override
     public Map<Integer, Student> updateStudent(Student student) {
-        studentRepository.save(student, PARAMETER_INDEX);
+        studentRepository.save(student, PARAMETER_INDEX_STUDENT);
         return null;
     }
 
@@ -53,6 +57,11 @@ class StudentServiceImpl implements StudentService {
             return null;
         }
     }
+
+//    public Set<Mark> getStudentMarksById(Integer id) {
+//        markRepository.
+//        return
+//    }
 
 
 }

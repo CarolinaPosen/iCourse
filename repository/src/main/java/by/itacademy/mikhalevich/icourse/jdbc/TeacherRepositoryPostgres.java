@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 @Slf4j
-public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> {
+public class TeacherRepositoryPostgres extends AbstractRepository<Trainer>  {
     //language=PostgreSQL
     private static final String SELECT_FROM_TRAINERS_ALL_FIELDS =
             "select t.id id, t.name title, t.login log, t.password pass, t.role_id role_id," +
@@ -113,8 +113,6 @@ public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> {
                                             .withSalary(rs.getBigDecimal("salary")))));
 
             trainersMap.computeIfPresent(tId, (id, trainer) -> trainer.addSalary(salaryMap.get(sId)));
-
-
         }
         return trainersMap;
     }

@@ -1,16 +1,17 @@
 package by.itacademy.mikhalevich.icourse.logic.impl;
 
-import by.itacademy.mikhalevich.icourse.jdbc.Repository;
+import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.jdbc.TeacherRepositoryPostgres;
+import by.itacademy.mikhalevich.icourse.jpa.TrainerRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.logic.TeacherService;
 import by.itacademy.mikhalevich.icourse.logic.calculating.Accounting;
+import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Salary;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -23,7 +24,7 @@ public class TrainerServiceImpl implements TeacherService {
     private Repository trainerRepository;
 
     public TrainerServiceImpl(DataSource dataSource) {
-        this.trainerRepository = TeacherRepositoryPostgres.getInstance(dataSource);
+        this.trainerRepository = TrainerRepositoryJpaImpl.getInstance();
     }
 
     @Override
@@ -39,6 +40,8 @@ public class TrainerServiceImpl implements TeacherService {
 
     @Override
     public Map<Integer, Trainer> createTrainer(Trainer trainer) {
+//        Role admin = new Role().withId(1).withName("Admin");
+//        trainer.withRole(admin);
         trainerRepository.save(trainer, PARAMETER_INDEX);
         return null;
     }

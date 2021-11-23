@@ -26,7 +26,7 @@ public class CreateTeacherController extends AbstractController {
                         .withLogin(req.getParameter("login"))
                         .withPassword(req.getParameter("password"))
                         .withRole(new Role()
-                        .withId(Integer.parseInt(req.getParameter("role")))));
+                        .withId(Integer.parseInt(req.getParameter("role"))).withName("Admin")));
 
         Map<Integer, Trainer> teachers = getTeacherService().readTeachers();
         req.setAttribute("teachers", teachers);

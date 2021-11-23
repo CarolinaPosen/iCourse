@@ -22,7 +22,7 @@
                     data-id-student="${student.key}">Change student data
             </button>
 
-            <form action="${pageContext.request.contextPath}/salary" method="post">
+            <form action="${pageContext.request.contextPath}/marks" method="post">
                 <input name="id" type="hidden" value="${student.key}" class="form-control">
                 <input name="name" type="hidden" value="${student.value.name}" class="form-control">
                 <input name="login" type="hidden" value="${student.value.login}" class="form-control">

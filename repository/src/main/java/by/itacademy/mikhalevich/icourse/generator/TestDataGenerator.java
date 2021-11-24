@@ -14,8 +14,8 @@ public class TestDataGenerator {
 
     public static void main(String[] args) {
 
-        clearDataBase();
-//        fillDb();
+//        clearDataBase();
+        fillDb();
 
     }
 

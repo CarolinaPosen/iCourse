@@ -25,13 +25,17 @@
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
 
         <!-- mapping files -->
-        <mapping resource="Role.hbm.xml"/>
-        <mapping resource="Trainer.hbm.xml"/>
-        <mapping resource="Student.hbm.xml"/>
-        <mapping resource="Class.hbm.xml"/>
-        <mapping resource="Theme.hbm.xml"/>
-        <mapping resource="Mark.hbm.xml"/>
-        <mapping resource="Salary.hbm.xml"/>
+<!--        <mapping resource="Role.hbm.xml"/>-->
+<!--        <mapping resource="Trainer.hbm.xml"/>-->
+<!--        <mapping resource="Student.hbm.xml"/>-->
+<!--        <mapping resource="Class.hbm.xml"/>-->
+<!--        <mapping resource="Theme.hbm.xml"/>-->
+<!--        <mapping resource="Mark.hbm.xml"/>-->
+<!--        <mapping resource="Salary.hbm.xml"/>-->
+
+        <mapping class="by.itacademy.mikhalevich.icourse.model.Trainer"/>
+        <mapping class="by.itacademy.mikhalevich.icourse.model.Role"/>
+        <mapping class="by.itacademy.mikhalevich.icourse.model.Salary"/>
 
     </session-factory>
 

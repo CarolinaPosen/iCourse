@@ -3,7 +3,9 @@ package by.itacademy.mikhalevich.icourse.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
+import javax.persistence.Entity;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -12,7 +14,9 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true, exclude = {"title"})
+@EqualsAndHashCode(callSuper = false, exclude = {"title"})
+@Entity
 public class Role extends AbstractEntity<Integer>{
         private String title;
 //        Set<Trainer> trainers = new HashSet<>();

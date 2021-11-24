@@ -3,7 +3,7 @@ package by.itacademy.mikhalevich.icourse.model;
 
 public interface CurrentAccount {
 
-	Long getId();
+	Integer getId();
 	
 	String getDescription();
 }

@@ -1,24 +1,27 @@
 package by.itacademy.mikhalevich.icourse.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerator;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import javax.persistence.*;
 import java.util.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true, exclude = "salaries")
-
+@Entity
+@Table(name="teacher", schema = "public")
 public class Trainer extends AbstractEntity<Integer> {
     private String name;
     private String login;
     private String password;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH})
+    @JoinColumn(name = "role_id")
     private Role role;
+
+    @OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     private Set<Salary> salaries = new HashSet<>();
 
     public Trainer withId(Integer id){

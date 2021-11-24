@@ -2,6 +2,7 @@ package by.itacademy.mikhalevich.icourse.logic.impl;
 
 import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.jdbc.TeacherRepositoryPostgres;
+import by.itacademy.mikhalevich.icourse.jpa.RoleRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.jpa.TrainerRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.logic.TeacherService;
 import by.itacademy.mikhalevich.icourse.logic.calculating.Accounting;
@@ -22,9 +23,11 @@ public class TrainerServiceImpl implements TeacherService {
 
     public static final int PARAMETER_INDEX = 5;
     private Repository trainerRepository;
+    private Repository roleRepository;
 
     public TrainerServiceImpl(DataSource dataSource) {
         this.trainerRepository = TrainerRepositoryJpaImpl.getInstance();
+        this.roleRepository = RoleRepositoryJpaImpl.getInstance();
     }
 
     @Override
@@ -40,9 +43,13 @@ public class TrainerServiceImpl implements TeacherService {
 
     @Override
     public Map<Integer, Trainer> createTrainer(Trainer trainer) {
-//        Role admin = new Role().withId(1).withName("Admin");
-//        trainer.withRole(admin);
+
+        Role updateRole = (Role) roleRepository.find(trainer.getRole().getId()).get();
+        trainer.withRole(updateRole);
+
         trainerRepository.save(trainer, PARAMETER_INDEX);
+
+
         return null;
     }
 

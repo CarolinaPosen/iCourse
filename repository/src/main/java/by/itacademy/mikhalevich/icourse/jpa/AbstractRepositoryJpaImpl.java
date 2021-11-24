@@ -7,7 +7,6 @@ import by.itacademy.mikhalevich.icourse.model.AbstractEntity;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;

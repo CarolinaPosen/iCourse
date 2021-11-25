@@ -17,7 +17,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Slf4j
-public abstract class AbstractRepositoryJpaImpl<T extends AbstractEntity<Integer>> implements Repository<T> {
+public abstract class AbstractRepositoryJpaImpl<T extends AbstractEntity> implements Repository<T> {
 
     protected final EntityManagerHelper helper = EntityManagerHelper.getInstance();
 

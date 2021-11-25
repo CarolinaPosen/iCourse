@@ -13,7 +13,8 @@
             <h3 class="name text-center font-weight-lighter">${teacher.value.name}</h3>
             <p class="login text-center font-weight-lighter">${teacher.value.login}</p>
             <p class="password text-center font-weight-lighter">${teacher.value.password}</p>
-            <%--<p class="salary text-center font-weight-lighter">${teacher.value.salaries}</p>--%>
+            <p class="salary text-center font-weight-lighter">${teacher.value.salaries}</p>
+            <p class="salary text-center font-weight-lighter">${teacher.value.role}</p>
             <p class="id text-center font-weight-lighter">${teacher.key}</p>
 
 

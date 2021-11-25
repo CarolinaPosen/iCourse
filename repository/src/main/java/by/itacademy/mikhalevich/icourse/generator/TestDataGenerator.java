@@ -8,21 +8,21 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 public class TestDataGenerator {
 
     public static void main(String[] args) {
 
-//        clearDataBase();
+        clearDataBase();
         fillDb();
 
     }
 
     private static void fillDb() {
-        Role admin = new Role().withId(1).withName("Admin");
-        Role manager = new Role().withId(2).withName("Manager");
-        Role user = new Role().withId(3).withName("User");
+
+        addRoleToDb();
 
         EntityManager em = EntityManagerHelper.getInstance().getEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -33,21 +33,21 @@ public class TestDataGenerator {
                 .withName("Сафонова Габи Авксентьевна")
                 .withLogin("Noahchie@mail.ru")
                 .withPassword("Asphodel")
-                .withRole(admin);
+                .withRole(getRole(em, "Admin"));
         trainer1.setSalaries(getSalaries());
 
         Trainer trainer2 = new Trainer()
                 .withName("Красильникова Любава Аристарховна")
                 .withLogin("Ethande@google.com")
                 .withPassword("Asp")
-                .withRole(manager);
+                .withRole(getRole(em, "Manager"));
         trainer2.setSalaries(getSalaries());
 
         Trainer trainer3 = new Trainer()
                 .withName("Волков Евгений Мэлорович")
                 .withLogin("Mica@yandex.ru")
                 .withPassword("Odel")
-                .withRole(manager);
+                .withRole(getRole(em, "Manager"));
         trainer3.setSalaries(getSalaries());
 
         Set<Theme> themes0 = new HashSet<>();
@@ -91,25 +91,31 @@ public class TestDataGenerator {
                 .withName("Осипов Вилен")
                 .withLogin("Asp@google.com")
                 .withPassword("Asp")
-                .withRole(user);
+                .withRole(getRole(em, "User"));
 
-        student0.setMarks(getMarks(themes0));
+        student0.addMark(getMark(theme0));
+        student0.addMark(getMark(theme1));
+        student0.addMark(getMark(theme2));
 
         Student student1 = new Student()
                 .withName("Рыбаков Тимофей")
                 .withLogin("Odel@yandex.ru")
                 .withPassword("Odel")
-                .withRole(user);
+                .withRole(getRole(em, "User"));
 
-        student1.setMarks(getMarks(themes0));
+        student1.addMark(getMark(theme0));
+        student1.addMark(getMark(theme1));
+        student1.addMark(getMark(theme2));
 
         Student student2 = new Student()
                 .withName("Исаков Савелий")
                 .withLogin("Ania@ann.an")
                 .withPassword("NN")
-                .withRole(user);
+                .withRole(getRole(em, "User"));
 
-        student2.setMarks(getMarks(themes0));
+        student2.addMark(getMark(theme3));
+        student2.addMark(getMark(theme4));
+        student2.addMark(getMark(theme5));
 
         Set<Student> students0 = new HashSet<>();
         students0.add(student0);
@@ -121,25 +127,31 @@ public class TestDataGenerator {
                 .withName("Исаков Савелий")
                 .withLogin("Camellia@tut.by")
                 .withPassword("Camellia")
-                .withRole(user);
+                .withRole(getRole(em, "User"));
 
-        student3.setMarks(getMarks(themes1));
+        student3.addMark(getMark(theme3));
+        student3.addMark(getMark(theme4));
+        student3.addMark(getMark(theme5));
 
         Student student4 = new Student()
                 .withName("Вишняков Евгений")
                 .withLogin("Halcyo@tut.by")
                 .withPassword("Halcyo")
-                .withRole(user);
+                .withRole(getRole(em, "User"));
 
-        student4.setMarks(getMarks(themes1));
+        student4.addMark(getMark(theme6));
+        student4.addMark(getMark(theme7));
+        student4.addMark(getMark(theme8));
 
         Student student5 = new Student()
                 .withName("Нестерова Жюли")
                 .withLogin("Anem@google.com")
                 .withPassword("Anem")
-                .withRole(user);
+                .withRole(getRole(em, "User"));
 
-        student5.setMarks(getMarks(themes1));
+        student5.addMark(getMark(theme6));
+        student5.addMark(getMark(theme7));
+        student5.addMark(getMark(theme8));
 
         Set<Student> students1 = new HashSet<>();
         students1.add(student3);
@@ -150,40 +162,51 @@ public class TestDataGenerator {
                 .withName("Фомичёва Зинаида")
                 .withLogin("Chalice@yandex.ru")
                 .withPassword("Chalice")
-                .withRole(user);
-        student6.setMarks(getMarks(themes2));
+                .withRole(getRole(em, "User"));
+
+        student6.addMark(getMark(theme0));
+        student6.addMark(getMark(theme1));
+        student6.addMark(getMark(theme2));
 
         Student student7 = new Student()
                 .withName("Родионова Милена")
                 .withLogin("Fawn@mail.ru")
                 .withPassword("Fawn")
-                .withRole(user);
+                .withRole(getRole(em, "User"));
 
-        student7.setMarks(getMarks(themes2));
+        student7.addMark(getMark(theme3));
+        student7.addMark(getMark(theme4));
+        student7.addMark(getMark(theme5));
 
         Student student8 = new Student()
                 .withName("Нестерова Жюли")
                 .withLogin("Anem@google.com")
                 .withPassword("Anem")
-                .withRole(user);
+                .withRole(getRole(em, "User"));
 
-        student8.setMarks(getMarks(themes2));
+        student8.addMark(getMark(theme6));
+        student8.addMark(getMark(theme7));
+        student8.addMark(getMark(theme8));
 
         Student student9 = new Student()
                 .withName("Самойлова Жаклин")
                 .withLogin("Tranquil@mail.ru")
                 .withPassword("Tranquil")
-                .withRole(user);
+                .withRole(getRole(em, "User"));
 
-        student9.setMarks(getMarks(themes2));
+        student9.addMark(getMark(theme0));
+        student9.addMark(getMark(theme1));
+        student9.addMark(getMark(theme2));
 
         Student student10 = new Student()
                 .withName("Родионова Милена")
                 .withLogin("Fawn@mail.ru")
                 .withPassword("Fawn")
-                .withRole(user);
+                .withRole(getRole(em, "User"));
 
-        student10.setMarks(getMarks(themes2));
+        student10.addMark(getMark(theme3));
+        student10.addMark(getMark(theme4));
+        student10.addMark(getMark(theme5));
 
         Set<Student> students2 = new HashSet<>();
         students2.add(student6);
@@ -215,6 +238,32 @@ public class TestDataGenerator {
         em.persist(group2);
         tx.commit();
         em.close();
+    }
+
+    private static void addRoleToDb(){
+
+        EntityManager em = EntityManagerHelper.getInstance().getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        Role admin = new Role().withTitle("Admin");
+        Role manager = new Role().withTitle("Manager");
+        Role user = new Role().withTitle("User");
+
+        em.persist(admin);
+        em.persist(manager);
+        em.persist(user);
+
+        tx.commit();
+        em.close();
+
+    }
+
+    private static Role getRole(EntityManager em, String title) {
+        TypedQuery<Role> serviceQuery = em.createQuery("from Role r where r.title = :title", Role.class);
+        serviceQuery.setParameter("title", title);
+        Role role = serviceQuery.getSingleResult();
+        return role;
     }
 
     private static void clearDataBase() {
@@ -249,22 +298,15 @@ public class TestDataGenerator {
 
     }
 
-    private static Set<Mark> getMarks(Set<Theme> themes) {
-        Set<Mark> marks = new HashSet<>();
-
+    private static Mark getMark(Theme theme) {
         long offset = Timestamp.valueOf("2020-01-01 00:00:00").getTime();
         long end = Timestamp.valueOf("2022-01-01 00:00:00").getTime();
         long diff = end - offset + 1;
 
-        Iterator<Theme> i = themes.iterator();
-        while (i.hasNext()) {
-            marks.add(new Mark()
+        return new Mark()
                     .withMark((int) (Math.random() * 100))
                     .withDate(new Timestamp(offset + (long) (Math.random() * diff)))
-                    .withTheme(i.next()));
-        }
-
-        return marks;
+                    .withTheme(theme);
     }
 
     private static Set<Salary> getSalaries() {

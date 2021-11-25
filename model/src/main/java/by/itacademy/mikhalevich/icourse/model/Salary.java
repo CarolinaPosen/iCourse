@@ -16,7 +16,7 @@ import java.util.HashMap;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Salary extends AbstractEntity<Integer> {
+public class Salary extends AbstractEntity {
 
     private BigDecimal salary;
     private Timestamp date;

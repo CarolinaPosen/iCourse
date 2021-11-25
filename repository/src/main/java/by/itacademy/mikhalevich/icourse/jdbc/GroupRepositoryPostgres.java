@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -133,7 +132,7 @@ public class GroupRepositoryPostgres extends AbstractRepository<Group> {
                                     .withPassword(rs.getString(PASSWORD))
                                     .withRole(new Role()
                                             .withId(rs.getInt("role_id"))
-                                            .withName("Role"))))
+                                            .withTitle("Role"))))
                     .addTheme(putIfAbsentAndReturn(themesMap, thId,
                             new Theme()
                                     .withId(thId)

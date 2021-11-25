@@ -3,6 +3,8 @@ package by.itacademy.mikhalevich.icourse.logic.impl;
 import by.itacademy.mikhalevich.icourse.jdbc.MarkRepositoryPostgres;
 import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.jdbc.StudentRepositoryPostgres;
+import by.itacademy.mikhalevich.icourse.jpa.MarkRepositoryJpaImpl;
+import by.itacademy.mikhalevich.icourse.jpa.StudentRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.logic.StudentService;
 import by.itacademy.mikhalevich.icourse.model.Student;
 import lombok.extern.slf4j.Slf4j;
@@ -20,8 +22,8 @@ class StudentServiceImpl implements StudentService {
     private Repository markRepository;
 
     public StudentServiceImpl(DataSource dataSource) {
-        this.studentRepository = StudentRepositoryPostgres.getInstance(dataSource);
-        this.markRepository = MarkRepositoryPostgres.getInstance(dataSource);
+        this.studentRepository = StudentRepositoryJpaImpl.getInstance();
+        this.markRepository = MarkRepositoryJpaImpl.getInstance();
     }
 
     @Override

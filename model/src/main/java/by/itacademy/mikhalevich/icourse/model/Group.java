@@ -2,6 +2,7 @@ package by.itacademy.mikhalevich.icourse.model;
 
 import lombok.*;
 
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,10 +11,25 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Group extends AbstractEntity<Integer> {
+@Entity
+@Table(name="class", schema = "public")
+public class Group extends AbstractEntity {
     private String title;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
+    @JoinColumn(name = "teacher_id")
     private Trainer trainer;
+
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
+    @JoinTable(name = "theme_class",
+            joinColumns = @JoinColumn(name = "theme_id"),
+            inverseJoinColumns = @JoinColumn(name = "class_id"))
     private Set<Theme> themes = new HashSet<>();
+
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
+    @JoinTable(name = "student_class",
+            joinColumns = @JoinColumn(name = "class_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id"))
     private Set<Student> students = new HashSet<>();
 
     public Group withId(Integer id){

@@ -37,6 +37,8 @@ public class TrainerServiceImpl implements TeacherService {
 
     @Override
     public Map<Integer, Trainer> updateTrainer(Trainer trainer) {
+        Role updateRole = (Role) roleRepository.find(trainer.getRole().getId()).get();
+        trainer.withRole(updateRole);
         trainerRepository.save(trainer, PARAMETER_INDEX);
         return null;
     }

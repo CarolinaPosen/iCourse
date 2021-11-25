@@ -7,8 +7,6 @@ import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -111,7 +109,7 @@ public class StudentRepositoryPostgres extends AbstractRepository<Student> {
                     .withPassword(rs.getString("pass"))
                     .withRole(new Role()
                             .withId(rs.getInt("role_id"))
-                            .withName("Role"))
+                            .withTitle("Role"))
                     .addMark(putIfAbsentAndReturn(markMap, mId,
                             new Mark()
                                     .withId(mId)

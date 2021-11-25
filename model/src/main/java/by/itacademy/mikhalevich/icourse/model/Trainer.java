@@ -12,12 +12,12 @@ import java.util.*;
 @EqualsAndHashCode(callSuper = true, exclude = "salaries")
 @Entity
 @Table(name="teacher", schema = "public")
-public class Trainer extends AbstractEntity<Integer> {
+public class Trainer extends AbstractEntity {
     private String name;
     private String login;
     private String password;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
     @JoinColumn(name = "role_id")
     private Role role;
 

@@ -17,18 +17,17 @@ import java.util.Set;
 @ToString(callSuper = true, exclude = {"title"})
 @EqualsAndHashCode(callSuper = false, exclude = {"title"})
 @Entity
-public class Role extends AbstractEntity<Integer>{
+public class Role extends AbstractEntity{
         private String title;
 //        Set<Trainer> trainers = new HashSet<>();
-
 
         public Role withId(Integer id){
             setId(id);
             return this;
         }
 
-        public Role withName(String role) {
-            setTitle(role);
+        public Role withTitle(String title) {
+            setTitle(title);
             return this;
         }
 
@@ -37,8 +36,4 @@ public class Role extends AbstractEntity<Integer>{
 //        return this;
 //    }
 
-        @Override
-        public String toString() {
-            return String.format("Role [id=%s, title=%s]", getId(), title);
-        }
     }

@@ -105,7 +105,7 @@ public class TeacherRepositoryPostgres extends AbstractRepository<Trainer>  {
                             .withPassword(rs.getString("pass"))
                             .withRole(new Role()
                             .withId(rs.getInt("role_id"))
-                            .withName("Role"))
+                            .withTitle("Role"))
                             .addSalary(putIfAbsentAndReturn(salaryMap, sId,
                                     new Salary()
                                             .withId(sId)

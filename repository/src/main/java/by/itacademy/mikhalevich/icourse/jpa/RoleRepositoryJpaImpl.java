@@ -22,6 +22,8 @@ public class RoleRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Role> {
         return instance;
     }
 
+
+    //"from Role" для получения этого значения использовать Class<?> clazz, clazz.getSimpleName());
     @Override
     protected TypedQuery<Role> findAllQuery() {
         return helper.getEntityManager().createQuery("from Role", Role.class);

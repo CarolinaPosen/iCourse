@@ -2,6 +2,7 @@ package by.itacademy.mikhalevich.icourse.logic.impl;
 
 import by.itacademy.mikhalevich.icourse.jdbc.GroupRepositoryPostgres;
 import by.itacademy.mikhalevich.icourse.Repository;
+import by.itacademy.mikhalevich.icourse.jpa.GroupRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.logic.GroupService;
 import by.itacademy.mikhalevich.icourse.model.Group;
 
@@ -13,7 +14,7 @@ public class GroupServiceImpl implements GroupService {
     private Repository groupRepository;
 
     public GroupServiceImpl(DataSource dataSource) {
-        this.groupRepository = GroupRepositoryPostgres.getInstance(dataSource);
+        this.groupRepository = GroupRepositoryJpaImpl.getInstance();
     }
 
     @Override

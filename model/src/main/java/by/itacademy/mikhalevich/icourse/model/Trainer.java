@@ -49,6 +49,7 @@ public class Trainer extends AbstractEntity {
     public Trainer addSalary(Salary salary){
         if(salary!=null){
             salaries.add(salary);
+            salary.setTrainer(this);
         }
         return this;
     }

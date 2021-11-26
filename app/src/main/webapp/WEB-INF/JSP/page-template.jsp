@@ -42,6 +42,7 @@
 <script src="${pageContext.request.contextPath}/static/js/create-teacher-popup.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/update-student-popup.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/update-salary-popup.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/update-mark-popup.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/jsontest.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/app-ajax.js"></script>
 </body>

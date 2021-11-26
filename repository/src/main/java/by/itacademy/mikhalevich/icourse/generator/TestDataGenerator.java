@@ -34,21 +34,21 @@ public class TestDataGenerator {
                 .withLogin("Noahchie@mail.ru")
                 .withPassword("Asphodel")
                 .withRole(getRole(em, "Admin"));
-        trainer1.setSalaries(getSalaries());
+        addSalaries(trainer1);
 
         Trainer trainer2 = new Trainer()
                 .withName("Красильникова Любава Аристарховна")
                 .withLogin("Ethande@google.com")
                 .withPassword("Asp")
                 .withRole(getRole(em, "Manager"));
-        trainer2.setSalaries(getSalaries());
+        addSalaries(trainer2);
 
         Trainer trainer3 = new Trainer()
                 .withName("Волков Евгений Мэлорович")
                 .withLogin("Mica@yandex.ru")
                 .withPassword("Odel")
                 .withRole(getRole(em, "Manager"));
-        trainer3.setSalaries(getSalaries());
+        addSalaries(trainer3);
 
         Set<Theme> themes0 = new HashSet<>();
         Theme theme0 = new Theme();
@@ -309,7 +309,7 @@ public class TestDataGenerator {
                     .withTheme(theme);
     }
 
-    private static Set<Salary> getSalaries() {
+    private static void addSalaries(Trainer trainer) {
         Set<Salary> salaries = new HashSet<>();
 
         long offset = Timestamp.valueOf("2020-01-01 00:00:00").getTime();
@@ -317,11 +317,11 @@ public class TestDataGenerator {
         long diff = end - offset + 1;
 
         for (int i = 0; i < 12; i++) {
-            salaries.add(new Salary()
+            trainer.addSalary(new Salary()
                     .withSalary(new BigDecimal (Math.random() * 1000))
                     .withDate(new Timestamp(offset + (long) (Math.random() * diff))));
         }
-        return salaries;
+//        return salaries;
     }
 
 }

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="popup" %>
-<popup:update-salary-popup/>
+<popup:update-mark-popup/>
 <c:set var="month" value="0"/>
 
 <div>
@@ -12,7 +12,7 @@
                 <h1>${requestScope.student.name}</h1>
             </div>
             <div class="card mb-4 shadow-sm">
-                <input name="id" type="hidden" value="${requestScope.student.id}"></h2>
+                <h2> <input name="id" type="hidden" value="${requestScope.student.id}"></h2>
             </div>
         </div>
     </div>
@@ -27,12 +27,13 @@
 
                     <p class="id font-weight-lighter">${mark.id}</p>
                     <h2 class="mark  font-weight-lighter">${mark.mark}</h2>
-                    <h3 class="mark  font-weight-lighter">${mark.theme.title}</h3>
+                    <h3 class="themeTitle  font-weight-lighter">${mark.theme.title}</h3>
+                    <p class="theme-id  font-weight-lighter">${mark.theme.id}</p>
                     <p class="date  font-weight-lighter">${mark.date}</p>
-                    <p class="student  font-weight-lighter">${requestScope.student.id}</p>
+                    <p class="student-id  font-weight-lighter">${requestScope.student.id}</p>
 
-                    <button type="button" class="btn change-salary-btn btn-success btn-block "
-                            data-id-salary="${mark.id}">Change mark
+                    <button type="button" class="btn change-mark-btn btn-success btn-block "
+                            data-id-mark="${mark.id}">Change mark
                     </button>
 
                     <form action="${pageContext.request.contextPath}/delete-salary" method="post">

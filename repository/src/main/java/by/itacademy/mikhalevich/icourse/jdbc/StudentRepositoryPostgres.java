@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 public class StudentRepositoryPostgres extends AbstractRepository<Student> {
@@ -132,6 +133,11 @@ public class StudentRepositoryPostgres extends AbstractRepository<Student> {
 
         }
         return studentMap;
+    }
+
+    @Override
+    public Optional<Student> findByName(String name) {
+        return Optional.empty();
     }
 }
 

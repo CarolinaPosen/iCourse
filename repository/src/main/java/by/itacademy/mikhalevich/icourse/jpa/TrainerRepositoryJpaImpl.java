@@ -27,4 +27,12 @@ public class TrainerRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Trainer>
     protected TypedQuery<Trainer> findAllQuery() {
        return helper.getEntityManager().createQuery("from Trainer", Trainer.class);
     }
+
+    @Override
+    protected TypedQuery<Trainer> findByNameQuery(String name) {
+        TypedQuery<Trainer> query = helper.getEntityManager().createQuery("from Trainer s where s.name = :name", Trainer.class);
+        query.setParameter("name", name);
+        return query;
+    }
+
 }

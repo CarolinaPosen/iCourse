@@ -20,7 +20,7 @@ public class SalaryController extends JsonController {
 
         Trainer trainer = getTeacherService().getTrainerById(Integer.parseInt(req.getParameter("id")));
 
-        if(req.getParameter("month")!=null){
+        if(req.getParameter("month") != null){
             Integer countOfMonth = Integer.parseInt(req.getParameter("month"));
             averageSalary = getTeacherService().averageSalary(trainer.getId(), countOfMonth);
             req.setAttribute("average", averageSalary);

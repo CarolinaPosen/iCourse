@@ -25,6 +25,7 @@ public abstract class AbstractRepositoryJpaImpl<T extends AbstractEntity> implem
 //    private final Class<T> clazz;
 
     protected abstract TypedQuery<T> findAllQuery();
+    protected abstract TypedQuery<T> findByNameQuery(String name);
 
     //    Этот метод вызывается из наследуемого класса паттерн Template
     @Override
@@ -65,7 +66,7 @@ public abstract class AbstractRepositoryJpaImpl<T extends AbstractEntity> implem
     }
 
     @Override
-    public T save(T entity, int parameterIndex) {
+    public T save(T entity) {
         EntityManager em = helper.getEntityManager();
         em.getTransaction().begin();
         if (entity.getId() == null) {
@@ -83,6 +84,17 @@ public abstract class AbstractRepositoryJpaImpl<T extends AbstractEntity> implem
         EntityManager em = helper.getEntityManager();
         em.getTransaction().begin();
         em.remove(entity);
+        em.getTransaction().commit();
+        em.close();
+        return Optional.ofNullable(entity);
+    }
+
+    public Optional<T> findByName(String name) {
+        EntityManager em = helper.getEntityManager();
+        em.getTransaction().begin();
+
+        T entity =  findByNameQuery(name).getSingleResult();
+
         em.getTransaction().commit();
         em.close();
         return Optional.ofNullable(entity);

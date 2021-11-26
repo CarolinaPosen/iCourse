@@ -14,7 +14,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(callSuper = true, exclude = {"title"})
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false, exclude = {"title"})
 @Entity
 public class Role extends AbstractEntity{

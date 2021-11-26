@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 public class MarkRepositoryPostgres extends AbstractRepository<Mark> {
@@ -95,5 +96,9 @@ public class MarkRepositoryPostgres extends AbstractRepository<Mark> {
         ps.setInt(3, (int) entity.getTheme().getId());
     }
 
+    @Override
+    public Optional<Mark> findByName(String name) {
+        return Optional.empty();
+    }
 }
 

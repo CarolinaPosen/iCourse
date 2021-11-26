@@ -5,8 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.*;
 
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true, exclude = "groups")
+@EqualsAndHashCode(callSuper = true, exclude = "groups")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

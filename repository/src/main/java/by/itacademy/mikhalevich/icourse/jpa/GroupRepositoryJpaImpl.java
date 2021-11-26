@@ -26,4 +26,12 @@ public class GroupRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Group> {
     protected TypedQuery<Group> findAllQuery() {
         return helper.getEntityManager().createQuery("from Group", Group.class);
     }
+
+    @Override
+    protected TypedQuery<Group> findByNameQuery(String name) {
+        TypedQuery<Group> query = helper.getEntityManager().createQuery("from Group g where g.title = :name", Group.class);
+        query.setParameter("name", name);
+        return query;
+    }
+
 }

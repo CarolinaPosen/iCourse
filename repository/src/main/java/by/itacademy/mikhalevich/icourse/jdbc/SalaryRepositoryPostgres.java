@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 public class SalaryRepositoryPostgres extends AbstractRepository<Salary> {
@@ -96,4 +97,8 @@ public class SalaryRepositoryPostgres extends AbstractRepository<Salary> {
         return salaryMap;
     }
 
+    @Override
+    public Optional<Salary> findByName(String name) {
+        return Optional.empty();
+    }
 }

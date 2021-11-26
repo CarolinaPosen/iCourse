@@ -25,4 +25,11 @@ public class StudentRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Student>
     protected TypedQuery<Student> findAllQuery() {
         return helper.getEntityManager().createQuery("from Student", Student.class);
     }
+
+    @Override
+    protected TypedQuery<Student> findByNameQuery(String name) {
+        TypedQuery<Student> query = helper.getEntityManager().createQuery("from Student s where s.name = :name", Student.class);
+        query.setParameter("name", name);
+        return query;
+    }
 }

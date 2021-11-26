@@ -116,4 +116,9 @@ public class TeacherRepositoryPostgres extends AbstractRepository<Trainer>  {
         }
         return trainersMap;
     }
+
+    @Override
+    public Optional<Trainer> findByName(String name) {
+        return Optional.empty();
+    }
 }

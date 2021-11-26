@@ -9,7 +9,8 @@ import java.util.stream.Collectors;
 public interface Repository<T> {
     Map<Integer, T> findAll();
     Optional<T> find(int id);
-    T save(T entity, int parameterIndex);
+    Optional<T> findByName(String name);
+    T save(T entity);
     Optional<T> remove(T entity);
 }
 

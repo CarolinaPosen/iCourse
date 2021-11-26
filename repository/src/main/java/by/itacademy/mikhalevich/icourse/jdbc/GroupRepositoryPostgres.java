@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 public class GroupRepositoryPostgres extends AbstractRepository<Group> {
@@ -143,5 +144,10 @@ public class GroupRepositoryPostgres extends AbstractRepository<Group> {
 
         }
         return groupMap;
+    }
+
+    @Override
+    public Optional<Group> findByName(String name) {
+        return Optional.empty();
     }
 }

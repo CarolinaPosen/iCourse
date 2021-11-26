@@ -25,7 +25,7 @@ public class TeacherEditController extends AbstractController {
                     .withName(req.getParameter("name"))
                     .withLogin(req.getParameter("login"))
                     .withPassword(req.getParameter("password"))
-                    .withRole(new Role().withId(Integer.parseInt(req.getParameter("role"))));
+                    .withRole(new Role().withTitle(req.getParameter("role")));
 
             getTeacherService().updateTrainer((trainer));
 

@@ -13,6 +13,7 @@ import java.util.HashMap;
 @ToString(callSuper = true, exclude = {"trainer"})
 @EqualsAndHashCode(callSuper = false, exclude = {"trainer"})
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

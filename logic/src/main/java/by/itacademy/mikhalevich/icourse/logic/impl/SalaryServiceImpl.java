@@ -2,6 +2,7 @@ package by.itacademy.mikhalevich.icourse.logic.impl;
 
 import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.jdbc.SalaryRepositoryPostgres;
+import by.itacademy.mikhalevich.icourse.jpa.SalaryRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.logic.SalaryService;
 import by.itacademy.mikhalevich.icourse.model.Salary;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,7 @@ public class SalaryServiceImpl implements SalaryService {
     private Repository salaryRepository;
 
     public SalaryServiceImpl(DataSource dataSource) {
-        this.salaryRepository = SalaryRepositoryPostgres.getInstance(dataSource);
+        this.salaryRepository = SalaryRepositoryJpaImpl.getInstance();
     }
 
     @Override
@@ -27,13 +28,13 @@ public class SalaryServiceImpl implements SalaryService {
 
     @Override
     public Map<Integer, Salary> updateSalary(Salary salary) {
-        salaryRepository.save(salary, PARAMETER_INDEX);
+        salaryRepository.save(salary);
         return null;
     }
 
     @Override
     public Map<Integer, Salary> createSalary(Salary salary) {
-        salaryRepository.save(salary, PARAMETER_INDEX);
+        salaryRepository.save(salary);
         return null;
     }
 

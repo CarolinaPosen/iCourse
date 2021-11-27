@@ -124,9 +124,9 @@ public class TestDataGenerator {
 
 
         Student student3 = new Student()
-                .withName("Исаков Савелий")
-                .withLogin("Camellia@tut.by")
-                .withPassword("Camellia")
+                .withName("Прокопенко Виталий")
+                .withLogin("Procop@tut.by")
+                .withPassword("PRO")
                 .withRole(getRole(em, "User"));
 
         student3.addMark(getMark(theme3));
@@ -144,9 +144,9 @@ public class TestDataGenerator {
         student4.addMark(getMark(theme8));
 
         Student student5 = new Student()
-                .withName("Нестерова Жюли")
-                .withLogin("Anem@google.com")
-                .withPassword("Anem")
+                .withName("Плитнткова Экли")
+                .withLogin("Ecli@google.com")
+                .withPassword("123")
                 .withRole(getRole(em, "User"));
 
         student5.addMark(getMark(theme6));
@@ -169,9 +169,9 @@ public class TestDataGenerator {
         student6.addMark(getMark(theme2));
 
         Student student7 = new Student()
-                .withName("Родионова Милена")
-                .withLogin("Fawn@mail.ru")
-                .withPassword("Fawn")
+                .withName("Радиона Силена")
+                .withLogin("SILENA@mail.ru")
+                .withPassword("sisis")
                 .withRole(getRole(em, "User"));
 
         student7.addMark(getMark(theme3));
@@ -217,19 +217,19 @@ public class TestDataGenerator {
 
         Group group0 = new Group();
         group0.setTitle("A1");
-        group0.setTrainer(trainer1);
+        group0.addTrainer(trainer1);
         group0.setStudents(students0);
         group0.setThemes(themes0);
 
         Group group1 = new Group();
         group1.setTitle("B2");
-        group1.setTrainer(trainer2);
+        group1.addTrainer(trainer2);
         group1.setStudents(students1);
         group1.setThemes(themes1);
 
         Group group2 = new Group();
         group2.setTitle("C3");
-        group2.setTrainer(trainer3);
+        group2.addTrainer(trainer3);
         group2.setStudents(students2);
         group2.setThemes(themes2);
 

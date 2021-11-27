@@ -8,6 +8,7 @@ import java.util.*;
 @ToString(callSuper = true, exclude = "groups")
 @EqualsAndHashCode(callSuper = true, exclude = "groups")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -17,7 +18,7 @@ public class Student extends AbstractEntity{
     private String login;
     private String password;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH})
     @JoinColumn(name = "role_id")
     private Role role;
 

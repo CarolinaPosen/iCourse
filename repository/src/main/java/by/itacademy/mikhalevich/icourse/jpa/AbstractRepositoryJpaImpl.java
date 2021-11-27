@@ -55,19 +55,31 @@ public abstract class AbstractRepositoryJpaImpl<T extends AbstractEntity> implem
 
     @Override
     public Optional<T> find(int id) {
-        EntityManager em = helper.getEntityManager();
+        T entity = null;
+        EntityManager em = null;
+        try {
+
+        em = helper.getEntityManager();
         em.getTransaction().begin();
 
-        T entity = em.find(getType(), id);
+        entity = em.find(getType(), id);
 
         em.getTransaction().commit();
         em.close();
+
+        } catch (Exception e) {
+            safeRollback(em, e);
+        } finally {
+            quietCloseEntityManager(em);
+        }
         return Optional.ofNullable(entity);
     }
 
     @Override
     public T save(T entity) {
-        EntityManager em = helper.getEntityManager();
+        EntityManager em = null;
+        try {
+        em = helper.getEntityManager();
         em.getTransaction().begin();
         if (entity.getId() == null) {
             em.persist(entity);
@@ -76,27 +88,47 @@ public abstract class AbstractRepositoryJpaImpl<T extends AbstractEntity> implem
         }
         em.getTransaction().commit();
         em.close();
+        } catch (Exception e) {
+            safeRollback(em, e);
+        } finally {
+            quietCloseEntityManager(em);
+        }
         return entity;
     }
 
     @Override
     public Optional<T> remove(T entity) {
-        EntityManager em = helper.getEntityManager();
+        EntityManager em = null;
+        try {
+
+        em = helper.getEntityManager();
         em.getTransaction().begin();
         em.remove(entity);
         em.getTransaction().commit();
         em.close();
+    } catch (Exception e) {
+        safeRollback(em, e);
+    } finally {
+        quietCloseEntityManager(em);
+    }
         return Optional.ofNullable(entity);
     }
 
     public Optional<T> findByName(String name) {
-        EntityManager em = helper.getEntityManager();
+        EntityManager em = null;
+        T entity = null;
+        try {
+        em = helper.getEntityManager();
         em.getTransaction().begin();
-
-        T entity =  findByNameQuery(name).getSingleResult();
-
+        entity =  findByNameQuery(name).getSingleResult();
         em.getTransaction().commit();
         em.close();
+
+        } catch (Exception e) {
+            safeRollback(em, e);
+        } finally {
+            quietCloseEntityManager(em);
+        }
         return Optional.ofNullable(entity);
     }
 

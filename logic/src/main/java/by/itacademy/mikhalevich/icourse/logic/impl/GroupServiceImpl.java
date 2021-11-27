@@ -5,11 +5,15 @@ import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.jpa.GroupRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.logic.GroupService;
 import by.itacademy.mikhalevich.icourse.model.Group;
+import by.itacademy.mikhalevich.icourse.model.Student;
+import by.itacademy.mikhalevich.icourse.model.Trainer;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
 import java.util.Map;
 import java.util.Optional;
 
+@Slf4j
 public class GroupServiceImpl implements GroupService {
     private Repository groupRepository;
 
@@ -23,25 +27,33 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Map<Integer, Group> updateGroup(Group teacher) {
+    public Map<Integer, Group> updateGroup(Group group) {
+
+        groupRepository.save(group);
+
         return null;
     }
 
     @Override
-    public Map<Integer, Group> createGroup(Group teacher) {
+    public Map<Integer, Group> createGroup(Group group) {
         return null;
     }
 
     @Override
     public Map<Integer, Group> deleteGroup(Integer id) {
+        groupRepository.remove(new Group().withId(id));
         return null;
     }
 
     @Override
-    public Optional getGroupById(Integer id) {
-        return groupRepository.find(id);
+    public Group getGroupById(Integer id) {
+        Optional group = groupRepository.find(id);
+        if (group.isPresent()) {
+            return (Group) group.get();
+        } else {
+            log.error("Trainer id: "+ id +" not exists");
+            return null;
+        }
     }
-
-
 
 }

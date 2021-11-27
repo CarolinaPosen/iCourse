@@ -38,9 +38,11 @@
 <footer class="footer" style="background-color: #d0e9c6">
 </footer>
 
+<script src="${pageContext.request.contextPath}/static/js/update-group-popup.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/update-teacher-popup.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/create-teacher-popup.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/update-student-popup.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/create-student-popup.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/update-salary-popup.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/update-mark-popup.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/jsontest.js"></script>

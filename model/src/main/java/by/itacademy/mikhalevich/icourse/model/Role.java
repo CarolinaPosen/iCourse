@@ -12,6 +12,7 @@ import java.util.Set;
 
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)

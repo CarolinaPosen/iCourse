@@ -8,7 +8,4 @@
         <jsp:include page="/WEB-INF/JSP/fragment/group-list.jsp"/>
     </div>
 
-    <div>
-        <button type="button" class="btn create-group-btn btn-success btn-sm btn-block">Create new group</button>
-    </div>
 </div>

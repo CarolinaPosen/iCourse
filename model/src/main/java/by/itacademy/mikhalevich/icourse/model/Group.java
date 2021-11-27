@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -16,7 +17,7 @@ import java.util.Set;
 public class Group extends AbstractEntity {
     private String title;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REMOVE})
     @JoinColumn(name = "teacher_id")
     private Trainer trainer;
 
@@ -57,4 +58,8 @@ public class Group extends AbstractEntity {
         return this;
     }
 
+    public void addTrainer(Trainer trainer){
+        this.trainer = trainer;
+        trainer.addGroup(this);
+    }
 }

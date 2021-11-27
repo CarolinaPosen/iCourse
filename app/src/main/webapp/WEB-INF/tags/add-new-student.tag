@@ -1,11 +1,11 @@
 <%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 
-<div id="createTeacherPopup" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div id="createStudentPopup" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form action="/web-app/create-teacher" method="post">
+            <form action="/web-app/create-student" method="post">
                 <div class="modal-header">
-                    <h4 class="modal-title">Create teacher</h4>
+                    <h4 class="modal-title">Create student</h4>
                 </div>
                 <div class="modal-body row">
                     <div class="col-sm-12">
@@ -31,4 +31,3 @@
         </div>
     </div>
 </div>
-

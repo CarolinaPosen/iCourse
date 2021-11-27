@@ -7,9 +7,10 @@ import javax.persistence.*;
 import java.util.*;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true, exclude = "salaries")
+@EqualsAndHashCode(callSuper = true, exclude = {"salaries", "groups"})
 @Entity
 @Table(name="teacher", schema = "public")
 public class Trainer extends AbstractEntity {
@@ -17,9 +18,12 @@ public class Trainer extends AbstractEntity {
     private String login;
     private String password;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH})
     @JoinColumn(name = "role_id")
     private Role role;
+
+    @OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    private Set<Group> groups = new HashSet<>();
 
     @OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     private Set<Salary> salaries = new HashSet<>();
@@ -46,12 +50,27 @@ public class Trainer extends AbstractEntity {
         return this;
     }
 
+    public Trainer withSalaries(Set<Salary> salaries){
+        setSalaries(salaries);
+        return this;
+    }
+
     public Trainer addSalary(Salary salary){
         if(salary!=null){
             salaries.add(salary);
             salary.setTrainer(this);
         }
         return this;
+    }
+
+    public void addGroup(Group group) {
+        groups.add(group);
+        group.setTrainer(this);
+    }
+
+    public void removeGroup(Group group) {
+        group.setTrainer(null);
+        this.groups.remove(group);
     }
 
     @Override

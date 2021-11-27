@@ -2,10 +2,12 @@ package by.itacademy.mikhalevich.icourse.logic.impl;
 
 import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.jdbc.TeacherRepositoryPostgres;
+import by.itacademy.mikhalevich.icourse.jpa.GroupRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.jpa.RoleRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.jpa.TrainerRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.logic.TeacherService;
 import by.itacademy.mikhalevich.icourse.logic.calculating.Accounting;
+import by.itacademy.mikhalevich.icourse.model.Group;
 import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Salary;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
@@ -21,13 +23,15 @@ import java.util.stream.Collectors;
 @Slf4j
 public class TrainerServiceImpl implements TeacherService {
 
-    public static final int PARAMETER_INDEX = 5;
+//    public static final int PARAMETER_INDEX = 5;
     private Repository trainerRepository;
     private Repository roleRepository;
+    private Repository groupRepository;
 
     public TrainerServiceImpl(DataSource dataSource) {
         this.trainerRepository = TrainerRepositoryJpaImpl.getInstance();
         this.roleRepository = RoleRepositoryJpaImpl.getInstance();
+        this.groupRepository = GroupRepositoryJpaImpl.getInstance();
     }
 
     @Override
@@ -37,22 +41,17 @@ public class TrainerServiceImpl implements TeacherService {
 
     @Override
     public Map<Integer, Trainer> updateTrainer(Trainer trainer) {
-
         Role updateRole = (Role) roleRepository.findByName(trainer.getRole().getTitle()).get();
-
         trainer.withRole(updateRole);
-
-        trainerRepository.save(trainer, PARAMETER_INDEX);
+        trainerRepository.save(trainer);
         return null;
     }
 
     @Override
     public Map<Integer, Trainer> createTrainer(Trainer trainer) {
-
         Role updateRole = (Role) roleRepository.findByName(trainer.getRole().getTitle()).get();
         trainer.withRole(updateRole);
-
-        trainerRepository.save(trainer, PARAMETER_INDEX);
+        trainerRepository.save(trainer);
 
 
         return null;
@@ -60,15 +59,34 @@ public class TrainerServiceImpl implements TeacherService {
 
     @Override
     public Map<Integer, Trainer> deleteTrainer(Integer id) {
-        trainerRepository.remove(new Trainer().withId(id));
+        Optional trainer = trainerRepository.find(id);
+        Trainer trainer1;
+        if (trainer.isPresent()) {
+            trainer1 = (Trainer) trainer.get();
+        } else {
+            log.error("Trainer id: "+ id +" not exists");
+            return null;
+        }
+        Optional<Group> groupOptional = trainer1.getGroups().stream().findFirst();
+        Group group;
+        if (groupOptional.isPresent()) {
+            group = (Group) groupOptional.get();
+        } else {
+            log.error("Trainer id: "+ id +" not exists");
+            return null;
+        }
+
+        trainer1.removeGroup(group);
+
+//        groupRepository.save(group);
+
+        trainerRepository.remove(trainer1);
         return null;
     }
 
     @Override
     public Trainer getTrainerById(Integer id) {
-
         Optional trainer = trainerRepository.find(id);
-
         if (trainer.isPresent()) {
             return (Trainer) trainer.get();
         } else {

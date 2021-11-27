@@ -26,13 +26,10 @@ public class SalaryEditController extends AbstractController {
 
         Salary salary = getSalaryService().getSalaryById(id);
 
-        Trainer trainer = getTeacherService().getTrainerById(trainerId);
+        salary.withSalary(new BigDecimal(req.getParameter("salary")));
 
-        getSalaryService().updateSalary(new Salary()
-                .withId(id)
-                .withSalary(new BigDecimal(req.getParameter("salary")))
-                .withDate(salary.getDate())
-                .withTrainer(trainer));
+        getSalaryService().updateSalary(salary
+                                .withSalary(new BigDecimal(req.getParameter("salary"))));
 
         Trainer updateTrainer = getTeacherService().getTrainerById(trainerId);
 

@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 @ToString(callSuper = true, exclude = "student")
 @EqualsAndHashCode(callSuper = true, exclude = "student")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -22,7 +23,7 @@ public class Mark extends AbstractEntity {
     @JoinColumn(name = "theme_id")
     private Theme theme;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "student_id")
     private Student student;
 

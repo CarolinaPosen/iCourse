@@ -24,6 +24,7 @@ public class ServiceManager {
 
 	private final TeacherService teacherService;
 	private final StudentService studentService;
+	private final MarkService markService;
 	private final GroupService groupService;
 	private final SalaryService salaryService;
 	private final AccountService accountService;
@@ -43,6 +44,9 @@ public class ServiceManager {
 	public StudentService getStudentService() {
 		return studentService;
 	}
+	public MarkService getMarkService() {
+		return markService;
+	}
 	public GroupService getGroupService() {
 		return groupService;
 	}
@@ -60,6 +64,7 @@ public class ServiceManager {
 
 		teacherService = new TrainerServiceImpl(dataSource);
 		studentService = new StudentServiceImpl(dataSource);
+		markService = new MarkServiceImpl();
 		groupService = new GroupServiceImpl(dataSource);
 		salaryService = new SalaryServiceImpl(dataSource);
 		accountService = new AccountServiceImpl(new LoginPasswordSource());

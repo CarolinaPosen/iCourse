@@ -4,10 +4,12 @@ import by.itacademy.mikhalevich.icourse.jdbc.MarkRepositoryPostgres;
 import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.jdbc.StudentRepositoryPostgres;
 import by.itacademy.mikhalevich.icourse.jpa.MarkRepositoryJpaImpl;
+import by.itacademy.mikhalevich.icourse.jpa.RoleRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.jpa.StudentRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.jpa.ThemeRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.logic.StudentService;
 import by.itacademy.mikhalevich.icourse.model.Mark;
+import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Salary;
 import by.itacademy.mikhalevich.icourse.model.Student;
 import lombok.extern.slf4j.Slf4j;
@@ -23,11 +25,13 @@ import java.util.Set;
 class StudentServiceImpl implements StudentService {
 
     private Repository studentRepository;
+    private Repository roleRepository;
     private Repository markRepository;
     private Repository themeRepository;
 
     public StudentServiceImpl(DataSource dataSource) {
         this.studentRepository = StudentRepositoryJpaImpl.getInstance();
+        this.roleRepository = RoleRepositoryJpaImpl.getInstance();
         this.markRepository = MarkRepositoryJpaImpl.getInstance();
         this.themeRepository = ThemeRepositoryJpaImpl.getInstance();
     }
@@ -39,12 +43,18 @@ class StudentServiceImpl implements StudentService {
 
     @Override
     public Map<Integer, Student> updateStudent(Student student) {
+
         studentRepository.save(student);
         return null;
+
+
     }
 
     @Override
     public Map<Integer, Student> createStudent(Student student) {
+        Role updateRole = (Role) roleRepository.findByName(student.getRole().getTitle()).get();
+        student.withRole(updateRole);
+        studentRepository.save(student);
         return null;
     }
 
@@ -72,8 +82,6 @@ class StudentServiceImpl implements StudentService {
 //                .withId(id)
 //                .withMark(mark)
 //                .withDate(date));
-//
-//
 //        return
 //    }
 

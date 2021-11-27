@@ -6,9 +6,9 @@ import java.util.Optional;
 
 public interface GroupService {
     Map<Integer, Group> readGroups();
-    Map<Integer, Group> updateGroup(Group teacher);
-    Map<Integer, Group> createGroup(Group teacher);
+    Map<Integer, Group> updateGroup(Group group);
+    Map<Integer, Group> createGroup(Group group);
     Map<Integer, Group> deleteGroup(Integer id);
-    Optional getGroupById (Integer id);
+    Group getGroupById (Integer id);
 
 }

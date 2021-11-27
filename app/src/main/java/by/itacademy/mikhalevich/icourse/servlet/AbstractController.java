@@ -17,6 +17,7 @@ public abstract class AbstractController extends HttpServlet {
 
 	private TeacherService teacherService;
 	private StudentService studentService;
+	private MarkService markService;
 	private GroupService groupService;
 	private SalaryService salaryService;
 	private AccountService accountService;
@@ -25,6 +26,7 @@ public abstract class AbstractController extends HttpServlet {
 	public final void init() throws ServletException {
 		teacherService = ServiceManager.getInstance(getServletContext()).getTeacherService();
 		studentService = ServiceManager.getInstance(getServletContext()).getStudentService();
+		markService = ServiceManager.getInstance(getServletContext()).getMarkService();
 		groupService = ServiceManager.getInstance(getServletContext()).getGroupService();
 		salaryService = ServiceManager.getInstance(getServletContext()).getSalaryService();
 		accountService = ServiceManager.getInstance(getServletContext()).getAccountService();
@@ -35,6 +37,9 @@ public abstract class AbstractController extends HttpServlet {
 	}
 	public final StudentService getStudentService() {
 		return studentService;
+	}
+	public final MarkService getMarkService() {
+		return markService;
 	}
 	public final GroupService getGroupService() {
 		return groupService;

@@ -1,8 +1,7 @@
 $(document).ready(function () {
         $('.change-btn').click(function () {
                 var idPerson = $(this).attr('data-id-teacher');
-                var teacher = $('#product'+idPerson);
-                $('#updateTeacherPopup').attr('data-id-teacher', idPerson);
+                var teacher = $('#teacher'+idPerson);
 
                 var id = teacher.find('.id').text();
                 $('#updateTeacherPopup .id').val(id);
@@ -10,11 +9,11 @@ $(document).ready(function () {
                 var name = teacher.find('.name').text();
                 $('#updateTeacherPopup .name').val(name);
 
-                var age = teacher.find('.age').text();
-                $('#updateTeacherPopup .age').val(age);
+                var login = teacher.find('.login').text();
+                $('#updateTeacherPopup .login').val(login);
 
-                var salary = teacher.find('.salary').text();
-                $('#updateTeacherPopup .salary').val(salary);
+                var password = teacher.find('.password').text();
+                $('#updateTeacherPopup .password').val(password);
 
                 $('#updateTeacherPopup').modal({
                         show:true

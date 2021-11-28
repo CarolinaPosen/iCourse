@@ -18,8 +18,8 @@ public class Theme extends AbstractEntity {
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
     @JoinTable(name = "theme_class",
-            joinColumns = @JoinColumn(name = "class_id"),
-            inverseJoinColumns = @JoinColumn(name = "theme_id"))
+            joinColumns = @JoinColumn(name = "theme_id"),
+            inverseJoinColumns = @JoinColumn(name = "class_id"))
     private Set<Group> groups = new HashSet<>();
 
     public Theme withId(Integer id){

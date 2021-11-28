@@ -1,6 +1,9 @@
 package by.itacademy.mikhalevich.icourse.logic.impl;
 
 import by.itacademy.mikhalevich.icourse.Repository;
+import by.itacademy.mikhalevich.icourse.factory.RepositoryFactory;
+import by.itacademy.mikhalevich.icourse.jdbc.EntityManagerHelper;
+import by.itacademy.mikhalevich.icourse.jdbc.GroupRepositoryPostgres;
 import by.itacademy.mikhalevich.icourse.jdbc.TeacherRepositoryPostgres;
 import by.itacademy.mikhalevich.icourse.jpa.GroupRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.jpa.RoleRepositoryJpaImpl;
@@ -28,10 +31,10 @@ public class TrainerServiceImpl implements TeacherService {
     private Repository roleRepository;
     private Repository groupRepository;
 
-    public TrainerServiceImpl(DataSource dataSource) {
-        this.trainerRepository = TrainerRepositoryJpaImpl.getInstance();
-        this.roleRepository = RoleRepositoryJpaImpl.getInstance();
-        this.groupRepository = GroupRepositoryJpaImpl.getInstance();
+    public TrainerServiceImpl() {
+        this.trainerRepository = RepositoryFactory.getTrainerRepository();
+        this.roleRepository = RepositoryFactory.getRoleRepository();
+        this.groupRepository = RepositoryFactory.getGroupRepository();
     }
 
     @Override
@@ -52,35 +55,31 @@ public class TrainerServiceImpl implements TeacherService {
         Role updateRole = (Role) roleRepository.findByName(trainer.getRole().getTitle()).get();
         trainer.withRole(updateRole);
         trainerRepository.save(trainer);
-
-
         return null;
     }
 
     @Override
     public Map<Integer, Trainer> deleteTrainer(Integer id) {
-        Optional trainer = trainerRepository.find(id);
-        Trainer trainer1;
-        if (trainer.isPresent()) {
-            trainer1 = (Trainer) trainer.get();
-        } else {
-            log.error("Trainer id: "+ id +" not exists");
-            return null;
-        }
-        Optional<Group> groupOptional = trainer1.getGroups().stream().findFirst();
-        Group group;
-        if (groupOptional.isPresent()) {
-            group = (Group) groupOptional.get();
+        Optional<Trainer> optionalTrainer = trainerRepository.find(id);
+        Trainer trainer;
+        if (optionalTrainer.isPresent()) {
+            trainer = optionalTrainer.get();
         } else {
             log.error("Trainer id: "+ id +" not exists");
             return null;
         }
 
-        trainer1.removeGroup(group);
-
-//        groupRepository.save(group);
-
-        trainerRepository.remove(trainer1);
+        Optional<Group> groupTrainerOptional = trainer.getGroups().stream().findFirst();
+        Group trainerGroup;
+        if (groupTrainerOptional.isPresent()) {
+            trainerGroup = groupTrainerOptional.get();
+        } else {
+            log.error("Group id: "+ id +" not exists");
+            return null;
+        }
+        trainerGroup.removeTrainer(trainer);
+        groupRepository.save(trainerGroup);
+        trainerRepository.remove(trainer);
         return null;
     }
 

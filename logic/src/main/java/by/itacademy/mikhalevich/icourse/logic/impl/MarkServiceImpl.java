@@ -36,6 +36,7 @@ public class MarkServiceImpl implements MarkService {
 
     @Override
     public Map<Integer, Mark> deleteMark(Integer id) {
+        markRepository.remove(new Mark().withId(id));
         return null;
     }
 

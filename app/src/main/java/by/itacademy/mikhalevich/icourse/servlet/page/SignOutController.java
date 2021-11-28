@@ -1,6 +1,6 @@
 package by.itacademy.mikhalevich.icourse.servlet.page;
 
-import by.itacademy.mikhalevich.icourse.servlet.AbstractController;
+import by.itacademy.mikhalevich.icourse.servlet.AccountController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
 
 import javax.servlet.ServletException;
@@ -11,7 +11,7 @@ import java.io.IOException;
 
 
 @WebServlet("/sign-out")
-public class SignOutController extends AbstractController {
+public class SignOutController extends AccountController {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

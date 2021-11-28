@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.jdbc;
 
+import by.itacademy.mikhalevich.icourse.MarkRepository;
 import by.itacademy.mikhalevich.icourse.model.Mark;
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,7 +13,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
-public class MarkRepositoryPostgres extends AbstractRepository<Mark> {
+public class MarkRepositoryPostgres extends AbstractRepository<Mark> implements MarkRepository {
 
     //language=PostgreSQL
     private static final String SELECT_FROM_MARK_ALL_FIELDS =

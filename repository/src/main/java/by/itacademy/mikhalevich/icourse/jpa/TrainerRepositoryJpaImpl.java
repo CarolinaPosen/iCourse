@@ -1,11 +1,12 @@
 package by.itacademy.mikhalevich.icourse.jpa;
 
+import by.itacademy.mikhalevich.icourse.TrainerRepository;
 import by.itacademy.mikhalevich.icourse.jdbc.TeacherRepositoryPostgres;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
 
 import javax.persistence.TypedQuery;
 
-public class TrainerRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Trainer> {
+public class TrainerRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Trainer> implements TrainerRepository {
 
     private static volatile TrainerRepositoryJpaImpl instance;
 

@@ -17,14 +17,14 @@ import java.util.Set;
 public class Group extends AbstractEntity {
     private String title;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
     @JoinColumn(name = "teacher_id")
     private Trainer trainer;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
     @JoinTable(name = "theme_class",
-            joinColumns = @JoinColumn(name = "theme_id"),
-            inverseJoinColumns = @JoinColumn(name = "class_id"))
+            joinColumns = @JoinColumn(name = "class_id"),
+            inverseJoinColumns = @JoinColumn(name = "theme_id"))
     private Set<Theme> themes = new HashSet<>();
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
@@ -59,7 +59,13 @@ public class Group extends AbstractEntity {
     }
 
     public void addTrainer(Trainer trainer){
-        this.trainer = trainer;
+        this.setTrainer(trainer);
         trainer.addGroup(this);
     }
+
+    public void removeTrainer(Trainer trainer){
+        this.setTrainer(null);
+//        trainer.addGroup(null);
+    }
+
 }

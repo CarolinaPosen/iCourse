@@ -1,10 +1,11 @@
 package by.itacademy.mikhalevich.icourse.jpa;
 
+import by.itacademy.mikhalevich.icourse.StudentRepository;
 import by.itacademy.mikhalevich.icourse.model.Student;
 
 import javax.persistence.TypedQuery;
 
-public class StudentRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Student> {
+public class StudentRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Student> implements StudentRepository {
     private static volatile StudentRepositoryJpaImpl instance;
 
     private StudentRepositoryJpaImpl() {

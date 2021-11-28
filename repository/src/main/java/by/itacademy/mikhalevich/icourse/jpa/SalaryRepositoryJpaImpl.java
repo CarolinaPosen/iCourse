@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.jpa;
 
+import by.itacademy.mikhalevich.icourse.SalaryRepository;
 import by.itacademy.mikhalevich.icourse.jdbc.TeacherRepositoryPostgres;
 import by.itacademy.mikhalevich.icourse.model.AbstractEntity;
 import by.itacademy.mikhalevich.icourse.model.Group;
@@ -8,7 +9,7 @@ import by.itacademy.mikhalevich.icourse.model.Salary;
 
 import javax.persistence.TypedQuery;
 
-public class SalaryRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Salary> {
+public class SalaryRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Salary> implements SalaryRepository {
 
     private SalaryRepositoryJpaImpl() {
     }

@@ -1,12 +1,13 @@
 package by.itacademy.mikhalevich.icourse.jpa;
 
+import by.itacademy.mikhalevich.icourse.MarkRepository;
 import by.itacademy.mikhalevich.icourse.model.Mark;
 import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
 
 import javax.persistence.TypedQuery;
 
-public class MarkRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Mark> {
+public class MarkRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Mark> implements MarkRepository {
     private MarkRepositoryJpaImpl() {
     }
 

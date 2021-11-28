@@ -2,8 +2,7 @@ package by.itacademy.mikhalevich.icourse.servlet.page;
 
 import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Student;
-import by.itacademy.mikhalevich.icourse.model.Trainer;
-import by.itacademy.mikhalevich.icourse.servlet.AbstractController;
+import by.itacademy.mikhalevich.icourse.servlet.AbstractStudentController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
 
 import javax.servlet.ServletException;
@@ -14,7 +13,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @WebServlet("/student-edit")
-public class StudentEditController extends AbstractController {
+public class StudentEditController extends AbstractStudentController {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

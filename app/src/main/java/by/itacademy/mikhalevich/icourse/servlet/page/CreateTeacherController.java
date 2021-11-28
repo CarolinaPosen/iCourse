@@ -1,9 +1,8 @@
 package by.itacademy.mikhalevich.icourse.servlet.page;
 
 import by.itacademy.mikhalevich.icourse.model.Role;
-import by.itacademy.mikhalevich.icourse.model.Salary;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
-import by.itacademy.mikhalevich.icourse.servlet.AbstractController;
+import by.itacademy.mikhalevich.icourse.servlet.AbstractTeacherController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
 
 import javax.servlet.ServletException;
@@ -11,11 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Map;
 
 @WebServlet("/create-teacher")
-public class CreateTeacherController extends AbstractController {
+public class CreateTeacherController extends AbstractTeacherController {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

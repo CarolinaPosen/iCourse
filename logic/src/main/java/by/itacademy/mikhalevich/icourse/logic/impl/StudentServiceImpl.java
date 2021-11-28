@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.logic.impl;
 
+import by.itacademy.mikhalevich.icourse.factory.RepositoryFactory;
 import by.itacademy.mikhalevich.icourse.jdbc.MarkRepositoryPostgres;
 import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.jdbc.StudentRepositoryPostgres;
@@ -29,8 +30,8 @@ class StudentServiceImpl implements StudentService {
     private Repository markRepository;
     private Repository themeRepository;
 
-    public StudentServiceImpl(DataSource dataSource) {
-        this.studentRepository = StudentRepositoryJpaImpl.getInstance();
+    public StudentServiceImpl() {
+        this.studentRepository = RepositoryFactory.getStudentRepository();
         this.roleRepository = RoleRepositoryJpaImpl.getInstance();
         this.markRepository = MarkRepositoryJpaImpl.getInstance();
         this.themeRepository = ThemeRepositoryJpaImpl.getInstance();

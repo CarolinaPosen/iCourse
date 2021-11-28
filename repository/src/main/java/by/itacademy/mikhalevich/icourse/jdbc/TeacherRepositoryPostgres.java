@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.jdbc;
 
+import by.itacademy.mikhalevich.icourse.TrainerRepository;
 import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Salary;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 @Slf4j
-public class TeacherRepositoryPostgres extends AbstractRepository<Trainer>  {
+public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> implements TrainerRepository {
     //language=PostgreSQL
     private static final String SELECT_FROM_TRAINERS_ALL_FIELDS =
             "select t.id id, t.name title, t.login log, t.password pass, t.role_id role_id," +

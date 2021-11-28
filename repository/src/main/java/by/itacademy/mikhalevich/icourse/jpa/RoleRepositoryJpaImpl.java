@@ -1,11 +1,12 @@
 package by.itacademy.mikhalevich.icourse.jpa;
 
+import by.itacademy.mikhalevich.icourse.RoleRepository;
 import by.itacademy.mikhalevich.icourse.jdbc.TeacherRepositoryPostgres;
 import by.itacademy.mikhalevich.icourse.model.Role;
 
 import javax.persistence.TypedQuery;
 
-public class RoleRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Role> {
+public class RoleRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Role> implements RoleRepository {
     private RoleRepositoryJpaImpl() {
     }
 

@@ -36,7 +36,7 @@
                             data-id-mark="${mark.id}">Change mark
                     </button>
 
-                    <form action="${pageContext.request.contextPath}/delete-salary" method="post">
+                    <form action="${pageContext.request.contextPath}/delete-mark" method="post">
                         <input name="id" type="hidden" value="${mark.id}" class="form-control">
                         <input type="hidden" name="student" class="student" value="${requestScope.student.id}">
                         <button type="submit" class="btn btn-warning btn-sm btn-block">Delete</button>

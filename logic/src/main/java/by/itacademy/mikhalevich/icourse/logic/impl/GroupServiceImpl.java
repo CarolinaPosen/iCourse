@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.logic.impl;
 
+import by.itacademy.mikhalevich.icourse.factory.RepositoryFactory;
 import by.itacademy.mikhalevich.icourse.jdbc.GroupRepositoryPostgres;
 import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.jpa.GroupRepositoryJpaImpl;
@@ -17,8 +18,8 @@ import java.util.Optional;
 public class GroupServiceImpl implements GroupService {
     private Repository groupRepository;
 
-    public GroupServiceImpl(DataSource dataSource) {
-        this.groupRepository = GroupRepositoryJpaImpl.getInstance();
+    public GroupServiceImpl() {
+        this.groupRepository = RepositoryFactory.getGroupRepository();
     }
 
     @Override
@@ -28,9 +29,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Map<Integer, Group> updateGroup(Group group) {
-
         groupRepository.save(group);
-
         return null;
     }
 

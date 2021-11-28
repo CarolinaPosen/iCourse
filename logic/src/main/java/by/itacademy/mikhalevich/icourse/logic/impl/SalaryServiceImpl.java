@@ -1,6 +1,7 @@
 package by.itacademy.mikhalevich.icourse.logic.impl;
 
 import by.itacademy.mikhalevich.icourse.Repository;
+import by.itacademy.mikhalevich.icourse.factory.RepositoryFactory;
 import by.itacademy.mikhalevich.icourse.jdbc.SalaryRepositoryPostgres;
 import by.itacademy.mikhalevich.icourse.jpa.SalaryRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.logic.SalaryService;
@@ -17,8 +18,8 @@ public class SalaryServiceImpl implements SalaryService {
     public static final int PARAMETER_INDEX = 4;
     private Repository salaryRepository;
 
-    public SalaryServiceImpl(DataSource dataSource) {
-        this.salaryRepository = SalaryRepositoryJpaImpl.getInstance();
+    public SalaryServiceImpl()  {
+        this.salaryRepository = RepositoryFactory.getSalaryRepository();
     }
 
     @Override

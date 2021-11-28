@@ -1,10 +1,11 @@
 package by.itacademy.mikhalevich.icourse.jpa;
 
+import by.itacademy.mikhalevich.icourse.GroupRepository;
 import by.itacademy.mikhalevich.icourse.model.Group;
 
 import javax.persistence.TypedQuery;
 
-public class GroupRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Group> {
+public class GroupRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Group> implements GroupRepository {
 
     private static volatile GroupRepositoryJpaImpl instance;
 

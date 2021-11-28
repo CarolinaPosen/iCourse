@@ -22,7 +22,7 @@ public class Trainer extends AbstractEntity {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "trainer", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH}, fetch=FetchType.EAGER)
     private Set<Group> groups = new HashSet<>();
 
     @OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
@@ -70,7 +70,7 @@ public class Trainer extends AbstractEntity {
 
     public void removeGroup(Group group) {
         group.setTrainer(null);
-        this.groups.remove(group);
+        //this.groups.remove(group);
     }
 
     @Override

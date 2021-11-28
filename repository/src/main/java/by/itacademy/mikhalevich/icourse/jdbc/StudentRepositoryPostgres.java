@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.jdbc;
 
+import by.itacademy.mikhalevich.icourse.StudentRepository;
 import by.itacademy.mikhalevich.icourse.model.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,7 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
-public class StudentRepositoryPostgres extends AbstractRepository<Student> {
+public class StudentRepositoryPostgres extends AbstractRepository<Student> implements StudentRepository {
     //language=PostgreSQL
     private static final String SELECT_FROM_STUDENT_ALL_FIELDS =
             "select s.id id, s.name title, s.login log, s.password pass, s.role_id role_id," +

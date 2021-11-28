@@ -2,7 +2,12 @@ package by.itacademy.mikhalevich.icourse.logic.impl;
 
 import javax.servlet.ServletContext;
 
-import by.itacademy.mikhalevich.icourse.logic.*;
+import by.itacademy.mikhalevich.icourse.logic.AccountService;
+import by.itacademy.mikhalevich.icourse.logic.GroupService;
+import by.itacademy.mikhalevich.icourse.logic.MarkService;
+import by.itacademy.mikhalevich.icourse.logic.SalaryService;
+import by.itacademy.mikhalevich.icourse.logic.StudentService;
+import by.itacademy.mikhalevich.icourse.logic.TeacherService;
 import by.itacademy.mikhalevich.icourse.repository.LoginPasswordSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
@@ -61,12 +66,11 @@ public class ServiceManager {
 	private ServiceManager(ServletContext context) {
 		loadApplicationProperties();
 		dataSource = createDataSource();
-
-		teacherService = new TrainerServiceImpl(dataSource);
-		studentService = new StudentServiceImpl(dataSource);
+		teacherService = new TrainerServiceImpl();
+		studentService = new StudentServiceImpl();
 		markService = new MarkServiceImpl();
-		groupService = new GroupServiceImpl(dataSource);
-		salaryService = new SalaryServiceImpl(dataSource);
+		groupService = new GroupServiceImpl();
+		salaryService = new SalaryServiceImpl();
 		accountService = new AccountServiceImpl(new LoginPasswordSource());
 	}
 
@@ -92,5 +96,4 @@ public class ServiceManager {
 			throw new RuntimeException(e);
 		}
 	}
-
 }

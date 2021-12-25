@@ -1,7 +1,5 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true" %>
 
-<!DOCTYPE html>
-<html lang="en">
 <head>
 
     <title>iCourse itAcademy</title>
@@ -38,11 +36,16 @@
 <footer class="footer" style="background-color: #d0e9c6">
 </footer>
 
-<script src="${pageContext.request.contextPath}/static/js/update-teacher-popup.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/create-teacher-popup.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/update-student-popup.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/update-salary-popup.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/jsontest.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/app-ajax.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/update-group-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/update-teacher-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/create-teacher-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/update-student-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/create-student-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/update-salary-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/create-salary-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/update-mark-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/create-mark-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jsontest.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/app-ajax.js"></script>
 </body>
 </html>

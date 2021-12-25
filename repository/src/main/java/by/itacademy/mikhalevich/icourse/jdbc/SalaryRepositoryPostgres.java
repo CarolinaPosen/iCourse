@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.jdbc;
 
+import by.itacademy.mikhalevich.icourse.SalaryRepository;
 import by.itacademy.mikhalevich.icourse.model.Salary;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
 import lombok.extern.slf4j.Slf4j;
@@ -11,9 +12,10 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
-public class SalaryRepositoryPostgres extends AbstractRepository<Salary> {
+public class SalaryRepositoryPostgres extends AbstractRepository<Salary> implements SalaryRepository {
 
     //language=PostgreSQL
     private static final String SELECT_FROM_SALARY_ALL_FIELDS =
@@ -96,4 +98,8 @@ public class SalaryRepositoryPostgres extends AbstractRepository<Salary> {
         return salaryMap;
     }
 
+    @Override
+    public Optional<Salary> findByName(String name) {
+        return Optional.empty();
+    }
 }

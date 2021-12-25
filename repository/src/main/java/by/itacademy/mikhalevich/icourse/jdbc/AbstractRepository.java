@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.jdbc;
 
+import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.exception.DataBaseErrorException;
 import by.itacademy.mikhalevich.icourse.model.AbstractEntity;
 import lombok.extern.slf4j.Slf4j;
@@ -68,8 +69,8 @@ public abstract class AbstractRepository<T extends AbstractEntity> implements Re
     }
 
     @Override
-    public T save(T entity, int parameterIndex) {
-        return entity.getId() == null ? insert(entity) : update(entity, parameterIndex);
+    public T save(T entity) {
+        return entity.getId() == null ? insert(entity) : update(entity);
     }
 
     private T insert(T entity) {
@@ -88,11 +89,11 @@ public abstract class AbstractRepository<T extends AbstractEntity> implements Re
         }
     }
 
-    private T update(T entity, int parameterIndex) {
+    private T update(T entity) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement ps = con.prepareStatement(updateSql())) {
             updateLogic(entity, ps);
-            ps.setInt(parameterIndex, (Integer) entity.getId());
+            ps.setInt(5, (Integer) entity.getId());
             if (ps.executeUpdate() > 0) {
                 return entity;
             }

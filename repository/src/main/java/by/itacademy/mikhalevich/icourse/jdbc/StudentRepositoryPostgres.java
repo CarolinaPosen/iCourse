@@ -1,31 +1,29 @@
 package by.itacademy.mikhalevich.icourse.jdbc;
 
-import by.itacademy.mikhalevich.icourse.model.Mark;
-import by.itacademy.mikhalevich.icourse.model.Role;
-import by.itacademy.mikhalevich.icourse.model.Student;
-import by.itacademy.mikhalevich.icourse.model.Theme;
+import by.itacademy.mikhalevich.icourse.StudentRepository;
+import by.itacademy.mikhalevich.icourse.model.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
-public class StudentRepositoryPostgres extends AbstractRepository<Student> {
+public class StudentRepositoryPostgres extends AbstractRepository<Student> implements StudentRepository {
     //language=PostgreSQL
     private static final String SELECT_FROM_STUDENT_ALL_FIELDS =
-            "select s.id id, s.name title, s.login log, s.password pass, s.role_id role_id, m.id mark_id, m.mark mark, th.id theme_id, th.title theme_title" +
+            "select s.id id, s.name title, s.login log, s.password pass, s.role_id role_id," +
+                    " m.id mark_id, m.mark mark, m.date mark_date, m.theme_id theme_id," +
+                    " th.title theme_title" +
                     " from student s " +
-                    " join student_class sc on s.id = sc.student_id " +
-                    " join class c on sc.class_id = c.id " +
-                    " join theme_class tc on c.id = tc.class_id " +
-                    " join theme th on tc.theme_id = th.id " +
-                    " join mark m on s.id = m.student_id ";
+                    " left join mark m on s.id = m.student_id "+
+                    " join theme th on m.theme_id = th.id " ;
+
 
     //language=PostgreSQL
     private static final String ONE_ENTITY_FILTER = " where s.id = ?";
@@ -103,6 +101,9 @@ public class StudentRepositoryPostgres extends AbstractRepository<Student> {
             int sId = rs.getInt("id");
             int mId = rs.getInt("mark_id");
             int thId = rs.getInt("theme_id");
+
+            Map<Integer, Mark> markMap = new HashMap<>();
+
             studentMap.putIfAbsent(sId, new Student()
                     .withId(sId)
                     .withName(rs.getString("title"))
@@ -110,18 +111,34 @@ public class StudentRepositoryPostgres extends AbstractRepository<Student> {
                     .withPassword(rs.getString("pass"))
                     .withRole(new Role()
                             .withId(rs.getInt("role_id"))
-                            .withName("Role")));
+                            .withTitle("Role"))
+                    .addMark(putIfAbsentAndReturn(markMap, mId,
+                            new Mark()
+                                    .withId(mId)
+                                    .withDate(rs.getTimestamp("mark_date"))
+                                    .withMark(rs.getInt("mark")))
+                                    .withTheme(new Theme()
+                                            .withId(thId)
+                                            .withTitle(rs.getString("theme_title")))));
 
-            studentMap.get(sId).addMark(new Mark()
-                    .withId(mId)
-                    .withMark(rs.getInt("mark"))
-                    .withDate(Timestamp.valueOf(LocalDateTime.now()))
-                    .withTheme(new Theme()
-                            .withId(thId)
-                            .withTitle(rs.getString("theme_title"))));
+//            studentMap.get(sId).addMark(new Mark()
+//                    .withId(mId)
+//                    .withMark(rs.getInt("mark"))
+//                    .withDate(Timestamp.valueOf(LocalDateTime.now()))
+//                    .withTheme(new Theme()
+//                            .withId(thId)
+//                            .withTitle(rs.getString("theme_title"))));
+
+            studentMap.computeIfPresent(sId, (id, student) -> student.addMark(markMap.get(mId)));
+//            trainersMap.computeIfPresent(tId, (id, trainer) -> trainer.addSalary(salaryMap.get(sId)));
 
         }
         return studentMap;
+    }
+
+    @Override
+    public Optional<Student> findByName(String name) {
+        return Optional.empty();
     }
 }
 

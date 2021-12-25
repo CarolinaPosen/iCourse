@@ -3,28 +3,33 @@ package by.itacademy.mikhalevich.icourse.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
+import javax.persistence.Entity;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class Role extends AbstractEntity<Integer>{
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = false, exclude = {"title"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@Entity
+public class Role extends AbstractEntity{
         private String title;
 //        Set<Trainer> trainers = new HashSet<>();
-
 
         public Role withId(Integer id){
             setId(id);
             return this;
         }
 
-        public Role withName(String role) {
-            setTitle(role);
+        public Role withTitle(String title) {
+            setTitle(title);
             return this;
         }
 
@@ -33,8 +38,4 @@ public class Role extends AbstractEntity<Integer>{
 //        return this;
 //    }
 
-        @Override
-        public String toString() {
-            return String.format("Role [id=%s, title=%s]", getId(), title);
-        }
     }

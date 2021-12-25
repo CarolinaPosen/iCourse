@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class JsonController extends AbstractController {
+public class JsonController extends AbstractTeacherController {
 
     protected void writeEntityToBody(Object obj, HttpServletResponse resp) throws IOException {
         obj = (obj instanceof Optional) ? ((Optional<?>)obj).orElse(null): obj;

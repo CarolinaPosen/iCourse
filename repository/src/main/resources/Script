@@ -1,12 +1,51 @@
+--DROP TABLE public.student_class;
+--DROP TABLE public.theme_class;
+--DROP TABLE public.salary;
+--DROP TABLE public."class";
+--DROP TABLE public.teacher;
+--DROP TABLE public."mark";
+--DROP TABLE public.student;
+--DROP TABLE public."role";
+--DROP TABLE public.theme;
+
+
+-- public."mark" definition
+-- Drop mark
+-- DROP TABLE public."mark";
+
+CREATE TABLE public."mark" (
+	id serial4 NOT NULL,
+	mark int4 NOT null,
+	"date" timestamp NOT NULL,
+	student_id int4 NULL,
+	theme_id int4 NULL
+);
+
+-- public.theme definition
+-- Drop table
+-- DROP TABLE public.theme;
+
+CREATE TABLE public.theme (
+	id serial4 NOT NULL,
+	title varchar(50) NULL
+);
+
 -- public.student_theme_class definition
 -- Drop table
 -- DROP TABLE public.student_theme_class;
 
-CREATE TABLE public.student_theme_class (
-	student_id int4 NULL,
+CREATE TABLE public.theme_class (
 	theme_id int4 NULL,
-	class_id int4 NULL,
-	mark_id int4 NULL
+	class_id int4 null
+);
+
+-- public.student_theme_class definition
+-- Drop table
+-- DROP TABLE public.student_theme_class;
+
+CREATE TABLE public.student_class (
+	student_id int4 NULL,
+	class_id int4 null
 );
 
 
@@ -19,20 +58,7 @@ CREATE TABLE public.student (
 	"name" varchar(50) NOT NULL,
 	login varchar(50) NOT NULL,
 	"password" varchar(50) NOT NULL,
-	role_id int4 NULL,
-	CONSTRAINT student_pkey PRIMARY KEY (id)
-);
-
-
--- public."mark" definition
--- Drop mark
--- DROP TABLE public."mark";
-
-CREATE TABLE public."mark" (
-	id serial4 NOT NULL,
-	mark int4 NOT null,
-	"date" timestamp NOT NULL,
-	CONSTRAINT mark_pkey PRIMARY KEY (id)
+	role_id int4 NULL
 );
 
 
@@ -45,8 +71,7 @@ CREATE TABLE public.teacher (
 	"name" varchar(50) NOT NULL,
 	login varchar(50) NOT NULL,
 	"password" varchar(50) NOT NULL,
-	role_id int4 NULL,
-	CONSTRAINT teacher_pkey PRIMARY KEY (id)
+	role_id int4 NULL
 );
 
 
@@ -58,8 +83,7 @@ CREATE TABLE public.salary (
 	id serial4 NOT NULL,
 	salary numeric(4) NOT NULL,
 	"date" timestamp NOT NULL,
-	teacher_id int4 NULL,
-	CONSTRAINT salary_pkey PRIMARY KEY (id)
+	teacher_id int4 NULL
 );
 
 
@@ -69,8 +93,7 @@ CREATE TABLE public.salary (
 
 CREATE TABLE public."role" (
 	id serial4 NOT NULL,
-	title varchar(50) NOT NULL,
-	CONSTRAINT role_pkey PRIMARY KEY (id)
+	title varchar(50) NOT NULL
 );
 
 
@@ -81,47 +104,5 @@ CREATE TABLE public."role" (
 CREATE TABLE public."class" (
 	id serial4 NOT NULL,
 	title varchar(50) NOT NULL,
-	teacher_id int4 NULL,
-	CONSTRAINT group_pkey PRIMARY KEY (id)
+	teacher_id int4 NULL
 );
-
-
--- public.theme definition
--- Drop table
--- DROP TABLE public.theme;
-
-CREATE TABLE public.theme (
-	id serial4 NOT NULL,
-	title varchar(50) NULL,
-	CONSTRAINT theme_pkey PRIMARY KEY (id)
-);
-
-
--- public."class" foreign keys
-
-ALTER TABLE public."class" ADD CONSTRAINT group_teacher_fk FOREIGN KEY (teacher_id) REFERENCES public.teacher(id);
-
--- public.student_theme_class foreign keys
-
-ALTER TABLE public.student_theme_class ADD CONSTRAINT student_theme_class_class_id_fkey FOREIGN KEY (class_id) REFERENCES public."class"(id);
-ALTER TABLE public.student_theme_class ADD CONSTRAINT student_theme_class_student_id_fkey FOREIGN KEY (student_id) REFERENCES public.student(id);
-ALTER TABLE public.student_theme_class ADD CONSTRAINT student_theme_class_theme_id_fkey FOREIGN KEY (theme_id) REFERENCES public.theme(id);
-ALTER TABLE public.student_theme_class ADD CONSTRAINT student_theme_class_mark_id_fkey FOREIGN KEY (mark_id) REFERENCES public.mark(id);
-
--- public.student foreign keys
-
-ALTER TABLE public.student ADD CONSTRAINT student_role_id_fkey FOREIGN KEY (role_id) REFERENCES public."role"(id);
-
--- public.teacher foreign keys
-
-ALTER TABLE public.teacher ADD CONSTRAINT teacher_role_id_fkey FOREIGN KEY (role_id) REFERENCES public."role"(id);
-
-
--- public.salary foreign keys
-
-ALTER TABLE public.salary ADD CONSTRAINT salary_teacher_fk FOREIGN KEY (teacher_id) REFERENCES public.teacher(id);
-
-
-
-
-

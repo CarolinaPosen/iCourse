@@ -1,7 +1,7 @@
 package by.itacademy.mikhalevich.icourse.servlet.page;
 
 import by.itacademy.mikhalevich.icourse.model.Trainer;
-import by.itacademy.mikhalevich.icourse.servlet.AbstractController;
+import by.itacademy.mikhalevich.icourse.servlet.AbstractSalaryController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
 
 import javax.servlet.ServletException;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @WebServlet("/delete-salary")
-public class DeleteSalaryController extends AbstractController {
+public class DeleteSalaryController extends AbstractSalaryController {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

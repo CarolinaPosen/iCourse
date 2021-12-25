@@ -1,23 +1,31 @@
 package by.itacademy.mikhalevich.icourse.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class AbstractEntity<T> implements Serializable {
+@MappedSuperclass
+public abstract class AbstractEntity implements Serializable {
 
-	private T id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-	public T getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(T id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

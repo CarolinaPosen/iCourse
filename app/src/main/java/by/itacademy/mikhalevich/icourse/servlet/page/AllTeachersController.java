@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.util.Map;
 
 import by.itacademy.mikhalevich.icourse.model.Trainer;
-import by.itacademy.mikhalevich.icourse.servlet.AbstractController;
+import by.itacademy.mikhalevich.icourse.servlet.AbstractTeacherController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
 
 @WebServlet("/teachers")
-public class AllTeachersController extends AbstractController {
+public class AllTeachersController extends AbstractTeacherController {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.jdbc;
 
+import by.itacademy.mikhalevich.icourse.GroupRepository;
 import by.itacademy.mikhalevich.icourse.model.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,11 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
-public class GroupRepositoryPostgres extends AbstractRepository<Group> {
+public class GroupRepositoryPostgres extends AbstractRepository<Group> implements GroupRepository {
 
     public static final String G_ID = "g_id";
     public static final String S_ID = "s_id";
@@ -25,16 +26,17 @@ public class GroupRepositoryPostgres extends AbstractRepository<Group> {
     public static final String PASSWORD = "pass";
     public static final String ROLE_ID = "role_id";
     public static final String THEME_TITLE = "theme_title";
+    public static final String S_NAME = "s_name";
     //language=PostgreSQL
     private static final String SELECT_FROM_GROUP_ALL_FIELDS =
             "select c.id g_id, c.title title," +
-                    " s.id s_id, s.name title, s.login log, s.password pass, s.role_id role_id," +
+                    " s.id s_id, s.name " + S_NAME + ", s.login log, s.password pass, s.role_id role_id," +
                     " th.id th_id, th.title theme_title," +
                     " t.id t_id, t.name t_name, t.login t_login" +
                     " from class c" +
-                    " join theme_class thc" +
+                    " LEFT OUTER join theme_class thc" +
                     " on c.id = thc.class_id" +
-                    " join theme th " +
+                    " LEFT OUTER join theme th " +
                     " on th.id = thc.theme_id" +
                     " join teacher t " +
                     " on c.teacher_id = t.id" +
@@ -123,17 +125,11 @@ public class GroupRepositoryPostgres extends AbstractRepository<Group> {
                     .withTitle(rs.getString(TITLE))
                     .withTeacher(new Trainer()
                             .withId(tId)
-                            .withName(rs.getString("t_name"))
-                            .withLogin(rs.getString("t_login")))
+                            .withName(rs.getString(T_NAME)))
                     .addStudent(putIfAbsentAndReturn(studentsMap, sId,
                             new Student()
                                     .withId(sId)
-                                    .withName(rs.getString(TITLE))
-                                    .withLogin(rs.getString(LOGIN))
-                                    .withPassword(rs.getString(PASSWORD))
-                                    .withRole(new Role()
-                                            .withId(rs.getInt("role_id"))
-                                            .withName("Role"))))
+                                    .withName(rs.getString(S_NAME))))
                     .addTheme(putIfAbsentAndReturn(themesMap, thId,
                             new Theme()
                                     .withId(thId)
@@ -144,5 +140,10 @@ public class GroupRepositoryPostgres extends AbstractRepository<Group> {
 
         }
         return groupMap;
+    }
+
+    @Override
+    public Optional<Group> findByName(String name) {
+        return Optional.empty();
     }
 }

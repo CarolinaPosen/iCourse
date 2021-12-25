@@ -13,11 +13,13 @@
                             NAME: <input type="text" name="name" class="form-control name"><br>
                             LOGIN: <input type="text" name="login" class="form-control login"><br>
                             PASSWORD: <input type="text" name="password" class="form-control password"><br>
-                            ROLE: <p><select name="role" size="3" multiple>
-                            <option selected type="number" value="1"> Administrator</option>
-                            <option type="number" value="2"> Manager</option>
-                            <option type="number" value="3"> User</option>
-                        </select><br>
+                            ROLE:<p><label>
+                            <select name="role" size="3" multiple>
+                                <option selected type="text" value="Admin"> Administrator</option>
+                                <option type="text" value="Manager"> Manager</option>
+                                <option type="text" value="User"> User</option>
+                            </select>
+                        </label><br>
                         </div>
                     </div>
                 </div>

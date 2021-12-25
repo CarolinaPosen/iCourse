@@ -1,7 +1,7 @@
 package by.itacademy.mikhalevich.icourse.servlet.page;
 
 import by.itacademy.mikhalevich.icourse.model.CurrentAccount;
-import by.itacademy.mikhalevich.icourse.servlet.AbstractController;
+import by.itacademy.mikhalevich.icourse.servlet.AccountController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
 import by.itacademy.mikhalevich.icourse.util.SessionUtils;
 
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/sign-in")
-public class SignInController extends AbstractController {
+public class SignInController extends AccountController {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

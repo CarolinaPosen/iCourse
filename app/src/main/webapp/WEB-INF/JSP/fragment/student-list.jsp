@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="popup" %>
 <popup:update-student-popup/>
+<popup:add-new-student/>
 
 <c:forEach var="student" items="${requestScope.students}">
     <div class="col-xs-12 col-sm-8 col-md-4">
@@ -22,19 +23,13 @@
                     data-id-student="${student.key}">Change student data
             </button>
 
-            <form action="${pageContext.request.contextPath}/salary" method="post">
+            <form action="${pageContext.request.contextPath}/marks" method="post">
                 <input name="id" type="hidden" value="${student.key}" class="form-control">
                 <input name="name" type="hidden" value="${student.value.name}" class="form-control">
                 <input name="login" type="hidden" value="${student.value.login}" class="form-control">
                 <input name="salary" type="hidden" value="${student.value.marks}" class="form-control">
                 <button type="submit" class="btn btn-info btn-sm btn-block">Show marks</button>
             </form>
-
-<%--                <c:forEach var="mark" items="${student.value.marks}">--%>
-<%--                    <input name="mark" value="${mark.mark}" class="form-control">--%>
-<%--                    <input name="mark" value="${mark.theme.title}" class="form-control">--%>
-<%--                </c:forEach>--%>
-
 
             <form action="${pageContext.request.contextPath}/delete-student" method="post">
                 <input name="id" type="hidden" value="${student.key}" class="form-control">
@@ -43,6 +38,14 @@
         </div>
     </div>
 </c:forEach>
+
+<div class="col-xs-12 col-sm-8 col-md-4">
+    <div class="card mb-4 shadow-sm">
+        <button type="button" class="btn create-student-btn btn-outline-success btn-lg btn-block">Create new
+            student
+        </button>
+    </div>
+</div>
 
 
 

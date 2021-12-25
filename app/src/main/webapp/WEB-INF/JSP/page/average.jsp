@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="popup" %>
 <popup:update-salary-popup/>
+<popup:add-new-salary/>
 <c:set var="month" value="0"/>
 
 <div>
@@ -14,8 +15,8 @@
             </div>
             <div class="card mb-4 shadow-sm">
                 <form action="/web-app/salary" method="post">
-                    <h2>COUNT OF MONTH:<input name="month" class="form-control">
-                        <input name="id" type="hidden" value="${requestScope.teacher.id}"></h2>
+                    <h2>COUNT OF MONTH:<input name="month" class="form-control" type="number" max="${requestScope.teacher.salaries.size()}">
+                        <input id="trainer_id" name="id" type="hidden" value="${requestScope.teacher.id}"></h2>
                     <button type="submit" class="btn btn-info btn-sm btn-block">Calculate average salary</button>
                 </form>
             </div>
@@ -49,4 +50,13 @@
         </c:forEach>
     </div>
 
+</div>
+
+<div class="col-xs-12 col-sm-8 col-md-4">
+    <div class="card mb-4 shadow-sm">
+        <button type="button" class="btn create-salary-btn btn-outline-success btn-lg btn-block"
+                data-id-teacher="${requestScope.teacher.id}">
+            Create new salary
+        </button>
+    </div>
 </div>

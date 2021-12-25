@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.jdbc;
 
+import by.itacademy.mikhalevich.icourse.TrainerRepository;
 import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Salary;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 @Slf4j
-public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> {
+public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> implements TrainerRepository {
     //language=PostgreSQL
     private static final String SELECT_FROM_TRAINERS_ALL_FIELDS =
             "select t.id id, t.name title, t.login log, t.password pass, t.role_id role_id," +
@@ -105,7 +106,7 @@ public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> {
                             .withPassword(rs.getString("pass"))
                             .withRole(new Role()
                             .withId(rs.getInt("role_id"))
-                            .withName("Role"))
+                            .withTitle("Role"))
                             .addSalary(putIfAbsentAndReturn(salaryMap, sId,
                                     new Salary()
                                             .withId(sId)
@@ -113,9 +114,12 @@ public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> {
                                             .withSalary(rs.getBigDecimal("salary")))));
 
             trainersMap.computeIfPresent(tId, (id, trainer) -> trainer.addSalary(salaryMap.get(sId)));
-
-
         }
         return trainersMap;
+    }
+
+    @Override
+    public Optional<Trainer> findByName(String name) {
+        return Optional.empty();
     }
 }

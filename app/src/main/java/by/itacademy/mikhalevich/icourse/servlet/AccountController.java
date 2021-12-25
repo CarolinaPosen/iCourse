@@ -1,7 +1,7 @@
 package by.itacademy.mikhalevich.icourse.servlet;
 
-import by.itacademy.mikhalevich.icourse.logic.*;
-import by.itacademy.mikhalevich.icourse.logic.impl.ServiceManager;
+import by.itacademy.mikhalevich.icourse.AccountService;
+import by.itacademy.mikhalevich.icourse.impl.ServiceManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

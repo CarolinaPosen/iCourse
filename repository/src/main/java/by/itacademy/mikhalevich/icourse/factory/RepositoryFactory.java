@@ -99,4 +99,15 @@ public class RepositoryFactory {
         }
     }
 
+    public static ThemeRepository getThemeRepository() {
+        switch (TYPE) {
+            case JDBC:
+                return null;
+            case JPA:
+                return ThemeRepositoryJpaImpl.getInstance();
+            default:
+                return ThemeRepositoryJpaImpl.getInstance();
+        }
+    }
+
 }

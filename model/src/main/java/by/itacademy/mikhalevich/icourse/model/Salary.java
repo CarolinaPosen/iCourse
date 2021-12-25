@@ -16,6 +16,7 @@ import java.util.HashMap;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 public class Salary extends AbstractEntity {
 

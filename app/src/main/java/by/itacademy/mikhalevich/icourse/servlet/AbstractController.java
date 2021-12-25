@@ -1,18 +1,5 @@
 package by.itacademy.mikhalevich.icourse.servlet;
 
-import by.itacademy.mikhalevich.icourse.logic.*;
-import by.itacademy.mikhalevich.icourse.logic.impl.ServiceManager;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 //public abstract class AbstractController extends HttpServlet {
 //
 //	private TeacherService teacherService;

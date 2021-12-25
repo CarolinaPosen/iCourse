@@ -1,5 +1,8 @@
 package by.itacademy.mikhalevich.icourse.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -11,8 +14,10 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true, exclude = {"salaries", "groups"})
+@ToString(callSuper = true, exclude = "groups")
 @Entity
 @Table(name="teacher", schema = "public")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Trainer extends AbstractEntity {
     private String name;
     private String login;
@@ -22,11 +27,11 @@ public class Trainer extends AbstractEntity {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToMany(mappedBy = "trainer", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH}, fetch=FetchType.EAGER)
-    private Set<Group> groups = new HashSet<>();
+    @OneToMany(mappedBy = "trainer", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
+    private Set<Group> groups = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-    private Set<Salary> salaries = new HashSet<>();
+    private Set<Salary> salaries = new LinkedHashSet<>();
 
     public Trainer withId(Integer id){
         setId(id);
@@ -73,8 +78,8 @@ public class Trainer extends AbstractEntity {
         //this.groups.remove(group);
     }
 
-    @Override
-    public String toString() {
-        return String.format("Trainer [id=%s, name=%s, login=%s, password=%s, role=%s, salary=%s]", getId(), name, login, password, role, salaries);
-    }
+//    @Override
+//    public String toString() {
+//        return String.format("Trainer [id=%s, name=%s, login=%s, password=%s, role=%s, salary=%s]", getId(), name, login, password, role, salaries);
+//    }
 }

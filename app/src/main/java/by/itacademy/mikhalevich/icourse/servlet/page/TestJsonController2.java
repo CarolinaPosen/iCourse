@@ -40,9 +40,9 @@ public class TestJsonController2 extends JsonController {
 
         writeEntityToBody(trainers, resp);
 
-/*        Map<Integer, Trainer> teachers = getTeacherService().readTeachers();
-        req.setAttribute("teachers", teachers);*/
-        //RoutingUtils.forwardToPage("jsontest.jsp", req, resp);
+        Map<Integer, Trainer> teachers = getTeacherService().readTeachers();
+        req.setAttribute("teachers", teachers);
+        RoutingUtils.forwardToPage("jsontest.jsp", req, resp);
 
     }
 

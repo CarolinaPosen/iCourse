@@ -17,6 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false, exclude = {"title"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 public class Role extends AbstractEntity{
         private String title;

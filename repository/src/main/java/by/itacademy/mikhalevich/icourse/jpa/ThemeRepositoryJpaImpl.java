@@ -1,10 +1,11 @@
 package by.itacademy.mikhalevich.icourse.jpa;
 
+import by.itacademy.mikhalevich.icourse.ThemeRepository;
 import by.itacademy.mikhalevich.icourse.model.Theme;
 
 import javax.persistence.TypedQuery;
 
-public class ThemeRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Theme> {
+public class ThemeRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Theme> implements ThemeRepository {
     private ThemeRepositoryJpaImpl() {
     }
 
@@ -21,8 +22,6 @@ public class ThemeRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Theme> {
         return instance;
     }
 
-
-    //"from Role" для получения этого значения использовать Class<?> clazz, clazz.getSimpleName());
     @Override
     protected TypedQuery<Theme> findAllQuery() {
         return helper.getEntityManager().createQuery("from Theme", Theme.class);

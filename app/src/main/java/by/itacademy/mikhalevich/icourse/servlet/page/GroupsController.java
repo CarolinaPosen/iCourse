@@ -36,7 +36,8 @@ public class GroupsController {
         Map<Integer, Group> groups = Map.of(1, new Group().withId(1).withTitle("Group1"));
 
         modelAndView.addObject("groups", groupService.readGroups());
-        modelAndView.setViewName("groups");
+        modelAndView.addObject("currentPage", "page/groups.jsp");
+        modelAndView.setViewName("page-template");
         return modelAndView;
     }
 }

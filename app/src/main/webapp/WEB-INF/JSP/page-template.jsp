@@ -27,6 +27,7 @@
         <div class="col-sm-7 col-md-8 col-lg-9 col-xs-9">
             <main>
                 <jsp:include page="${requestScope.currentPage}"/>
+                <script>alert(${requestScope.currentPage})</script>
             </main>
         </div>
     </div>

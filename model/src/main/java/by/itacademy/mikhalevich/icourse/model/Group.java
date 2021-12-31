@@ -1,6 +1,7 @@
 package by.itacademy.mikhalevich.icourse.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
@@ -13,7 +14,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude = "trainer")
 @ToString(callSuper = true, exclude = "trainer")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
@@ -21,10 +22,12 @@ import java.util.Set;
 public class Group extends AbstractEntity {
     private String title;
 
+    @JsonManagedReference
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
     @JoinColumn(name = "teacher_id")
     private Trainer trainer;
 
+    @JsonManagedReference
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
     @JoinTable(name = "theme_class",
             joinColumns = @JoinColumn(name = "class_id"),

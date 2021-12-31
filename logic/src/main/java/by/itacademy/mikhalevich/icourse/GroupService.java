@@ -7,8 +7,8 @@ import java.util.Optional;
 public interface GroupService {
     Map<Integer, Group> readGroups();
     Map<Integer, Group> updateGroup(Group group);
-    Map<Integer, Group> createGroup(Group group);
-    Map<Integer, Group> deleteGroup(Integer id);
+    Group createGroup(Group group);
+    Optional<Group> deleteGroup(Group group);
     Group getGroupById (Integer id);
 
 }

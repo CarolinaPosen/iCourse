@@ -16,7 +16,7 @@ public class DeleteGroupController extends AbstractGroupController {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getGroupService().deleteGroup(Integer.parseInt(req.getParameter("id")));
+        getGroupService().deleteGroup(new Group().withId(Integer.parseInt(req.getParameter("id"))));
         Map<Integer, Group> groups = getGroupService().readGroups();
         req.setAttribute("groups", groups);
         RoutingUtils.forwardToPage("groups.jsp", req, resp);

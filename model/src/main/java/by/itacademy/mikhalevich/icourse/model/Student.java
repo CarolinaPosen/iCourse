@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
@@ -28,6 +29,7 @@ public class Student extends AbstractEntity{
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private Set<Mark> marks = new HashSet<>();
 
+    @JsonBackReference
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
     @JoinTable(name = "student_class",
             joinColumns = @JoinColumn(name = "student_id"),

@@ -5,7 +5,9 @@ import by.itacademy.mikhalevich.icourse.factory.RepositoryFactory;
 import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.model.Group;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
 import java.util.Optional;
@@ -31,24 +33,30 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Map<Integer, Group> createGroup(Group group) {
-        return null;
+    public Group createGroup(Group group) {
+        return (Group) groupRepository.save(group);
     }
 
     @Override
-    public Map<Integer, Group> deleteGroup(Integer id) {
-        groupRepository.remove(new Group().withId(id));
-        return null;
+    public Optional<Group> deleteGroup(Group group) {
+
+        Optional deletedGroup = groupRepository.remove(group);
+        if (deletedGroup.isEmpty()) {
+            log.error("Group id: "+ group.getId() +" not exists");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: "+ group.getId() +" not exists");
+        } else {
+            return deletedGroup;
+        }
     }
 
     @Override
     public Group getGroupById(Integer id) {
         Optional group = groupRepository.find(id);
-        if (group.isPresent()) {
-            return (Group) group.get();
+        if (group.isEmpty()) {
+            log.error("Group id: "+ id +" not exists");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: "+ id +" not exists");
         } else {
-            log.error("Trainer id: "+ id +" not exists");
-            return null;
+            return (Group) group.get();
         }
     }
 

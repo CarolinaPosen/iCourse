@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -14,7 +15,7 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true, exclude = {"salaries", "groups"})
-@ToString(callSuper = true, exclude = "groups")
+@ToString(callSuper = true, exclude = {"salaries", "groups"})
 @Entity
 @Table(name="teacher", schema = "public")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -27,6 +28,7 @@ public class Trainer extends AbstractEntity {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "trainer", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
     private Set<Group> groups = new LinkedHashSet<>();
 

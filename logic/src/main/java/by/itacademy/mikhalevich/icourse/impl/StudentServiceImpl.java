@@ -9,12 +9,15 @@ import by.itacademy.mikhalevich.icourse.jpa.ThemeRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Student;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
-class StudentServiceImpl implements StudentService {
+@Component
+public class StudentServiceImpl implements StudentService {
 
     private Repository studentRepository;
     private Repository roleRepository;
@@ -35,25 +38,25 @@ class StudentServiceImpl implements StudentService {
 
     @Override
     public Map<Integer, Student> updateStudent(Student student) {
-
         studentRepository.save(student);
         return null;
-
-
     }
 
     @Override
-    public Map<Integer, Student> createStudent(Student student) {
+    public Optional<Student> createStudent(Student student) {
         Role updateRole = (Role) roleRepository.findByName(student.getRole().getTitle()).get();
         student.withRole(updateRole);
-        studentRepository.save(student);
-        return null;
+        return Optional.ofNullable((Student) studentRepository.save(student));
     }
 
     @Override
-    public Map<Integer, Student> deleteStudent(Integer id) {
-        studentRepository.remove(new Student().withId(id));
-        return null;
+    public Optional<Student> deleteStudent(Integer id) {
+        return  studentRepository.remove(new Student().withId(id));
+    }
+
+    @Override
+    public Optional<Student> deleteStudent(Student student) {
+        return  studentRepository.remove(student.getId());
     }
 
     @Override

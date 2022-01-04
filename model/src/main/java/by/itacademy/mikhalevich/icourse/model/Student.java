@@ -2,14 +2,15 @@ package by.itacademy.mikhalevich.icourse.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.*;
 
-@ToString(callSuper = true, exclude = "groups")
-@EqualsAndHashCode(callSuper = true, exclude = "groups")
+@ToString(callSuper = true, exclude = {"groups", "marks"})
+@EqualsAndHashCode(callSuper = true, exclude = {"groups", "marks"})
 @Data
 @Builder
 @NoArgsConstructor
@@ -26,6 +27,7 @@ public class Student extends AbstractEntity{
     @JoinColumn(name = "role_id")
     private Role role;
 
+//    @JsonManagedReference
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private Set<Mark> marks = new HashSet<>();
 

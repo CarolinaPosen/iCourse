@@ -2,15 +2,22 @@ package by.itacademy.mikhalevich.icourse.api;
 
 import by.itacademy.mikhalevich.icourse.impl.GroupServiceImpl;
 import by.itacademy.mikhalevich.icourse.model.Group;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import java.util.Map;
 import java.util.Optional;
-
-@Controller
+@Slf4j
+@RestController
+@RequestMapping(path = "/api/groups", produces = "application/json")
 public class GroupsController {
 
     private final GroupServiceImpl groupService;
@@ -20,36 +27,33 @@ public class GroupsController {
         this.groupService = groupService;
     }
 
-    @RequestMapping(path = "/api/groups", method = RequestMethod.GET, produces = "application/json")
-    @ResponseBody // Ответ кладем в ResponseBody
+    @GetMapping
     public Map<Integer, Group> allGroups()  {
         return groupService.readGroups();
     }
 
-    @RequestMapping(path = "/api/groups/{id}", method = RequestMethod.GET, produces = "application/json")
-    @ResponseBody // Ответ кладем в ResponseBody
-    public Group getGroup(@PathVariable int id)  {
-        return groupService.getGroupById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<Group> getGroup(@PathVariable int id)  {
+        return ResponseEntity.ok(groupService.getGroupById(id));
     }
 
-    @RequestMapping(path = "/api/groups", method = RequestMethod.POST, produces = "application/json")
-    @ResponseBody
+    @PostMapping
     public Group createGroup(@RequestBody Group group)  {
         return groupService.createGroup(group);
     }
 
-    @RequestMapping(path = "/api/groups", method = RequestMethod.PUT, produces = "application/json")
-    @ResponseBody
-    public Group updateGroup(@RequestBody Group group)  {
-        return group;
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateGroup(@PathVariable int id, @RequestBody Group group)  {
+        if(group != null && id != group.getId()){
+            return ResponseEntity.badRequest()
+                    .body("Group id must be equal with id in path: "+ id +" != "+ group.getId());
+        }
+        return ResponseEntity.ok(groupService.createGroup(group));
     }
 
-    @RequestMapping(path = "/api/groups/{id}", method = RequestMethod.DELETE, produces = "application/json")
-    @ResponseBody
-    public Group deleteGroup(@PathVariable int id)  {
-
-        Group deletedGroup = groupService.getGroupById(id);
-        return groupService.deleteGroup(deletedGroup).get();
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Group> deleteGroup(@PathVariable Integer id)  {
+        Group group = groupService.getGroupById(id);
+        return ResponseEntity.of(groupService.deleteGroup(group));
     }
 }

@@ -27,9 +27,8 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Map<Integer, Group> updateGroup(Group group) {
-        groupRepository.save(group);
-        return null;
+    public Optional<Group> updateGroup(Group group) {
+        return Optional.of((Group) groupRepository.save(group));
     }
 
     @Override
@@ -39,8 +38,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Optional<Group> deleteGroup(Group group) {
-
-        Optional deletedGroup = groupRepository.remove(group);
+        Optional<Group> deletedGroup = groupRepository.remove(group);
         if (deletedGroup.isEmpty()) {
             log.error("Group id: "+ group.getId() +" not exists");
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: "+ group.getId() +" not exists");

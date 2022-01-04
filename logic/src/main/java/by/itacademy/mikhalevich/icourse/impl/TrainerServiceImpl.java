@@ -9,6 +9,7 @@ import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Salary;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
+@Component
 public class TrainerServiceImpl implements TeacherService {
 
 //    public static final int PARAMETER_INDEX = 5;
@@ -36,23 +38,21 @@ public class TrainerServiceImpl implements TeacherService {
     }
 
     @Override
-    public Map<Integer, Trainer> updateTrainer(Trainer trainer) {
+    public Optional<Trainer> updateTrainer(Trainer trainer) {
         Role updateRole = (Role) roleRepository.findByName(trainer.getRole().getTitle()).get();
         trainer.withRole(updateRole);
-        trainerRepository.save(trainer);
-        return null;
+        return Optional.ofNullable((Trainer) trainerRepository.save(trainer));
     }
 
     @Override
-    public Map<Integer, Trainer> createTrainer(Trainer trainer) {
+    public Optional<Trainer> createTrainer(Trainer trainer) {
         Role updateRole = (Role) roleRepository.findByName(trainer.getRole().getTitle()).get();
         trainer.withRole(updateRole);
-        trainerRepository.save(trainer);
-        return null;
+        return Optional.ofNullable((Trainer) trainerRepository.save(trainer));
     }
 
     @Override
-    public Map<Integer, Trainer> deleteTrainer(Integer id) {
+    public Optional<Trainer> deleteTrainer(Integer id) {
 
         Optional<Trainer> optionalTrainer = trainerRepository.find(id);
         Trainer trainer;

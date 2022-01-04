@@ -1,5 +1,6 @@
 package by.itacademy.mikhalevich.icourse.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
@@ -26,6 +27,7 @@ public class Mark extends AbstractEntity {
     @JoinColumn(name = "theme_id")
     private Theme theme;
 
+    @JsonBackReference
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "student_id")
     private Student student;

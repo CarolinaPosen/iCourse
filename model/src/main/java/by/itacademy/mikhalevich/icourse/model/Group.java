@@ -14,20 +14,20 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true, exclude = "trainer")
-@ToString(callSuper = true, exclude = "trainer")
+@EqualsAndHashCode(callSuper = true, exclude = {"trainer", "themes"})
+@ToString(callSuper = true, exclude = {"trainer", "themes"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name="class", schema = "public")
 public class Group extends AbstractEntity {
     private String title;
 
-    @JsonManagedReference
+    //@JsonManagedReference
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
     @JoinColumn(name = "teacher_id")
     private Trainer trainer;
 
-    @JsonManagedReference
+   //@JsonManagedReference
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
     @JoinTable(name = "theme_class",
             joinColumns = @JoinColumn(name = "class_id"),

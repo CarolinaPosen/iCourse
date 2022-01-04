@@ -12,5 +12,4 @@ import java.util.List;
 @AllArgsConstructor
 public class Trainers {
     private String name;
-    private List<Trainer> trainerList;
 }

@@ -1,4 +1,4 @@
-package by.itacademy.mikhalevich.icourse.impl;
+package by.itacademy.mikhalevich.icourse.service;
 
 import javax.servlet.ServletContext;
 
@@ -76,8 +76,8 @@ public class ServiceManager {
 
 	private BasicDataSource createDataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
-		//dataSource.setDefaultAutoCommit(false);
-		//dataSource.setRollbackOnReturn(true);
+		dataSource.setDefaultAutoCommit(false);
+		dataSource.setRollbackOnReturn(true);
 		dataSource.setDriverClassName(getApplicationProperty(DB_DRIVER));
 		dataSource.setUrl(getApplicationProperty(DB_URL));
 		dataSource.setUsername(getApplicationProperty(DB_USERNAME));

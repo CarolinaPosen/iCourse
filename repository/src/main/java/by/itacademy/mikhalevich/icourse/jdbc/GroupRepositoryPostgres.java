@@ -34,9 +34,9 @@ public class GroupRepositoryPostgres extends AbstractRepository<Group> implement
                     " th.id th_id, th.title theme_title," +
                     " t.id t_id, t.name t_name, t.login t_login" +
                     " from class c" +
-                    " LEFT OUTER join theme_class thc" +
+                    " join theme_class thc" +
                     " on c.id = thc.class_id" +
-                    " LEFT OUTER join theme th " +
+                    " join theme th " +
                     " on th.id = thc.theme_id" +
                     " join teacher t " +
                     " on c.teacher_id = t.id" +

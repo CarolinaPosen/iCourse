@@ -1,4 +1,4 @@
-package by.itacademy.mikhalevich.icourse.impl;
+package by.itacademy.mikhalevich.icourse.service;
 
 import by.itacademy.mikhalevich.icourse.MarkService;
 import by.itacademy.mikhalevich.icourse.Repository;

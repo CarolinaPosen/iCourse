@@ -1,6 +1,6 @@
 package by.itacademy.mikhalevich.icourse.api;
 
-import by.itacademy.mikhalevich.icourse.impl.StudentServiceImpl;
+import by.itacademy.mikhalevich.icourse.service.StudentServiceImpl;
 import by.itacademy.mikhalevich.icourse.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

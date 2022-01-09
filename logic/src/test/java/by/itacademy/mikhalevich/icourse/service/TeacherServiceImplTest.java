@@ -1,4 +1,4 @@
-package by.itacademy.mikhalevich.icourse.impl;
+package by.itacademy.mikhalevich.icourse.service;
 
 public class TeacherServiceImplTest {
 

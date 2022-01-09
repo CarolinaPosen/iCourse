@@ -1,4 +1,4 @@
-package by.itacademy.mikhalevich.icourse.impl;
+package by.itacademy.mikhalevich.icourse.service;
 
 import by.itacademy.mikhalevich.icourse.AccountService;
 import by.itacademy.mikhalevich.icourse.model.Account;

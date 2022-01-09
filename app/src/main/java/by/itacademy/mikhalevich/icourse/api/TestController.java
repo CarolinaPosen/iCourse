@@ -1,16 +1,9 @@
 package by.itacademy.mikhalevich.icourse.api;
 
 import by.itacademy.mikhalevich.icourse.dto.Trainers;
-import by.itacademy.mikhalevich.icourse.impl.GroupServiceImpl;
-import by.itacademy.mikhalevich.icourse.model.Group;
-import by.itacademy.mikhalevich.icourse.model.Student;
-import by.itacademy.mikhalevich.icourse.model.Trainer;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -27,7 +20,12 @@ public class TestController {
     Trainers student = new Trainers("Kifi");
 
     @GetMapping
-    public ResponseEntity<Trainers> allGroups()  {
+    public ResponseEntity<Trainers> allTest()  {
+
+        if(false){
+            throw new IllegalArgumentException("Test aspect exception");
+        }
+
         return ResponseEntity.of(Optional.ofNullable(student));
     }
 

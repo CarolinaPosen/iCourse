@@ -17,7 +17,7 @@ public class GroupEditController extends AbstractGroupController {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Group group = getGroupService().getGroupById(Integer.parseInt(req.getParameter("id")));
+        Group group = getGroupService().getGroupById(Integer.parseInt(req.getParameter("id"))).get();
         group.withTitle(req.getParameter("name"));
         getGroupService().updateGroup(group);
 

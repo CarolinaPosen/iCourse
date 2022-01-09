@@ -1,4 +1,4 @@
-package by.itacademy.mikhalevich.icourse.impl;
+package by.itacademy.mikhalevich.icourse.service;
 
 import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.SalaryService;

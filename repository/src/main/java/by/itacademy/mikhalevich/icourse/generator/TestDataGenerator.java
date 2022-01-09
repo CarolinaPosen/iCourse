@@ -50,7 +50,6 @@ public class TestDataGenerator {
                 .withRole(getRole(em, "Manager"));
         addSalaries(trainer3);
 
-        Set<Theme> themes0 = new HashSet<>();
         Theme theme0 = new Theme();
         theme0.setTitle("ПРОЕКТИРОВАНИЕ 3-Х УРОВНЕВОЙ АРХИТЕКТУРЫ");
         Theme theme1 = new Theme();
@@ -58,7 +57,6 @@ public class TestDataGenerator {
         Theme theme2 = new Theme();
         theme2.setTitle("APACHE TOMCAT СЕРВЕР");
 
-        Set<Theme> themes1 = new HashSet<>();
         Theme theme3 = new Theme();
         theme3.setTitle("ОСНОВЫ GIT");
         Theme theme4 = new Theme();
@@ -66,7 +64,6 @@ public class TestDataGenerator {
         Theme theme5 = new Theme();
         theme5.setTitle("Сервлеты");
 
-        Set<Theme> themes2 = new HashSet<>();
         Theme theme6 = new Theme();
         theme6.setTitle("Обмен информацией. Cookie и сессии");
         Theme theme7 = new Theme();
@@ -74,14 +71,17 @@ public class TestDataGenerator {
         Theme theme8 = new Theme();
         theme8.setTitle("Java Server Pages");
 
+        Set<Theme> themes0 = new HashSet<>();
         themes0.add(theme0);
         themes0.add(theme1);
         themes0.add(theme2);
 
+        Set<Theme> themes1 = new HashSet<>();
         themes1.add(theme3);
         themes1.add(theme4);
         themes1.add(theme5);
 
+        Set<Theme> themes2 = new HashSet<>();
         themes2.add(theme6);
         themes2.add(theme7);
         themes2.add(theme8);

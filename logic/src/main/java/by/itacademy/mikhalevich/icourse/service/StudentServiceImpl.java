@@ -1,4 +1,4 @@
-package by.itacademy.mikhalevich.icourse.impl;
+package by.itacademy.mikhalevich.icourse.service;
 
 import by.itacademy.mikhalevich.icourse.StudentService;
 import by.itacademy.mikhalevich.icourse.factory.RepositoryFactory;
@@ -10,7 +10,6 @@ import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Student;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.Map;
 import java.util.Optional;

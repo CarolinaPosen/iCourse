@@ -1,15 +1,8 @@
 package by.itacademy.mikhalevich.icourse.servlet.page;
 
-import by.itacademy.mikhalevich.icourse.impl.GroupServiceImpl;
 import by.itacademy.mikhalevich.icourse.model.Group;
 import by.itacademy.mikhalevich.icourse.servlet.AbstractGroupController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.AbstractController;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

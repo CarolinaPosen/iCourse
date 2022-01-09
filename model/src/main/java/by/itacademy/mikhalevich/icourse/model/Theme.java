@@ -14,8 +14,8 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(callSuper = true, exclude = {"title", "groups"})
-@EqualsAndHashCode(callSuper = true, exclude = {"title", "groups"})
+@ToString(callSuper = true, exclude = {"groups"})
+@EqualsAndHashCode(callSuper = true, exclude = {"groups"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 public class Theme extends AbstractEntity {

@@ -2,9 +2,11 @@ package by.itacademy.mikhalevich.icourse.jpa;
 
 import by.itacademy.mikhalevich.icourse.GroupRepository;
 import by.itacademy.mikhalevich.icourse.model.Group;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.TypedQuery;
 
+//@Component("groupRepositoryJpaImpl")
 public class GroupRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Group> implements GroupRepository {
 
     private static volatile GroupRepositoryJpaImpl instance;

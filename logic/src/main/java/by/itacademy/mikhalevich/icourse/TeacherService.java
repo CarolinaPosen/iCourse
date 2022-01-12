@@ -12,7 +12,7 @@ public interface TeacherService {
 	Optional<Trainer> updateTrainer(Trainer trainer);
 	Optional<Trainer> createTrainer(Trainer trainer);
 	Optional<Trainer> deleteTrainer(Integer id);
-	Trainer getTrainerById (Integer id);
+	Optional<Trainer> getTrainerById (Integer id);
 	BigDecimal averageSalary(Integer id, int month);
 
 

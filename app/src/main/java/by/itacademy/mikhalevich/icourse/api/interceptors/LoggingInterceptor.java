@@ -47,7 +47,6 @@ public class LoggingInterceptor extends HandlerInterceptorAdapter {
         while (headerNames.hasMoreElements()) {
             String name = headerNames.nextElement();
             log.info("[{}]: {}", name, req.getHeader(name));
-
         }
     }
 

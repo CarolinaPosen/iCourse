@@ -33,7 +33,7 @@ public class CreateSalaryController extends AbstractTeacherController {
                         .withDate(Timestamp.from(Instant.now()))
                         .withTrainer(new Trainer().withId(Integer.parseInt(req.getParameter("trainer")))));
 
-        Trainer updateTrainer = getTeacherService().getTrainerById(Integer.parseInt(req.getParameter("trainer")));
+        Trainer updateTrainer = getTeacherService().getTrainerById(Integer.parseInt(req.getParameter("trainer"))).get();
 
         req.setAttribute("teacher", updateTrainer);
         RoutingUtils.forwardToPage("average.jsp", req, resp);

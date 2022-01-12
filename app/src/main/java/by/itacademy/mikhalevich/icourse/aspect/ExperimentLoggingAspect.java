@@ -19,7 +19,7 @@ import java.util.Optional;
 @Aspect
 @Slf4j
 @Component
-public class LoggingAspect {
+public class ExperimentLoggingAspect {
 
     @Pointcut("execution(* by.itacademy.mikhalevich.icourse.api.*.*(..))")
     public void controllers() {

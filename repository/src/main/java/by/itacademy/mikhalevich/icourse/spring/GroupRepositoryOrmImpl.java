@@ -13,4 +13,9 @@ public class GroupRepositoryOrmImpl extends AbstractRepositoryOrmImpl<Group> imp
     public GroupRepositoryOrmImpl(){
         clazz = Group.class;
     }
+
+    @Override
+    protected TypedQuery<Group> findByNameQuery(String name) {
+        return null;
+    }
 }

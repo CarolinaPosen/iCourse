@@ -18,7 +18,7 @@ public class StudentEditController extends AbstractStudentController {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Student student = getStudentService().getStudentById(Integer.parseInt(req.getParameter("id")));
+        Student student = getStudentService().getStudentById(Integer.parseInt(req.getParameter("id"))).get();
 
         student
                 .withName(req.getParameter("name"))

@@ -1,33 +1,34 @@
-package by.itacademy.mikhalevich.icourse.service;
+package by.itacademy.mikhalevich.icourse.servicespring;
 
-import by.itacademy.mikhalevich.icourse.StudentService;
+import by.itacademy.mikhalevich.icourse.*;
 import by.itacademy.mikhalevich.icourse.factory.RepositoryFactory;
-import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.jpa.MarkRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.jpa.RoleRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.jpa.ThemeRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Student;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
-@Component
-public class StudentServiceImpl implements StudentService {
+@Component("studentServiceSpringImpl")
+public class StudentServiceSpringImpl implements StudentService {
 
     private Repository studentRepository;
     private Repository roleRepository;
-    private Repository markRepository;
-    private Repository themeRepository;
 
-    public StudentServiceImpl() {
-        this.studentRepository = RepositoryFactory.getStudentRepository();
-        this.roleRepository = RoleRepositoryJpaImpl.getInstance();
-        this.markRepository = MarkRepositoryJpaImpl.getInstance();
-        this.themeRepository = ThemeRepositoryJpaImpl.getInstance();
+    @Autowired
+    public StudentServiceSpringImpl(
+            @Qualifier("studentRepositoryOrmImpl") StudentRepository studentRepository,
+            @Qualifier("roleRepositoryOrmImpl") RoleRepository roleRepository
+    ) {
+        this.studentRepository = studentRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Override
@@ -55,29 +56,17 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Optional<Student> deleteStudent(Student student) {
-        return  studentRepository.remove(student.getId());
+        return  studentRepository.remove(student);
     }
 
     @Override
     public Optional<Student> getStudentById(Integer id) {
         Optional student = studentRepository.find(id);
-
         if (student.isPresent()) {
             return student;
         } else {
-            log.error("Trainer id: "+ id +" not exists");
+            log.error("Student id: "+ id +" not exists");
             return Optional.empty();
         }
     }
-
-//    public Set<Mark> updateStudentsMarks(Integer id, Integer mark, Timestamp date, Integer studentId) {
-//
-//        getStudentById(studentId).addMark(new Mark()
-//                .withId(id)
-//                .withMark(mark)
-//                .withDate(date));
-//        return
-//    }
-
-
 }

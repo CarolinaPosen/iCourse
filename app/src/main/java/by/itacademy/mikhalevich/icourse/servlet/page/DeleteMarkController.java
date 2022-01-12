@@ -19,7 +19,7 @@ public class DeleteMarkController extends AbstractMarkController {
 
         getMarkService().deleteMark(Integer.parseInt(req.getParameter("id")));
 
-        Student student = getStudentService().getStudentById(studentId);
+        Student student = getStudentService().getStudentById(studentId).get();
 
         req.setAttribute("student", student);
         RoutingUtils.forwardToPage("marks.jsp", req, resp);

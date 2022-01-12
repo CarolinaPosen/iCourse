@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 @Slf4j
-public class AppExceptionLoggingAspect {
+public class ExperimentAppExceptionLoggingAspect {
 
     @AfterThrowing(
             pointcut = "execution(* by.itacademy.mikhalevich.icourse.spring.AbstractRepositoryOrmImpl.findAll())",

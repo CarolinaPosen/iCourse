@@ -27,7 +27,7 @@ public class SalaryEditController extends AbstractSalaryController {
         getSalaryService().updateSalary(salary
                                 .withSalary(new BigDecimal(req.getParameter("salary"))));
 
-        Trainer updateTrainer = getTeacherService().getTrainerById(trainerId);
+        Trainer updateTrainer = getTeacherService().getTrainerById(trainerId).get();
 
         req.setAttribute("teacher", updateTrainer);
         RoutingUtils.forwardToPage("average.jsp", req, resp);

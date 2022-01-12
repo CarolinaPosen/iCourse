@@ -26,7 +26,7 @@ public class CreateMarkController extends AbstractStudentController {
                         .withDate(Timestamp.from(Instant.now()))
                         .withTheme(new Theme().withId(Integer.parseInt(req.getParameter("themes-id")))));
 
-        Student student = getStudentService().getStudentById(Integer.parseInt(req.getParameter("student-id")));
+        Student student = getStudentService().getStudentById(Integer.parseInt(req.getParameter("student-id"))).get();
         req.setAttribute("student", student);
         RoutingUtils.forwardToPage("marks.jsp", req, resp);
     }

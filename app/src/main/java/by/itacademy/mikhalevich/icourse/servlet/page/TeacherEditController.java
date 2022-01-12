@@ -19,7 +19,7 @@ public class TeacherEditController extends AbstractTeacherController {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Trainer trainer = getTeacherService().getTrainerById(Integer.parseInt(req.getParameter("id")));
+        Trainer trainer = getTeacherService().getTrainerById(Integer.parseInt(req.getParameter("id"))).get();
 
             trainer
                     .withName(req.getParameter("name"))

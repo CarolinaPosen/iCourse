@@ -2,6 +2,7 @@ package by.itacademy.mikhalevich.icourse.config;
 
 import by.itacademy.mikhalevich.icourse.filter.ContentCachingFilter;
 import by.itacademy.mikhalevich.icourse.filter.EncodingFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
@@ -25,7 +26,6 @@ public class WebApplicationConfig extends AbstractAnnotationConfigDispatcherServ
     @Override
     protected Filter[] getServletFilters() {
         return new Filter[] {
-                new EncodingFilter(),
                 new ContentCachingFilter()
         };
     }

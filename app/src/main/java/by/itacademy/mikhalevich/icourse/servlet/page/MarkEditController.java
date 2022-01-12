@@ -24,7 +24,7 @@ public class MarkEditController extends AbstractMarkController {
         getMarkService().updateMark(mark);
 
         Integer studentId = Integer.parseInt(req.getParameter("student-id"));
-        Student student = getStudentService().getStudentById(studentId);
+        Student student = getStudentService().getStudentById(studentId).get();
 
         req.setAttribute("student", student);
         RoutingUtils.forwardToPage("marks.jsp", req, resp);

@@ -1,14 +1,11 @@
-package by.itacademy.mikhalevich.icourse.service;
+package by.itacademy.mikhalevich.icourse.servicespring;
 
-import by.itacademy.mikhalevich.icourse.Repository;
-import by.itacademy.mikhalevich.icourse.TeacherService;
-import by.itacademy.mikhalevich.icourse.factory.RepositoryFactory;
+import by.itacademy.mikhalevich.icourse.*;
 import by.itacademy.mikhalevich.icourse.calculating.Accounting;
-import by.itacademy.mikhalevich.icourse.model.Group;
-import by.itacademy.mikhalevich.icourse.model.Role;
-import by.itacademy.mikhalevich.icourse.model.Salary;
-import by.itacademy.mikhalevich.icourse.model.Trainer;
+import by.itacademy.mikhalevich.icourse.model.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -18,18 +15,22 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Component
-public class TrainerServiceImpl implements TeacherService {
+@Component("trainerServiceSpringImpl")
+public class TrainerServiceSpringImpl implements TeacherService {
 
-//    public static final int PARAMETER_INDEX = 5;
     private Repository trainerRepository;
     private Repository roleRepository;
     private Repository groupRepository;
 
-    public TrainerServiceImpl() {
-        this.trainerRepository = RepositoryFactory.getTrainerRepository();
-        this.roleRepository = RepositoryFactory.getRoleRepository();
-        this.groupRepository = RepositoryFactory.getGroupRepository();
+    @Autowired
+    public TrainerServiceSpringImpl(
+            @Qualifier("trainerRepositoryOrmImpl") TrainerRepository trainerRepository,
+            @Qualifier("roleRepositoryOrmImpl") RoleRepository roleRepository,
+            @Qualifier("groupRepositoryOrmImpl") GroupRepository groupRepository
+    ) {
+        this.trainerRepository = trainerRepository;
+        this.roleRepository = roleRepository;
+        this.groupRepository = groupRepository;
     }
 
     @Override
@@ -68,11 +69,10 @@ public class TrainerServiceImpl implements TeacherService {
             trainerGroup.removeTrainer(trainer);
             groupRepository.save(trainerGroup);
         } else {
-            log.error("Group id: "+ id +" not exists");
+            log.error("Trainer id: "+ id +" does`t have attached group");
         }
 
-        trainerRepository.remove(trainer);
-        return null;
+        return trainerRepository.remove(trainer);
     }
 
     @Override

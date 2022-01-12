@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
-@Component
+@Component("groupServiceSpringImpl")
 public class GroupServiceSpringImpl implements GroupService {
 
     private GroupRepository groupRepository;
@@ -44,13 +44,7 @@ public class GroupServiceSpringImpl implements GroupService {
 
     @Override
     public Optional<Group> deleteGroup(Group group) {
-        Optional<Group> deletedGroup = groupRepository.remove(group);
-        if (deletedGroup.isEmpty()) {
-            log.error("Group id: " + group.getId() + " not exists");
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + group.getId() + " not exists");
-        } else {
-            return deletedGroup;
-        }
+            return groupRepository.remove(group);
     }
 
     @Override

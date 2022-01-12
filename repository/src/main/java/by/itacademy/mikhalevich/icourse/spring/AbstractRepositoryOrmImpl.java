@@ -1,13 +1,18 @@
 package by.itacademy.mikhalevich.icourse.spring;
 
+import by.itacademy.mikhalevich.icourse.GroupRepository;
 import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.model.AbstractEntity;
+import by.itacademy.mikhalevich.icourse.model.Group;
+import by.itacademy.mikhalevich.icourse.model.Role;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -23,6 +28,8 @@ public abstract class AbstractRepositoryOrmImpl<T extends AbstractEntity> implem
     protected Class<T> clazz;
     private EntityManagerFactory emf;
     private final ThreadLocal<EntityManager> emThreadLocal = new ThreadLocal<>();
+
+    protected abstract TypedQuery<T> findByNameQuery(String name);
 
     @Autowired
     public void setEmf(EntityManagerFactory emf) {
@@ -48,7 +55,11 @@ public abstract class AbstractRepositoryOrmImpl<T extends AbstractEntity> implem
 
     @Override
     public Optional<T> findByName(String name) {
-        return Optional.empty();
+        T entity = null;
+        begin();
+        entity = findByNameQuery(name).getSingleResult();
+        commit();
+        return Optional.ofNullable(entity);
     }
 
     @Override
@@ -67,8 +78,8 @@ public abstract class AbstractRepositoryOrmImpl<T extends AbstractEntity> implem
     public Optional<T> remove(T entity) {
         begin();
         Optional<T> foundEntityOptional = Optional.ofNullable(getEntityManager().find(clazz, entity.getId()));
-        if(foundEntityOptional.isPresent()){
-                       getEntityManager().remove(entity);
+        if (foundEntityOptional.isPresent()) {
+            getEntityManager().remove(entity);
             commit();
             return foundEntityOptional;
         }
@@ -76,22 +87,22 @@ public abstract class AbstractRepositoryOrmImpl<T extends AbstractEntity> implem
         return Optional.empty();
     }
 
-    public EntityManager getEntityManager(){
-        if (emThreadLocal.get() == null){
+    public EntityManager getEntityManager() {
+        if (emThreadLocal.get() == null) {
             emThreadLocal.set(emf.createEntityManager());
         }
         return emThreadLocal.get();
     }
 
-    public void begin(){
+    public void begin() {
         getEntityManager().getTransaction().begin();
     }
 
-    public void commit(){
+    public void commit() {
         getEntityManager().getTransaction().commit();
     }
 
-    public void rollBack(){
+    public void rollBack() {
         getEntityManager().getTransaction().rollback();
     }
 

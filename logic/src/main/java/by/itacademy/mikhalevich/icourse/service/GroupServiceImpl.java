@@ -6,23 +6,17 @@ import by.itacademy.mikhalevich.icourse.factory.RepositoryFactory;
 import by.itacademy.mikhalevich.icourse.model.Group;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
-//@Component
-//@NoArgsConstructor
+@Component("groupServiceImpl")
 public class GroupServiceImpl implements GroupService {
 
     private GroupRepository groupRepository;
-
-//    @Autowired
-//    public GroupServiceImpl(@Qualifier("groupRepositoryJpaImpl") GroupRepository groupRepository) {
-//        this.groupRepository = groupRepository;
-//        log.info("GroupRepository: {}", groupRepository);
-//    }
 
     public GroupServiceImpl() {
         this.groupRepository = RepositoryFactory.getGroupRepository();

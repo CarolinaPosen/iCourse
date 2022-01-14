@@ -1,7 +1,5 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true" %>
 
-<!DOCTYPE html>
-<html lang="en">
 <head>
 
     <title>iCourse itAcademy</title>
@@ -11,10 +9,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/products.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/aside.css" type="text/css">
 
 </head>
 <body>
@@ -33,6 +27,7 @@
         <div class="col-sm-7 col-md-8 col-lg-9 col-xs-9">
             <main>
                 <jsp:include page="${requestScope.currentPage}"/>
+                <script>alert(${requestScope.currentPage})</script>
             </main>
         </div>
     </div>
@@ -42,10 +37,16 @@
 <footer class="footer" style="background-color: #d0e9c6">
 </footer>
 
-<script src="${pageContext.request.contextPath}/static/js/load-more-products.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/find-ajax.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/filter-ajax.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/update-teacher-popup.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/create-teacher-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/update-group-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/update-teacher-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/create-teacher-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/update-student-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/create-student-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/update-salary-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/create-salary-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/update-mark-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/create-mark-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jsontest.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/app-ajax.js"></script>
 </body>
 </html>

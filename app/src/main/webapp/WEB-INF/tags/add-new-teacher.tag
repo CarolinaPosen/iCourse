@@ -11,8 +11,15 @@
                     <div class="col-sm-12">
                         <div class="list-group hidden-xs adv-chars">
                             NAME: <input type="text" name="name" class="form-control name"><br>
-                            AGE: <input type="number" name="age" class="form-control age"><br>
-                            SALARY: <input type="number" name="salary" class="form-control salary"><br>
+                            LOGIN: <input type="text" name="login" class="form-control login"><br>
+                            PASSWORD: <input type="text" name="password" class="form-control password"><br>
+                            ROLE:<p><label>
+                            <select name="role" size="3" multiple>
+                                <option selected type="text" value="Admin"> Administrator</option>
+                                <option type="text" value="Manager"> Manager</option>
+                                <option type="text" value="User"> User</option>
+                            </select>
+                        </label><br>
                         </div>
                     </div>
                 </div>

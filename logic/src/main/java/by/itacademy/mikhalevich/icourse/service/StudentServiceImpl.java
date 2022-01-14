@@ -6,8 +6,10 @@ import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.jpa.MarkRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.jpa.RoleRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.jpa.ThemeRepositoryJpaImpl;
+import by.itacademy.mikhalevich.icourse.model.Group;
 import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Student;
+import by.itacademy.mikhalevich.icourse.model.Theme;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -22,12 +24,14 @@ public class StudentServiceImpl implements StudentService {
     private Repository roleRepository;
     private Repository markRepository;
     private Repository themeRepository;
+    private Repository groupRepository;
 
     public StudentServiceImpl() {
         this.studentRepository = RepositoryFactory.getStudentRepository();
-        this.roleRepository = RoleRepositoryJpaImpl.getInstance();
-        this.markRepository = MarkRepositoryJpaImpl.getInstance();
-        this.themeRepository = ThemeRepositoryJpaImpl.getInstance();
+        this.roleRepository = RepositoryFactory.getRoleRepository();
+        this.markRepository = RepositoryFactory.getMarkRepository();
+        this.themeRepository = RepositoryFactory.getThemeRepository();
+        this.groupRepository = RepositoryFactory.getGroupRepository();
     }
 
     @Override
@@ -36,26 +40,39 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Map<Integer, Student> updateStudent(Student student) {
-        studentRepository.save(student);
-        return null;
+    public Optional<Student> updateStudent(Student student) {
+        return Optional.ofNullable((Student) studentRepository.save(student));
+    }
+
+    public Optional<Student> updateStudentsMark(Student student) {
+        Student updateStudent = (Student) studentRepository.find(student.getId()).get();
+        student.getMarks().forEach(mark -> mark.setTheme((Theme) themeRepository.find(mark.getTheme().getId()).get()));
+        student.getMarks().forEach(updateStudent::addMark);
+        return Optional.ofNullable((Student) studentRepository.save(updateStudent));
     }
 
     @Override
     public Optional<Student> createStudent(Student student) {
+
+        int groupId = student.getGroups().stream().findFirst().get().getId();
+
         Role updateRole = (Role) roleRepository.findByName(student.getRole().getTitle()).get();
+
+        Group updateGroup = (Group) groupRepository.find(groupId).get();
         student.withRole(updateRole);
-        return Optional.ofNullable((Student) studentRepository.save(student));
+        updateGroup.addStudent(student);
+        groupRepository.save(updateGroup);
+        return Optional.empty();
     }
 
     @Override
     public Optional<Student> deleteStudent(Integer id) {
-        return  studentRepository.remove(new Student().withId(id));
+        return studentRepository.remove(new Student().withId(id));
     }
 
     @Override
     public Optional<Student> deleteStudent(Student student) {
-        return  studentRepository.remove(student.getId());
+        return studentRepository.remove(student.getId());
     }
 
     @Override

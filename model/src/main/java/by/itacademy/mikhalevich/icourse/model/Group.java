@@ -28,14 +28,13 @@ public class Group extends AbstractEntity {
     @JoinColumn(name = "teacher_id")
     private Trainer trainer;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
     @JoinTable(name = "theme_class",
             joinColumns = @JoinColumn(name = "class_id"),
             inverseJoinColumns = @JoinColumn(name = "theme_id"))
     private Set<Theme> themes = new HashSet<>();
 
-    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
     @JoinTable(name = "student_class",
             joinColumns = @JoinColumn(name = "class_id"),

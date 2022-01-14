@@ -1,4 +1,4 @@
-package by.itacademy.mikhalevich.icourse.servlet.page;
+package by.itacademy.mikhalevich.icourse.servlet.page.theme;
 
 import by.itacademy.mikhalevich.icourse.dto.Trainers;
 import by.itacademy.mikhalevich.icourse.model.Student;

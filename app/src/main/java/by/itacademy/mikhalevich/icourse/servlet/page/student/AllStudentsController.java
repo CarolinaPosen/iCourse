@@ -1,4 +1,4 @@
-package by.itacademy.mikhalevich.icourse.servlet.page;
+package by.itacademy.mikhalevich.icourse.servlet.page.student;
 
 import by.itacademy.mikhalevich.icourse.model.Student;
 import by.itacademy.mikhalevich.icourse.servlet.AbstractStudentController;
@@ -11,14 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-@WebServlet("/delete-student")
-public class DeleteStudentController extends AbstractStudentController {
+@WebServlet("/students")
+public class AllStudentsController extends AbstractStudentController {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        getStudentService().deleteStudent(Integer.parseInt(req.getParameter("id")));
-
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<Integer, Student> students = getStudentService().readStudents();
         req.setAttribute("students", students);
         RoutingUtils.forwardToPage("students.jsp", req, resp);

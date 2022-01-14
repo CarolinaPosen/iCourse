@@ -60,7 +60,7 @@ public class TrainerServiceImpl implements TeacherService {
             trainer = optionalTrainer.get();
         } else {
             log.error("Trainer id: "+ id +" not exists");
-            return null;
+            return Optional.empty();
         }
 
         if (!trainer.getGroups().isEmpty()) {
@@ -70,9 +70,7 @@ public class TrainerServiceImpl implements TeacherService {
         } else {
             log.error("Group id: "+ id +" not exists");
         }
-
-        trainerRepository.remove(trainer);
-        return null;
+        return trainerRepository.remove(trainer);
     }
 
     @Override

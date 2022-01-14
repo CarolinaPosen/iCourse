@@ -25,12 +25,12 @@ public class TrainerServiceSpringImpl implements TeacherService {
     @Autowired
     public TrainerServiceSpringImpl(
             @Qualifier("trainerRepositoryOrmImpl") TrainerRepository trainerRepository,
-            @Qualifier("roleRepositoryOrmImpl") RoleRepository roleRepository,
-            @Qualifier("groupRepositoryOrmImpl") GroupRepository groupRepository
+            @Qualifier("roleRepositoryOrmImpl") RoleRepository roleRepository
+//            @Qualifier("groupRepositoryOrmImpl") GroupRepository groupRepository
     ) {
         this.trainerRepository = trainerRepository;
         this.roleRepository = roleRepository;
-        this.groupRepository = groupRepository;
+//        this.groupRepository = groupRepository;
     }
 
     @Override
@@ -54,14 +54,13 @@ public class TrainerServiceSpringImpl implements TeacherService {
 
     @Override
     public Optional<Trainer> deleteTrainer(Integer id) {
-
         Optional<Trainer> optionalTrainer = trainerRepository.find(id);
         Trainer trainer;
         if (optionalTrainer.isPresent()) {
             trainer = optionalTrainer.get();
         } else {
             log.error("Trainer id: "+ id +" not exists");
-            return null;
+            return Optional.empty();
         }
 
         if (!trainer.getGroups().isEmpty()) {
@@ -71,7 +70,6 @@ public class TrainerServiceSpringImpl implements TeacherService {
         } else {
             log.error("Trainer id: "+ id +" does`t have attached group");
         }
-
         return trainerRepository.remove(trainer);
     }
 

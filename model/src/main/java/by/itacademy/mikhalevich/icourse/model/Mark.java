@@ -23,12 +23,12 @@ public class Mark extends AbstractEntity {
     private int mark;
     private Timestamp date;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
+    @ManyToOne()
     @JoinColumn(name = "theme_id")
     private Theme theme;
 
     @JsonBackReference
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne()
     @JoinColumn(name = "student_id")
     private Student student;
 

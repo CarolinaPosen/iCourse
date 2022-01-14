@@ -1,4 +1,4 @@
-package by.itacademy.mikhalevich.icourse.servlet.page;
+package by.itacademy.mikhalevich.icourse.servlet.page.mark;
 
 import by.itacademy.mikhalevich.icourse.model.*;
 import by.itacademy.mikhalevich.icourse.servlet.AbstractStudentController;
@@ -20,14 +20,19 @@ public class CreateMarkController extends AbstractStudentController {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        getMarkService().createMark(
-                new Mark()
-                        .withMark(Integer.parseInt(req.getParameter("mark")))
-                        .withDate(Timestamp.from(Instant.now()))
-                        .withTheme(new Theme().withId(Integer.parseInt(req.getParameter("themes-id")))));
+        Mark mark = new Mark()
+                .withMark(Integer.parseInt(req.getParameter("mark")))
+                .withDate(Timestamp.from(Instant.now()))
+                .withTheme(new Theme().withId(Integer.parseInt(req.getParameter("themes-id"))));
 
-        Student student = getStudentService().getStudentById(Integer.parseInt(req.getParameter("student-id"))).get();
-        req.setAttribute("student", student);
+        Student student = new Student();
+        student.withId(Integer.parseInt(req.getParameter("student-id")));
+        student.addMark(mark);
+
+        getStudentService().updateStudentsMark(student).get();
+        Student updateStudent = getStudentService().getStudentById(Integer.parseInt(req.getParameter("student-id"))).get();
+
+        req.setAttribute("student", updateStudent);
         RoutingUtils.forwardToPage("marks.jsp", req, resp);
     }
 

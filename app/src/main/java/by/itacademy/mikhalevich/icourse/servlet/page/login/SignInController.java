@@ -1,4 +1,4 @@
-package by.itacademy.mikhalevich.icourse.servlet.page;
+package by.itacademy.mikhalevich.icourse.servlet.page.login;
 
 import by.itacademy.mikhalevich.icourse.model.CurrentAccount;
 import by.itacademy.mikhalevich.icourse.servlet.AccountController;

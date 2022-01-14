@@ -68,7 +68,7 @@ public class StudentController {
             return ResponseEntity.badRequest()
                     .body("Student id must be equal with id in path: "+ id +" != "+ student.getId());
         } else {
-            return ResponseEntity.of(studentService.createStudent(student));
+            return ResponseEntity.of(studentService.updateStudent(student));
         }
     }
 

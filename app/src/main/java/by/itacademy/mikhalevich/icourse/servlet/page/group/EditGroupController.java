@@ -1,4 +1,4 @@
-package by.itacademy.mikhalevich.icourse.servlet.page;
+package by.itacademy.mikhalevich.icourse.servlet.page.group;
 
 import by.itacademy.mikhalevich.icourse.model.Group;
 import by.itacademy.mikhalevich.icourse.servlet.AbstractGroupController;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @WebServlet("/group-edit")
-public class GroupEditController extends AbstractGroupController {
+public class EditGroupController extends AbstractGroupController {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

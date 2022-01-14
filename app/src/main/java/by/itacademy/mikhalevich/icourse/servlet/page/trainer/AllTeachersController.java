@@ -1,4 +1,4 @@
-package by.itacademy.mikhalevich.icourse.servlet.page;
+package by.itacademy.mikhalevich.icourse.servlet.page.trainer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

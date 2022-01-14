@@ -71,7 +71,6 @@ public class TeacherController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Trainer> deleteTrainer(@PathVariable Integer id)  {
-        Trainer trainer = trainerService.getTrainerById(id).get();
-        return ResponseEntity.ok(trainerService.deleteTrainer(trainer.getId()).get());
+        return ResponseEntity.of(trainerService.deleteTrainer(id));
     }
 }

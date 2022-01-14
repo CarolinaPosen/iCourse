@@ -7,7 +7,8 @@ import java.util.Optional;
 
 public interface StudentService {
     Map<Integer, Student> readStudents();
-    Map<Integer, Student> updateStudent(Student student);
+    Optional<Student> updateStudent(Student student);
+    Optional<Student> updateStudentsMark(Student student);
     Optional<Student> createStudent(Student student);
     Optional<Student> deleteStudent(Integer id);
     Optional<Student> deleteStudent(Student student);

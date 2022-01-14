@@ -10,9 +10,10 @@
                 <div class="modal-body row">
                     <div class="col-sm-12">
                         <div class="list-group hidden-xs adv-chars">
-                            NAME: <input type="text" name="name" class="form-control name"><br>
-                            LOGIN: <input type="text" name="login" class="form-control login"><br>
-                            PASSWORD: <input type="text" name="password" class="form-control password"><br>
+                            NAME: <input type="text" class="name" name="name" class="form-control name"><br>
+                            LOGIN: <input type="text" class="login" name="login" class="form-control login"><br>
+                            PASSWORD: <input type="text" class="password" name="password" class="form-control password"><br>
+                            GROUP: <input type="text" class="group" name="group" class="form-control group"><br>
                             ROLE:<p><label>
                             <select name="role" size="3" multiple>
                                 <option selected type="text" value="Admin"> Administrator</option>

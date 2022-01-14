@@ -4,9 +4,11 @@ import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.ThemeService;
 import by.itacademy.mikhalevich.icourse.factory.RepositoryFactory;
 import by.itacademy.mikhalevich.icourse.model.Theme;
+import by.itacademy.mikhalevich.icourse.model.Trainer;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 public class ThemeServiceImpl implements ThemeService {
@@ -24,23 +26,29 @@ public class ThemeServiceImpl implements ThemeService {
     }
 
     @Override
-    public Map<Integer, Theme> updateTheme(Theme theme) {
+    public Optional<Theme> updateTheme(Theme theme) {
         themeRepository.save(theme);
         return null;
     }
 
     @Override
-    public Map<Integer, Theme> createTheme(Theme theme) {
+    public Optional<Theme> createTheme(Theme theme) {
         return null;
     }
 
     @Override
-    public Map<Integer, Theme> deleteTheme(Integer id) {
+    public Optional<Theme> deleteTheme(Integer id) {
         return null;
     }
 
     @Override
-    public Theme getThemeById(Integer id) {
-        return null;
+    public Optional<Theme> getThemeById(Integer id) {
+        Optional<Theme> theme = themeRepository.find(id);
+        if (theme.isPresent()) {
+            return theme;
+        } else {
+            log.error("Theme id: "+ id +" not exists");
+            return Optional.of(new Theme());
+        }
     }
 }

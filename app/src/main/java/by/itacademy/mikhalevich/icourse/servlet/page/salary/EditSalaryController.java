@@ -1,4 +1,4 @@
-package by.itacademy.mikhalevich.icourse.servlet.page;
+package by.itacademy.mikhalevich.icourse.servlet.page.salary;
 
 import by.itacademy.mikhalevich.icourse.model.Salary;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 @WebServlet("/salary-edit")
-public class SalaryEditController extends AbstractSalaryController {
+public class EditSalaryController extends AbstractSalaryController {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

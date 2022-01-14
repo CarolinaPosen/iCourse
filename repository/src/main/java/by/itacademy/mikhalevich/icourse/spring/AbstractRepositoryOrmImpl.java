@@ -2,12 +2,14 @@ package by.itacademy.mikhalevich.icourse.spring;
 
 import by.itacademy.mikhalevich.icourse.GroupRepository;
 import by.itacademy.mikhalevich.icourse.Repository;
+import by.itacademy.mikhalevich.icourse.exception.DataBaseErrorException;
 import by.itacademy.mikhalevich.icourse.model.AbstractEntity;
 import by.itacademy.mikhalevich.icourse.model.Group;
 import by.itacademy.mikhalevich.icourse.model.Role;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -34,12 +36,18 @@ public abstract class AbstractRepositoryOrmImpl<T extends AbstractEntity> implem
     @Autowired
     public void setEmf(EntityManagerFactory emf) {
         this.emf = emf;
+        log.info("Autowired EntityManagerFactory {}", emf.toString());
     }
 
     @Override
     public Map<Integer, T> findAll() {
         begin();
-        List<T> resultList = getEntityManager().createQuery("from " + clazz.getName(), clazz).getResultList();
+        List<T> resultList;
+        try {
+             resultList = getEntityManager().createQuery("from " + clazz.getName(), clazz).getResultList();
+        } catch (Exception e) {
+            throw new DataBaseErrorException("Method Find All Exception: " + clazz.getName());
+        }
         commit();
         Map<Integer, T> result = resultList.stream().collect(Collectors.toMap(T::getId, Function.identity()));
         return result;
@@ -48,7 +56,12 @@ public abstract class AbstractRepositoryOrmImpl<T extends AbstractEntity> implem
     @Override
     public Optional<T> find(int id) {
         begin();
-        Optional<T> optionalEntity = Optional.ofNullable(getEntityManager().find(clazz, id));
+        Optional<T> optionalEntity;
+        try{
+            optionalEntity = Optional.ofNullable(getEntityManager().find(clazz, id));
+        } catch (Exception e) {
+            throw new DataBaseErrorException("Method Find Exception: " + clazz.getName());
+        }
         commit();
         return optionalEntity;
     }

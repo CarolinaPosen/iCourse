@@ -1,4 +1,4 @@
-package by.itacademy.mikhalevich.icourse.servlet.page;
+package by.itacademy.mikhalevich.icourse.servlet.page.trainer;
 
 import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @WebServlet("/teacher-edit")
-public class TeacherEditController extends AbstractTeacherController {
+public class EditTeacherController extends AbstractTeacherController {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

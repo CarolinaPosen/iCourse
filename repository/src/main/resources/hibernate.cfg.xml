@@ -26,6 +26,7 @@
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
         <!-- Anti Pattern -->
         <property name="hibernate.enable_lazy_load_no_trans">true</property>
+<!--        <property name="hibernate.event.merge.entity_copy_observer">allow</property>-->
 
         <!-- mapping files -->
 <!--        <mapping resource="Role.hbm.xml"/>-->

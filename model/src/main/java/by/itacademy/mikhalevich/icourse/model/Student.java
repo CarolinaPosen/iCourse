@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.util.*;
 
 @ToString(callSuper = true, exclude = {"groups", "marks"})
-@EqualsAndHashCode(callSuper = true, exclude = {"groups", "marks"})
+@EqualsAndHashCode(callSuper = true, exclude = {"groups"})
 @Data
 @Builder
 @NoArgsConstructor
@@ -23,16 +23,16 @@ public class Student extends AbstractEntity{
     private String login;
     private String password;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH})
+    @ManyToOne()
     @JoinColumn(name = "role_id")
     private Role role;
 
 //    @JsonManagedReference
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "student", cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.DETACH})
     private Set<Mark> marks = new HashSet<>();
 
     @JsonBackReference
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
+    @ManyToMany()
     @JoinTable(name = "student_class",
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "class_id"))
@@ -69,16 +69,11 @@ public class Student extends AbstractEntity{
         return this;
     }
 
-/*    public Student addGroup(Group group){
+    public Student addGroup(Group group){
         if(group!=null){
             groups.add(group);
         }
         return this;
-    }*/
-
-//    @Override
-//    public String toString() {
-//        return String.format("Student [id=%s, name=%s, login=%s, role=%s]", getId(), name, login, role);
-//    }
+    }
 
 }

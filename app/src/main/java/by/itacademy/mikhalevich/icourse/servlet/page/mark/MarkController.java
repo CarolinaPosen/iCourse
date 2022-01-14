@@ -1,4 +1,4 @@
-package by.itacademy.mikhalevich.icourse.servlet.page;
+package by.itacademy.mikhalevich.icourse.servlet.page.mark;
 
 import by.itacademy.mikhalevich.icourse.model.*;
 import by.itacademy.mikhalevich.icourse.servlet.AbstractStudentController;

@@ -37,12 +37,9 @@
                     data-id-group="${group.key}">Change groups name
             </button>
 
-            <form action="${pageContext.request.contextPath}/students-of-group" method="post">
-                <input name="id" type="hidden" value="${student.key}" class="form-control">
-                <input name="name" type="hidden" value="${student.value.name}" class="form-control">
-                <input name="login" type="hidden" value="${student.value.login}" class="form-control">
-                <input name="salary" type="hidden" value="${student.value.marks}" class="form-control">
-                <button type="submit" class="btn btn-info btn-sm btn-block">Add/Remove students</button>
+            <form action="${pageContext.request.contextPath}/group-students-edit" method="post">
+                <input name="group-id" type="hidden" value="${group.key}" class="form-control">
+                <button type="submit" class="btn btn-info btn-sm btn-block">Group students</button>
             </form>
 
             <form action="/web-app/delete-group" method="post">

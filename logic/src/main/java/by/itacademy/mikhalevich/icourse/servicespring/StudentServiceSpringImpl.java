@@ -5,13 +5,16 @@ import by.itacademy.mikhalevich.icourse.factory.RepositoryFactory;
 import by.itacademy.mikhalevich.icourse.jpa.MarkRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.jpa.RoleRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.jpa.ThemeRepositoryJpaImpl;
+import by.itacademy.mikhalevich.icourse.model.Mark;
 import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Student;
+import by.itacademy.mikhalevich.icourse.model.Theme;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
 import java.util.Map;
 import java.util.Optional;
 
@@ -21,14 +24,17 @@ public class StudentServiceSpringImpl implements StudentService {
 
     private Repository studentRepository;
     private Repository roleRepository;
+    private Repository themeRepository;
 
     @Autowired
     public StudentServiceSpringImpl(
             @Qualifier("studentRepositoryOrmImpl") StudentRepository studentRepository,
-            @Qualifier("roleRepositoryOrmImpl") RoleRepository roleRepository
+            @Qualifier("roleRepositoryOrmImpl") RoleRepository roleRepository,
+            @Qualifier("themeRepositoryOrmImpl") ThemeRepository themeRepository
     ) {
         this.studentRepository = studentRepository;
         this.roleRepository = roleRepository;
+        this.themeRepository = themeRepository;
     }
 
     @Override
@@ -37,9 +43,20 @@ public class StudentServiceSpringImpl implements StudentService {
     }
 
     @Override
-    public Map<Integer, Student> updateStudent(Student student) {
-        studentRepository.save(student);
-        return null;
+    public Optional<Student> updateStudent(Student student) {
+        Student updateStudent = (Student) studentRepository.find(student.getId()).get();
+        updateStudent.withId(student.getId());
+        updateStudent.withName(student.getName());
+        updateStudent.withLogin(student.getLogin());
+        updateStudent.withPassword(student.getPassword());
+        student.getMarks().forEach(mark -> mark.setTheme((Theme) themeRepository.find(mark.getTheme().getId()).get()));
+        student.getMarks().forEach(updateStudent::addMark);
+        return Optional.ofNullable((Student) studentRepository.save(updateStudent));
+    }
+
+    @Override
+    public Optional<Student> updateStudentsMark(Student student) {
+        return Optional.empty();
     }
 
     @Override

@@ -4,14 +4,11 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="popup" %>
 <popup:add-new-teacher/>
 
-<div id="productList">
+<div id="teacherList">
 
     <div class="row load-more">
     <jsp:include page="/WEB-INF/JSP/fragment/teacher-list.jsp"/>
     </div>
 
-    <div>
-        <button type="button" class="btn create-teacher-btn btn-success btn-sm btn-block">Create new teacher</button>
-    </div>
 </div>
 

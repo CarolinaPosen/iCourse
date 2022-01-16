@@ -2,7 +2,7 @@ $('.create-mark-btn').click(function () {
 
     $.ajax({
         type: "GET",
-        url: 'http://10.130.30.105:8080/web-app/themes',
+        url: 'http://localhost:8080/web-app/themes',
         dataType: 'json',
         //data: data,
         success: function (responseData) {

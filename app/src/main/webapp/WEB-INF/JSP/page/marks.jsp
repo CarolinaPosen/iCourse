@@ -50,7 +50,7 @@
     <div class="col-xs-12 col-sm-8 col-md-4">
         <div class="card mb-4 shadow-sm">
             <button type="button" class="btn create-mark-btn btn-outline-success btn-lg btn-block"
-                    data-id-student=60>
+                    data-id-student=${requestScope.student.id}>
                 Create new mark
             </button>
         </div>

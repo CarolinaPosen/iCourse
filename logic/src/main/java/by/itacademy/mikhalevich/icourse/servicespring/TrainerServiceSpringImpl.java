@@ -55,22 +55,14 @@ public class TrainerServiceSpringImpl implements TeacherService {
     @Override
     public Optional<Trainer> deleteTrainer(Integer id) {
         Optional<Trainer> optionalTrainer = trainerRepository.find(id);
-        Trainer trainer;
-        if (optionalTrainer.isPresent()) {
-            trainer = optionalTrainer.get();
-        } else {
-            log.error("Trainer id: "+ id +" not exists");
-            return Optional.empty();
-        }
 
-        if (!trainer.getGroups().isEmpty()) {
-            Group trainerGroup = trainer.getGroups().stream().findFirst().get();
-            trainerGroup.removeTrainer(trainer);
-            groupRepository.save(trainerGroup);
+        if (!optionalTrainer.get().getGroups().isEmpty()) {
+            Group trainerGroup = optionalTrainer.get().getGroups().stream().findFirst().get();
+            trainerGroup.removeTrainer(optionalTrainer.get());
         } else {
             log.error("Trainer id: "+ id +" does`t have attached group");
         }
-        return trainerRepository.remove(trainer);
+        return trainerRepository.remove(optionalTrainer.get());
     }
 
     @Override

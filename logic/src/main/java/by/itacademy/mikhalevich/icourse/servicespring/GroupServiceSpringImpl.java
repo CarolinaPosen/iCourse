@@ -10,19 +10,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
-@Component("groupServiceSpringImpl")
+@Service("groupServiceSpringImpl")
 public class GroupServiceSpringImpl implements GroupService {
 
     private GroupRepository groupRepository;
 
+//    @Autowired
+//    TransactionTemplate transactionTemplate;
+
     @Autowired
-    public GroupServiceSpringImpl(@Qualifier("groupRepositoryOrmImpl") GroupRepository groupRepository) {
+    public GroupServiceSpringImpl(
+            @Qualifier("groupRepositoryOrmImpl") GroupRepository groupRepository) {
         this.groupRepository = groupRepository;
         log.info("GroupRepository: {}", groupRepository);
     }

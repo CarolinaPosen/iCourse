@@ -38,7 +38,7 @@ public class GroupsController {
     @PostConstruct
     private void init(){
         groupService = serviceMap.get(serviceType);
-        log.info("Group controller autowired service: {}", groupService.toString());
+        log.info("Group REST controller autowired service: {}", groupService.getClass().getSimpleName());
     }
 
     @Autowired
@@ -62,7 +62,7 @@ public class GroupsController {
         if (getGroup.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + id + " not exists");
         } else {
-            return ResponseEntity.of(groupService.getGroupById(id));
+            return ResponseEntity.of(getGroup);
         }
     }
 

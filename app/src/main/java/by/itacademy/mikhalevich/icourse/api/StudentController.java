@@ -34,7 +34,7 @@ public class StudentController {
     @PostConstruct
     private void init(){
         studentService = serviceMap.get(serviceType);
-        log.info("Student controller autowired service: {}", studentService.toString());
+        log.info("Student REST controller autowired service: {}", studentService.getClass().getSimpleName());
     }
 
     @Autowired

@@ -23,8 +23,6 @@ public class GroupServiceSpringImpl implements GroupService {
 
     private GroupRepository groupRepository;
 
-//    @Autowired
-//    TransactionTemplate transactionTemplate;
 
     @Autowired
     public GroupServiceSpringImpl(

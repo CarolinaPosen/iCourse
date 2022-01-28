@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 @Import({SpringOrmConfig.class})
 @EnableTransactionManagement
 @RequiredArgsConstructor
-public class EntityManagerConfig implements TransactionManagementConfigurer {
+public class TransactionTemplateConfig implements TransactionManagementConfigurer {
 
     private final DataSource dataSource;
     private final LocalContainerEntityManagerFactoryBean factoryBean;
@@ -32,7 +32,7 @@ public class EntityManagerConfig implements TransactionManagementConfigurer {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager() {
+    public JpaTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager(factoryBean.getObject());
         transactionManager.setDataSource(dataSource);
         transactionManager.setJpaDialect(new HibernateJpaDialect());

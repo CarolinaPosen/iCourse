@@ -49,7 +49,7 @@ public class SalaryServiceImpl implements SalaryService {
 
     @Override
     public Map<Integer, Salary> deleteSalary(Integer id) {
-        salaryRepository.remove(new Salary().withId(id));
+        salaryRepository.remove(id);
         return null;
     }
 

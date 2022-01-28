@@ -70,7 +70,7 @@ public class TrainerServiceImpl implements TeacherService {
         } else {
             log.error("Group id: "+ id +" not exists");
         }
-        return trainerRepository.remove(trainer);
+        return trainerRepository.remove(trainer.getId());
     }
 
     @Override

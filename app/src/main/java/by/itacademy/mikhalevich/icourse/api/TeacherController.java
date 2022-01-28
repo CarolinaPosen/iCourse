@@ -5,6 +5,7 @@ import by.itacademy.mikhalevich.icourse.TeacherService;
 import by.itacademy.mikhalevich.icourse.service.TrainerServiceImpl;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
 import by.itacademy.mikhalevich.icourse.servicespring.TrainerServiceSpringImpl;
+import by.itacademy.mikhalevich.icourse.servicespring.base.TrainerBaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,9 +23,9 @@ import java.util.Map;
 @PropertySource("classpath:application.properties")
 public class TeacherController {
 
-    private TeacherService trainerService;
+    private TrainerBaseService trainerService;
 
-    private Map<String, TeacherService> serviceMap;
+    private Map<String, TrainerBaseService> serviceMap;
     @Value("${trainer-service.type}")
     private String serviceType;
 
@@ -35,7 +36,7 @@ public class TeacherController {
     }
 
     @Autowired
-    public void setServiceMap(Map<String, TeacherService> serviceMap){
+    public void setServiceMap(Map<String, TrainerBaseService> serviceMap){
         this.serviceMap = serviceMap;
     }
 
@@ -46,17 +47,17 @@ public class TeacherController {
 
     @GetMapping
     public Map<Integer, Trainer> allTrainers()  {
-        return trainerService.readTeachers();
+        return trainerService.read();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Trainer> getTrainer(@PathVariable int id)  {
-        return ResponseEntity.of(trainerService.getTrainerById(id));
+        return ResponseEntity.of(trainerService.getById(id));
     }
 
     @PostMapping
     public ResponseEntity<Trainer> createTrainer(@RequestBody Trainer trainer)  {
-        return ResponseEntity.of(trainerService.createTrainer(trainer));
+        return ResponseEntity.of(trainerService.create(trainer));
     }
 
     @PutMapping("/{id}")
@@ -65,12 +66,12 @@ public class TeacherController {
             return ResponseEntity.badRequest()
                     .body("Trainer id must be equal with id in path: "+ id +" != "+ trainer.getId());
         } else {
-            return ResponseEntity.of(trainerService.createTrainer(trainer));
+            return ResponseEntity.of(trainerService.update(trainer));
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Trainer> deleteTrainer(@PathVariable Integer id)  {
-        return ResponseEntity.of(trainerService.deleteTrainer(id));
+        return ResponseEntity.of(trainerService.delete(id));
     }
 }

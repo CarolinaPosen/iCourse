@@ -22,7 +22,7 @@ public class Theme extends AbstractEntity {
     private String title;
 
     @JsonBackReference
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
+    @ManyToMany()
     @JoinTable(name = "theme_class",
             joinColumns = @JoinColumn(name = "theme_id"),
             inverseJoinColumns = @JoinColumn(name = "class_id"))

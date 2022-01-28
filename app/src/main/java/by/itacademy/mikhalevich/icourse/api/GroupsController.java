@@ -2,6 +2,7 @@ package by.itacademy.mikhalevich.icourse.api;
 
 import by.itacademy.mikhalevich.icourse.GroupService;
 import by.itacademy.mikhalevich.icourse.model.Group;
+import by.itacademy.mikhalevich.icourse.servicespring.base.GroupBaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,9 +30,9 @@ import java.util.Optional;
 @PropertySource("classpath:application.properties")
 public class GroupsController {
 
-    private GroupService groupService;
+    private GroupBaseService groupService;
 
-    private Map<String, GroupService> serviceMap;
+    private Map<String, GroupBaseService> serviceMap;
     @Value("${group-service.type}")
     private String serviceType;
 
@@ -42,7 +43,7 @@ public class GroupsController {
     }
 
     @Autowired
-    public void setServiceMap(Map<String, GroupService> serviceMap){
+    public void setServiceMap(Map<String, GroupBaseService> serviceMap){
         this.serviceMap = serviceMap;
     }
 
@@ -53,13 +54,13 @@ public class GroupsController {
 
     @GetMapping
     public Map<Integer, Group> allGroups() {
-        return groupService.readGroups();
+        return groupService.read();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Group> getGroup(@PathVariable int id) {
-        Optional<Group> getGroup = groupService.getGroupById(id);
-        if (getGroup.isEmpty()) {
+        Optional<Group> getGroup = groupService.getById(id);
+        if (!getGroup.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + id + " not exists");
         } else {
             return ResponseEntity.of(getGroup);
@@ -68,8 +69,8 @@ public class GroupsController {
 
     @PostMapping
     public ResponseEntity<Group> createGroup(@RequestBody Group group) {
-        Optional<Group> createGroup = groupService.createGroup(group);
-        if (createGroup.isEmpty()) {
+        Optional<Group> createGroup = groupService.create(group);
+        if (!createGroup.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + group.getId() + " not exists");
         } else {
             return ResponseEntity.of(createGroup);
@@ -82,8 +83,8 @@ public class GroupsController {
             return ResponseEntity.badRequest()
                     .body("Group id must be equal with id in path: " + id + " != " + group.getId());
         }
-        Optional<Group> updatedGroup = groupService.updateGroup(group);
-        if (updatedGroup.isEmpty()) {
+        Optional<Group> updatedGroup = groupService.update(group);
+        if (!updatedGroup.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + group.getId() + " not exists");
         } else {
             return ResponseEntity.of(updatedGroup);
@@ -92,16 +93,16 @@ public class GroupsController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Group> deleteGroup(@PathVariable Integer id) {
-        Optional<Group> group = groupService.getGroupById(id);
-        if (group.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + id + " not exists");
-        } else {
-            Optional<Group> deletedGroup = groupService.deleteGroup(group.get());
-            if (deletedGroup.isEmpty()) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + group.get().getId() + " not exists");
+//        Optional<Group> group = groupService.getGroupById(id);
+//        if (group.isEmpty()) {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + id + " not exists");
+//        } else {
+            Optional<Group> deletedGroup = groupService.delete(id);
+            if (!deletedGroup.isPresent()) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + id + " not exists");
             } else {
                 return ResponseEntity.of(deletedGroup);
             }
-        }
+//        }
     }
 }

@@ -3,6 +3,7 @@ package by.itacademy.mikhalevich.icourse.api;
 import by.itacademy.mikhalevich.icourse.GroupService;
 import by.itacademy.mikhalevich.icourse.Service;
 import by.itacademy.mikhalevich.icourse.model.Group;
+import by.itacademy.mikhalevich.icourse.model.Trainer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,24 +21,24 @@ import java.util.Optional;
 @Slf4j
 @RestController
 @RequestMapping(path = "/api/base", produces = "application/json")
-public class BaseController {
+public class ExperimentGroupController {
 
-    private Service<Group> service;
+    private Service<Trainer> service;
 
     @Autowired
-    public BaseController(@Qualifier("groupBaseServiceImpl") Service service) {
+    public ExperimentGroupController(@Qualifier("trainerServiceMemoryImpl") Service service) {
         this.service = service;
     }
 
     @GetMapping
-    public Map<Integer, Group> allGroups() {
+    public Map<Integer, Trainer> allGroups() {
         return service.read();
 }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Group> getGroup(@PathVariable int id) {
-        Optional<Group> getGroup = service.getGroupById(id);
-        if (getGroup.isEmpty()) {
+    public ResponseEntity<Trainer> getGroup(@PathVariable int id) {
+        Optional<Trainer> getGroup = service.getById(id);
+        if (!getGroup.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + id + " not exists");
         } else {
             return ResponseEntity.of(getGroup);
@@ -45,23 +46,23 @@ public class BaseController {
     }
 
     @PostMapping
-    public ResponseEntity<Group> createGroup(@RequestBody Group group) {
-        Optional<Group> createGroup = service.create(group);
-        if (createGroup.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + group.getId() + " not exists");
+    public ResponseEntity<Trainer> createGroup(@RequestBody Trainer trainer) {
+        Optional<Trainer> createGroup = service.create(trainer);
+        if (!createGroup.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + trainer.getId() + " not exists");
         } else {
             return ResponseEntity.of(createGroup);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateGroup(@PathVariable int id, @RequestBody Group group) {
+    public ResponseEntity<?> updateGroup(@PathVariable int id, @RequestBody Trainer group) {
         if (group != null && id != group.getId()) {
             return ResponseEntity.badRequest()
                     .body("Group id must be equal with id in path: " + id + " != " + group.getId());
         }
-        Optional<Group> updatedGroup = service.update(group);
-        if (updatedGroup.isEmpty()) {
+        Optional<Trainer> updatedGroup = service.update(group);
+        if (!updatedGroup.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + group.getId() + " not exists");
         } else {
             return ResponseEntity.of(updatedGroup);
@@ -69,17 +70,12 @@ public class BaseController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Group> deleteGroup(@PathVariable Integer id) {
-        Optional<Group> group = service.getGroupById(id);
-        if (group.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + id + " not exists");
-        } else {
-            Optional<Group> deletedGroup = service.delete(group.get());
-            if (deletedGroup.isEmpty()) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + group.get().getId() + " not exists");
+    public ResponseEntity<Trainer> deleteGroup(@PathVariable Integer id) {
+            Optional<Trainer> deletedGroup = service.delete(id);
+            if (!deletedGroup.isPresent()) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Experiment Entity id: " + id + " not exists");
             } else {
                 return ResponseEntity.of(deletedGroup);
             }
-        }
     }
 }

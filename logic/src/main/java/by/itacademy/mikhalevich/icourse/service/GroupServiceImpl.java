@@ -40,8 +40,8 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Optional<Group> deleteGroup(Group group) {
-        Optional<Group> deletedGroup = groupRepository.remove(group);
-        if (deletedGroup.isEmpty()) {
+        Optional<Group> deletedGroup = groupRepository.remove(group.getId());
+        if (!deletedGroup.isPresent()) {
             log.error("Group id: " + group.getId() + " not exists");
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + group.getId() + " not exists");
         } else {
@@ -52,7 +52,7 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public Optional<Group> getGroupById(Integer id) {
         Optional group = groupRepository.find(id);
-        if (group.isEmpty()) {
+        if (!group.isPresent()) {
             log.error("Group id: " + id + " not exists");
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + id + " not exists");
         } else {

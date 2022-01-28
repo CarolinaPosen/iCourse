@@ -26,7 +26,7 @@ public class SpringOrmConfig {
     private final DataSource dataSource;
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean factoryBean(@Autowired Properties jpaProperties){
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Autowired Properties jpaProperties){
         LocalContainerEntityManagerFactoryBean managerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 
         managerFactoryBean.setDataSource(dataSource);

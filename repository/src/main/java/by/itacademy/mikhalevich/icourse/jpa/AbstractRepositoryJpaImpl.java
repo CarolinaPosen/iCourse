@@ -54,7 +54,7 @@ public abstract class AbstractRepositoryJpaImpl<T extends AbstractEntity> implem
     }
 
     @Override
-    public Optional<T> find(int id) {
+    public Optional<T> find(Integer id) {
         T entity = null;
         EntityManager em = null;
         try {
@@ -97,12 +97,14 @@ public abstract class AbstractRepositoryJpaImpl<T extends AbstractEntity> implem
     }
 
     @Override
-    public Optional<T> remove(T entity) {
+    public Optional<T> remove(Integer id) {
+        T entity = null;
         EntityManager em = null;
         try {
 
         em = helper.getEntityManager();
         em.getTransaction().begin();
+        entity = em.find(getType(), id);
         em.remove(entity);
         em.getTransaction().commit();
         em.close();

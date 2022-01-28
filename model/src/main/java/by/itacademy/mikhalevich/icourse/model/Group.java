@@ -16,7 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true, exclude = {"trainer"})
-@ToString(callSuper = true, exclude = {"trainer", "themes"})
+@ToString(callSuper = true, exclude = {"trainer"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name="class", schema = "public")
@@ -35,6 +35,7 @@ public class Group extends AbstractEntity {
             inverseJoinColumns = @JoinColumn(name = "theme_id"))
     private Set<Theme> themes = new HashSet<>();
 
+//    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
     @JoinTable(name = "student_class",
             joinColumns = @JoinColumn(name = "class_id"),

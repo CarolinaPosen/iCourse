@@ -1,13 +1,9 @@
 package by.itacademy.mikhalevich.icourse.base;
 
 import by.itacademy.mikhalevich.icourse.Repository;
-import by.itacademy.mikhalevich.icourse.exception.DataBaseErrorException;
 import by.itacademy.mikhalevich.icourse.model.AbstractEntity;
-import by.itacademy.mikhalevich.icourse.model.Group;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.List;
@@ -36,7 +32,7 @@ public class BaseRepositoryImpl<T extends AbstractEntity> implements Repository<
     }
 
     @Override
-    public Optional<T> find(int id) {
+    public Optional<T> find(Integer id) {
         return Optional.ofNullable(em.find(clazz, id));
     }
 
@@ -58,9 +54,11 @@ public class BaseRepositoryImpl<T extends AbstractEntity> implements Repository<
     }
 
     @Override
-    public Optional<T> remove(T entity) {
-        Optional<T> foundEntityOptional = Optional.ofNullable(em.find(clazz, entity.getId()));
+    public Optional<T> remove(Integer id) {
+        T entity = null;
+        Optional<T> foundEntityOptional = Optional.ofNullable(em.find(clazz, id));
         if (foundEntityOptional.isPresent()) {
+            entity = em.find(clazz, id);
             em.remove(entity);
             return foundEntityOptional;
         }

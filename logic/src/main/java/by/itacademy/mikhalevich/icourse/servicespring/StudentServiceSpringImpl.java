@@ -68,12 +68,12 @@ public class StudentServiceSpringImpl implements StudentService {
 
     @Override
     public Optional<Student> deleteStudent(Integer id) {
-        return  studentRepository.remove(new Student().withId(id));
+        return  studentRepository.remove(id);
     }
 
     @Override
     public Optional<Student> deleteStudent(Student student) {
-        return  studentRepository.remove(student);
+        return  studentRepository.remove(student.getId());
     }
 
     @Override

@@ -62,7 +62,7 @@ public class TrainerServiceSpringImpl implements TeacherService {
         } else {
             log.error("Trainer id: "+ id +" does`t have attached group");
         }
-        return trainerRepository.remove(optionalTrainer.get());
+        return trainerRepository.remove(optionalTrainer.get().getId());
     }
 
     @Override

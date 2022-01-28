@@ -64,7 +64,7 @@ public class GroupRepositoryTemplateImpl implements GroupRepository {
 
 
     @Override
-    public Optional<Group> find(int id) {
+    public Optional<Group> find(Integer id) {
         return Optional.empty();
     }
 
@@ -79,7 +79,7 @@ public class GroupRepositoryTemplateImpl implements GroupRepository {
     }
 
     @Override
-    public Optional<Group> remove(Group entity) {
+    public Optional<Group> remove(Integer id) {
         return Optional.empty();
     }
 }

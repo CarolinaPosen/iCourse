@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -20,47 +22,37 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public abstract class BaseServiceImpl<T extends AbstractEntity> implements Service<T> {
 
-//    @Autowired
-//    @Qualifier("baseRepositoryImpl")
-//    private Repository<T> repository;
-
     protected abstract Repository<T> getRepository();
 
-    @Autowired
-    private TransactionTemplate transactionTemplate;
-
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     @Override
     public Map<Integer, T> read() {
-        return transactionTemplate.execute(new TransactionCallback<Map<Integer, T>>() {
-            @Override
-            public Map<Integer, T> doInTransaction(TransactionStatus transactionStatus) {
-                try{
-                    return getRepository().findAll();
-                } catch (Exception e) {
-                    transactionStatus.setRollbackOnly();
-                }
-                return null;
-            }
-        });
+        return getRepository().findAll();
     }
 
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     @Override
     public Optional<T> update(T t) {
         return Optional.ofNullable(getRepository().save(t));
     }
 
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     @Override
     public Optional<T> create(T t) {
         return Optional.ofNullable(getRepository().save(t));
     }
 
+    @Transactional(readOnly = false)
     @Override
-    public Optional<T> delete(T t) {
-        return getRepository().remove(t);
+    public Optional<T> delete(Integer id) {
+        Optional<T> removeEntity = getRepository().find(id);
+        getRepository().remove(removeEntity.get().getId());
+        return removeEntity;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     @Override
-    public Optional<T> getGroupById(Integer id) {
-        return Optional.empty();
+    public Optional<T> getById(Integer id) {
+        return getRepository().find(id);
     }
 }

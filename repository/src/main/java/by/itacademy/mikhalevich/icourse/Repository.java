@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 
 public interface Repository<T> {
     Map<Integer, T> findAll();
-    Optional<T> find(int id);
+    Optional<T> find(Integer id);
     Optional<T> findByName(String name);
     T save(T entity);
-    Optional<T> remove(T entity);
+    Optional<T> remove(Integer id);
 }
 
 //    Map<Integer, T> result = entities.stream()

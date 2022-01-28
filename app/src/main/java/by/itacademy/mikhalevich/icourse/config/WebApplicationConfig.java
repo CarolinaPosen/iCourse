@@ -23,7 +23,6 @@ public class WebApplicationConfig extends AbstractAnnotationConfigDispatcherServ
         return new String[] {"/"};
     }
 
-    @Override
     protected Filter[] getServletFilters() {
         return new Filter[] {
                 new ContentCachingFilter()

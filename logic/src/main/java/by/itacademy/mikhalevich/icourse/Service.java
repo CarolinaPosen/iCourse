@@ -9,6 +9,6 @@ public interface Service<T> {
     Map<Integer, T> read();
     Optional<T> update(T t);
     Optional<T> create(T t);
-    Optional<T> delete(T t);
-    Optional<T> getGroupById (Integer id);
+    Optional<T> delete(Integer id);
+    Optional<T> getById (Integer id);
 }

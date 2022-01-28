@@ -5,6 +5,7 @@ import by.itacademy.mikhalevich.icourse.StudentService;
 import by.itacademy.mikhalevich.icourse.model.Group;
 import by.itacademy.mikhalevich.icourse.service.StudentServiceImpl;
 import by.itacademy.mikhalevich.icourse.model.Student;
+import by.itacademy.mikhalevich.icourse.servicespring.base.StudentBaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,9 +26,9 @@ import java.util.Optional;
 @PropertySource("classpath:application.properties")
 public class StudentController {
 
-    private StudentService studentService;
+    private StudentBaseService studentService;
 
-    private Map<String, StudentService> serviceMap;
+    private Map<String, StudentBaseService> serviceMap;
     @Value("${student-service.type}")
     private String serviceType;
 
@@ -38,7 +39,7 @@ public class StudentController {
     }
 
     @Autowired
-    public void setServiceMap(Map<String, StudentService> serviceMap){
+    public void setServiceMap(Map<String, StudentBaseService> serviceMap){
         this.serviceMap = serviceMap;
     }
 
@@ -49,17 +50,17 @@ public class StudentController {
 
     @GetMapping
     public Map<Integer, Student> allStudents()  {
-        return studentService.readStudents();
+        return studentService.read();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Student> getStudent(@PathVariable int id)  {
-        return ResponseEntity.of(studentService.getStudentById(id));
+        return ResponseEntity.of(studentService.getById(id));
     }
 
     @PostMapping
     public ResponseEntity<Student> createStudent(@RequestBody Student student)  {
-        return ResponseEntity.of(studentService.createStudent(student));
+        return ResponseEntity.of(studentService.create(student));
     }
 
     @PutMapping("/{id}")
@@ -68,7 +69,7 @@ public class StudentController {
             return ResponseEntity.badRequest()
                     .body("Student id must be equal with id in path: "+ id +" != "+ student.getId());
         } else {
-            return ResponseEntity.of(studentService.updateStudent(student));
+            return ResponseEntity.of(studentService.update(student));
         }
     }
 
@@ -80,17 +81,17 @@ public class StudentController {
 //        return ResponseEntity.of(studentService.deleteStudent(student.getId()));
 
 
-        Optional<Student> student = studentService.getStudentById(id);
-        if (student.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student id: " + id + " not exists");
-        } else {
-            Optional<Student> deletedStudent = studentService.deleteStudent(student.get());
-            if (deletedStudent.isEmpty()) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student id: " + student.get().getId() + " not exists");
+//        Optional<Student> student = studentService.getStudentById(id);
+//        if (student.isEmpty()) {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student id: " + id + " not exists");
+//        } else {
+            Optional<Student> deletedStudent = studentService.delete(id);
+            if (!deletedStudent.isPresent()) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student id: " + id + " not exists");
             } else {
                 return ResponseEntity.of(deletedStudent);
             }
         }
-    }
+//    }
 
 }

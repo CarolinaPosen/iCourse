@@ -9,12 +9,12 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.*;
 
-@ToString(callSuper = true, exclude = {"groups", "marks"})
-@EqualsAndHashCode(callSuper = true, exclude = {"groups"})
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true, exclude = {"groups", "marks"})
+@EqualsAndHashCode(callSuper = true, exclude = {"groups"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 public class Student extends AbstractEntity{
@@ -27,7 +27,7 @@ public class Student extends AbstractEntity{
     @JoinColumn(name = "role_id")
     private Role role;
 
-//    @JsonManagedReference
+    //    @JsonManagedReference
     @OneToMany(mappedBy = "student", cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.DETACH})
     private Set<Mark> marks = new HashSet<>();
 
@@ -77,3 +77,5 @@ public class Student extends AbstractEntity{
     }
 
 }
+
+

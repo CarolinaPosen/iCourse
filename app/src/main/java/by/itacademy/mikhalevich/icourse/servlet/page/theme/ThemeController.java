@@ -31,7 +31,7 @@ public class ThemeController extends AbstractThemeController {
 
             List<Theme> list = new ArrayList<Theme>(themes.values());
 
-            List<String> list1 = new ArrayList<String>(List.of("String", "MAP", "SET"));
+//            List<String> list1 = new ArrayList<String>(List.of("String", "MAP", "SET"));
 
             resp.setContentType("application/json");
             resp.setCharacterEncoding("UTF-8");

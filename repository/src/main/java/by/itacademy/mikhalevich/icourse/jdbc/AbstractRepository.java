@@ -50,7 +50,7 @@ public abstract class AbstractRepository<T extends AbstractEntity> implements Re
     }
 
     @Override
-    public Optional<T> find(int id) {
+    public Optional<T> find(Integer id) {
         Map<Integer, T> result;
         ResultSet rs = null;
         try (Connection con = dataSource.getConnection();
@@ -105,12 +105,12 @@ public abstract class AbstractRepository<T extends AbstractEntity> implements Re
     }
 
     @Override
-    public Optional<T> remove(T entity) {
+    public Optional<T> remove(Integer id) {
         try (Connection con = dataSource.getConnection();
              PreparedStatement ps = con.prepareStatement(deleteSql())) {
-            ps.setInt(1, (Integer) entity.getId());
+            ps.setInt(1, id);
             if (ps.executeUpdate() > 0) {
-                return Optional.of(entity);
+                return Optional.empty();
             }
             return Optional.empty();
         } catch (SQLException e) {

@@ -48,13 +48,13 @@ public class GroupServiceSpringImpl implements GroupService {
 
     @Override
     public Optional<Group> deleteGroup(Group group) {
-            return groupRepository.remove(group);
+            return groupRepository.remove(group.getId());
     }
 
     @Override
     public Optional<Group> getGroupById(Integer id) {
         Optional<Group> group = groupRepository.find(id);
-        if (group.isEmpty()) {
+        if (group.isPresent()) {
             log.error("Group id: " + id + " not exists");
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + id + " not exists");
         } else {

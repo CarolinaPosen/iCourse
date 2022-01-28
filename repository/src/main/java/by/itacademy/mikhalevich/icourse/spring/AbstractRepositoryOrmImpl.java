@@ -30,8 +30,7 @@ import java.util.stream.Collectors;
 public abstract class AbstractRepositoryOrmImpl<T extends AbstractEntity> implements Repository<T> {
 
     protected Class<T> clazz;
-//    @PersistenceContext
-//    @Getter
+
     private EntityManagerFactory emf;
     private final ThreadLocal<EntityManager> emThreadLocal = new ThreadLocal<>();
 
@@ -58,7 +57,7 @@ public abstract class AbstractRepositoryOrmImpl<T extends AbstractEntity> implem
     }
 
     @Override
-    public Optional<T> find(int id) {
+    public Optional<T> find(Integer id) {
         begin();
         Optional<T> optionalEntity;
         try{
@@ -92,11 +91,11 @@ public abstract class AbstractRepositoryOrmImpl<T extends AbstractEntity> implem
     }
 
     @Override
-    public Optional<T> remove(T entity) {
+    public Optional<T> remove(Integer id) {
         begin();
-        Optional<T> foundEntityOptional = Optional.ofNullable(getEntityManager().find(clazz, entity.getId()));
+        Optional<T> foundEntityOptional = Optional.ofNullable(getEntityManager().find(clazz, id));
         if (foundEntityOptional.isPresent()) {
-            getEntityManager().remove(entity);
+            getEntityManager().remove(foundEntityOptional.get());
             commit();
             return foundEntityOptional;
         }

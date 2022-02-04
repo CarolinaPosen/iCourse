@@ -8,9 +8,9 @@
         <p class="mx-auto d-block"> Menu</p>
     </div>
     <div class="list-group">
-        <a href="/web-app/teachers" class="list-group-item"> Teachers </a>
-        <a href="/web-app/students" class="list-group-item"> Students </a>
-        <a href="/web-app/groups" class="list-group-item"> Groups </a>
+        <a href="/teachers" class="list-group-item"> Teachers </a>
+        <a href="/students" class="list-group-item"> Students </a>
+        <a href="/groups" class="list-group-item"> Groups </a>
     </div>
 </div>
 

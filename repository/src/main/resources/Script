@@ -1,0 +1,108 @@
+--DROP TABLE public.student_class;
+--DROP TABLE public.theme_class;
+--DROP TABLE public.salary;
+--DROP TABLE public."class";
+--DROP TABLE public.teacher;
+--DROP TABLE public."mark";
+--DROP TABLE public.student;
+--DROP TABLE public."role";
+--DROP TABLE public.theme;
+
+
+-- public."mark" definition
+-- Drop mark
+-- DROP TABLE public."mark";
+
+CREATE TABLE public."mark" (
+	id serial4 NOT NULL,
+	mark int4 NOT null,
+	"date" timestamp NOT NULL,
+	student_id int4 NULL,
+	theme_id int4 NULL
+);
+
+-- public.theme definition
+-- Drop table
+-- DROP TABLE public.theme;
+
+CREATE TABLE public.theme (
+	id serial4 NOT NULL,
+	title varchar(50) NULL
+);
+
+-- public.student_theme_class definition
+-- Drop table
+-- DROP TABLE public.student_theme_class;
+
+CREATE TABLE public.theme_class (
+	theme_id int4 NULL,
+	class_id int4 null
+);
+
+-- public.student_theme_class definition
+-- Drop table
+-- DROP TABLE public.student_theme_class;
+
+CREATE TABLE public.student_class (
+	student_id int4 NULL,
+	class_id int4 null
+);
+
+
+-- public.student definition
+-- Drop table
+-- DROP TABLE public.student;
+
+CREATE TABLE public.student (
+	id serial4 NOT NULL,
+	"name" varchar(50) NOT NULL,
+	login varchar(50) NOT NULL,
+	"password" varchar(50) NOT NULL,
+	role_id int4 NULL
+);
+
+
+-- public.teacher definition
+-- Drop table
+-- DROP TABLE public.teacher;
+
+CREATE TABLE public.teacher (
+	id serial4 NOT NULL,
+	"name" varchar(50) NOT NULL,
+	login varchar(50) NOT NULL,
+	"password" varchar(50) NOT NULL,
+	role_id int4 NULL
+);
+
+
+-- public.salary definition
+-- Drop table
+-- DROP TABLE public.salary;
+
+CREATE TABLE public.salary (
+	id serial4 NOT NULL,
+	salary numeric(4) NOT NULL,
+	"date" timestamp NOT NULL,
+	teacher_id int4 NULL
+);
+
+
+-- public."role" definition
+-- Drop table
+-- DROP TABLE public."role";
+
+CREATE TABLE public."role" (
+	id serial4 NOT NULL,
+	title varchar(50) NOT NULL
+);
+
+
+-- public."class" definition
+-- Drop table
+-- DROP TABLE public."class";
+
+CREATE TABLE public."class" (
+	id serial4 NOT NULL,
+	title varchar(50) NOT NULL,
+	teacher_id int4 NULL
+);

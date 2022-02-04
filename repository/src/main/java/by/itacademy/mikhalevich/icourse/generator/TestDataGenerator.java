@@ -2,14 +2,15 @@ package by.itacademy.mikhalevich.icourse.generator;
 
 import by.itacademy.mikhalevich.icourse.jdbc.EntityManagerHelper;
 import by.itacademy.mikhalevich.icourse.model.*;
+import by.itacademy.mikhalevich.icourse.model.auth.Authority;
+import by.itacademy.mikhalevich.icourse.model.auth.Credential;
+import by.itacademy.mikhalevich.icourse.model.auth.Role;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class TestDataGenerator {
 
@@ -28,26 +29,25 @@ public class TestDataGenerator {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
+        List<Role> trainerRoleAdmin = Arrays.asList(new Role().withName("ADMIN"));
+        List<Role> trainerRoleUser = Arrays.asList(new Role().withName("USER"));
+
+        List<Authority> trainerAuthorityRead = Arrays.asList(new Authority().withName("READ_INFO"));
+        List<Authority> trainerAuthorityWrite = Arrays.asList(new Authority().withName("WRITE_INFO"));
 
         Trainer trainer1 = new Trainer()
                 .withName("Сафонова Габи Авксентьевна")
-                .withLogin("Noahchie@mail.ru")
-                .withPassword("Asphodel")
-                .withRole(getRole(em, "Admin"));
+                .withCredential(new Credential("S", "$2a$12$Lv22bizCGwR5rzLhB1eUaO5CWp/7CVx3iYyT8B/bQYJ60Dn387k02", true, trainerRoleAdmin, trainerAuthorityWrite));
         addSalaries(trainer1);
 
         Trainer trainer2 = new Trainer()
                 .withName("Красильникова Любава Аристарховна")
-                .withLogin("Ethande@google.com")
-                .withPassword("Asp")
-                .withRole(getRole(em, "Manager"));
+                .withCredential(new Credential("K", "$2a$12$Lv22bizCGwR5rzLhB1eUaO5CWp/7CVx3iYyT8B/bQYJ60Dn387k02", true, trainerRoleUser, trainerAuthorityRead));
         addSalaries(trainer2);
 
         Trainer trainer3 = new Trainer()
                 .withName("Волков Евгений Мэлорович")
-                .withLogin("Mica@yandex.ru")
-                .withPassword("Odel")
-                .withRole(getRole(em, "Manager"));
+                .withCredential(new Credential("V", "$2a$12$Lv22bizCGwR5rzLhB1eUaO5CWp/7CVx3iYyT8B/bQYJ60Dn387k02", true, trainerRoleUser, trainerAuthorityRead));
         addSalaries(trainer3);
 
         Theme theme0 = new Theme();
@@ -89,9 +89,13 @@ public class TestDataGenerator {
 
         Student student0 = new Student()
                 .withName("Осипов Вилен")
-                .withLogin("Asp@google.com")
-                .withPassword("Asp")
-                .withRole(getRole(em, "User"));
+                .withCredential(
+                        new Credential(
+                                "Asp@google.com",
+                                "$2a$12$Lv22bizCGwR5rzLhB1eUaO5CWp/7CVx3iYyT8B/bQYJ60Dn387k02",
+                                true,
+                                trainerRoleAdmin,
+                                trainerAuthorityRead));
 
         student0.addMark(getMark(theme0));
         student0.addMark(getMark(theme1));
@@ -99,9 +103,12 @@ public class TestDataGenerator {
 
         Student student1 = new Student()
                 .withName("Рыбаков Тимофей")
-                .withLogin("Odel@yandex.ru")
-                .withPassword("Odel")
-                .withRole(getRole(em, "User"));
+                .withCredential(
+                        new Credential("Odel@yandex.ru",
+                        "$2a$12$Lv22bizCGwR5rzLhB1eUaO5CWp/7CVx3iYyT8B/bQYJ60Dn387k02",
+                        true,
+                        trainerRoleAdmin,
+                        trainerAuthorityRead));
 
         student1.addMark(getMark(theme0));
         student1.addMark(getMark(theme1));
@@ -109,9 +116,12 @@ public class TestDataGenerator {
 
         Student student2 = new Student()
                 .withName("Исаков Савелий")
-                .withLogin("Ania@ann.an")
-                .withPassword("NN")
-                .withRole(getRole(em, "User"));
+                .withCredential(
+                        new Credential("Ania@ann.an",
+                        "$2a$12$Lv22bizCGwR5rzLhB1eUaO5CWp/7CVx3iYyT8B/bQYJ60Dn387k02",
+                                true,
+                                trainerRoleAdmin,
+                                trainerAuthorityRead));
 
         student2.addMark(getMark(theme3));
         student2.addMark(getMark(theme4));
@@ -125,9 +135,11 @@ public class TestDataGenerator {
 
         Student student3 = new Student()
                 .withName("Прокопенко Виталий")
-                .withLogin("Procop@tut.by")
-                .withPassword("PRO")
-                .withRole(getRole(em, "User"));
+                .withCredential(new Credential("Procop@tut.by",
+                        "$2a$12$Lv22bizCGwR5rzLhB1eUaO5CWp/7CVx3iYyT8B/bQYJ60Dn387k02",
+                        true,
+                        trainerRoleAdmin,
+                        trainerAuthorityRead));
 
         student3.addMark(getMark(theme3));
         student3.addMark(getMark(theme4));
@@ -135,9 +147,11 @@ public class TestDataGenerator {
 
         Student student4 = new Student()
                 .withName("Вишняков Евгений")
-                .withLogin("Halcyo@tut.by")
-                .withPassword("Halcyo")
-                .withRole(getRole(em, "User"));
+                .withCredential(new Credential("Halcyo@tut.by",
+                        "$2a$12$Lv22bizCGwR5rzLhB1eUaO5CWp/7CVx3iYyT8B/bQYJ60Dn387k02",
+                        true,
+                        trainerRoleAdmin,
+                        trainerAuthorityRead));
 
         student4.addMark(getMark(theme6));
         student4.addMark(getMark(theme7));
@@ -145,9 +159,12 @@ public class TestDataGenerator {
 
         Student student5 = new Student()
                 .withName("Плитнткова Экли")
-                .withLogin("Ecli@google.com")
-                .withPassword("123")
-                .withRole(getRole(em, "User"));
+                .withCredential(
+                        new Credential("Ecli@google.com",
+                        "$2a$12$Lv22bizCGwR5rzLhB1eUaO5CWp/7CVx3iYyT8B/bQYJ60Dn387k02",
+                                true,
+                                trainerRoleAdmin,
+                                trainerAuthorityRead));
 
         student5.addMark(getMark(theme6));
         student5.addMark(getMark(theme7));
@@ -160,9 +177,11 @@ public class TestDataGenerator {
 
         Student student6 = new Student()
                 .withName("Фомичёва Зинаида")
-                .withLogin("Chalice@yandex.ru")
-                .withPassword("Chalice")
-                .withRole(getRole(em, "User"));
+                .withCredential(new Credential("Chalice@yandex.ru",
+                        "$2a$12$Lv22bizCGwR5rzLhB1eUaO5CWp/7CVx3iYyT8B/bQYJ60Dn387k02",
+                        true,
+                        trainerRoleAdmin,
+                        trainerAuthorityRead));
 
         student6.addMark(getMark(theme0));
         student6.addMark(getMark(theme1));
@@ -170,9 +189,12 @@ public class TestDataGenerator {
 
         Student student7 = new Student()
                 .withName("Радиона Силена")
-                .withLogin("SILENA@mail.ru")
-                .withPassword("sisis")
-                .withRole(getRole(em, "User"));
+                .withCredential(
+                        new Credential("SILENA@mail.ru",
+                                "$2a$12$Lv22bizCGwR5rzLhB1eUaO5CWp/7CVx3iYyT8B/bQYJ60Dn387k02",
+                                true,
+                                trainerRoleAdmin,
+                                trainerAuthorityRead));
 
         student7.addMark(getMark(theme3));
         student7.addMark(getMark(theme4));
@@ -180,9 +202,11 @@ public class TestDataGenerator {
 
         Student student8 = new Student()
                 .withName("Нестерова Жюли")
-                .withLogin("Anem@google.com")
-                .withPassword("Anem")
-                .withRole(getRole(em, "User"));
+                .withCredential(new Credential("Anem@google.com",
+                        "$2a$12$Lv22bizCGwR5rzLhB1eUaO5CWp/7CVx3iYyT8B/bQYJ60Dn387k02",
+                        true,
+                        trainerRoleAdmin,
+                        trainerAuthorityRead));
 
         student8.addMark(getMark(theme6));
         student8.addMark(getMark(theme7));
@@ -190,9 +214,11 @@ public class TestDataGenerator {
 
         Student student9 = new Student()
                 .withName("Самойлова Жаклин")
-                .withLogin("Tranquil@mail.ru")
-                .withPassword("Tranquil")
-                .withRole(getRole(em, "User"));
+                .withCredential(new Credential("Tranquil@mail.ru",
+                        "$2a$12$Lv22bizCGwR5rzLhB1eUaO5CWp/7CVx3iYyT8B/bQYJ60Dn387k02",
+                        true,
+                        trainerRoleAdmin,
+                        trainerAuthorityRead));
 
         student9.addMark(getMark(theme0));
         student9.addMark(getMark(theme1));
@@ -200,9 +226,11 @@ public class TestDataGenerator {
 
         Student student10 = new Student()
                 .withName("Родионова Милена")
-                .withLogin("Fawn@mail.ru")
-                .withPassword("Fawn")
-                .withRole(getRole(em, "User"));
+                .withCredential(new Credential("Fawn@mail.ru",
+                        "$2a$12$Lv22bizCGwR5rzLhB1eUaO5CWp/7CVx3iYyT8B/bQYJ60Dn387k02",
+                        true,
+                        trainerRoleAdmin,
+                        trainerAuthorityRead));
 
         student10.addMark(getMark(theme3));
         student10.addMark(getMark(theme4));
@@ -246,24 +274,24 @@ public class TestDataGenerator {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
-        Role admin = new Role().withTitle("Admin");
-        Role manager = new Role().withTitle("Manager");
-        Role user = new Role().withTitle("User");
+//        Role admin = new Role().withName("USER");
+//        Role manager = new Role().withName("ADMIN");
+//        Role user = new Role().withName("MANAGER");
 
-        em.persist(admin);
-        em.persist(manager);
-        em.persist(user);
+//        em.persist(admin);
+//        em.persist(manager);
+//        em.persist(user);
 
         tx.commit();
         em.close();
 
     }
 
-    private static Role getRole(EntityManager em, String title) {
-        TypedQuery<Role> serviceQuery = em.createQuery("from Role r where r.title = :title", Role.class);
-        serviceQuery.setParameter("title", title);
-        Role role = serviceQuery.getSingleResult();
-        return role;
+    private static Credential getCredential(EntityManager em, String username) {
+        TypedQuery<Credential> serviceQuery = em.createQuery("from Credential c where c.username = :username", Credential.class);
+        serviceQuery.setParameter("username", username);
+        Credential credential = serviceQuery.getSingleResult();
+        return credential;
     }
 
     private static void clearDataBase() {
@@ -278,8 +306,10 @@ public class TestDataGenerator {
             Query q2 = em.createQuery("DELETE FROM Group ");
             Query q3 = em.createQuery("DELETE FROM Student");
             Query q4 = em.createQuery("DELETE FROM Trainer ");
-            Query q5 = em.createQuery("DELETE FROM Role");
+            Query q5 = em.createQuery("DELETE FROM Credential ");
             Query q6 = em.createQuery("DELETE FROM Theme");
+            Query q7 = em.createQuery("DELETE FROM Role");
+            Query q8 = em.createQuery("DELETE FROM Authority ");
 
             q0.executeUpdate();
             q1.executeUpdate();
@@ -288,6 +318,8 @@ public class TestDataGenerator {
             q4.executeUpdate();
             q5.executeUpdate();
             q6.executeUpdate();
+            q7.executeUpdate();
+            q8.executeUpdate();
 
         } catch (SecurityException | IllegalStateException | RollbackException e) {
             e.printStackTrace();

@@ -1,14 +1,9 @@
 package by.itacademy.mikhalevich.icourse.api;
 
-import by.itacademy.mikhalevich.icourse.StudentService;
-import by.itacademy.mikhalevich.icourse.TeacherService;
-import by.itacademy.mikhalevich.icourse.service.TrainerServiceImpl;
+import by.itacademy.mikhalevich.icourse.Service;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
-import by.itacademy.mikhalevich.icourse.servicespring.TrainerServiceSpringImpl;
-import by.itacademy.mikhalevich.icourse.servicespring.base.TrainerBaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +18,9 @@ import java.util.Map;
 @PropertySource("classpath:application.properties")
 public class TeacherController {
 
-    private TrainerBaseService trainerService;
+    private Service<Trainer> trainerService;
 
-    private Map<String, TrainerBaseService> serviceMap;
+    private Map<String, Service<Trainer>> serviceMap;
     @Value("${trainer-service.type}")
     private String serviceType;
 
@@ -36,7 +31,7 @@ public class TeacherController {
     }
 
     @Autowired
-    public void setServiceMap(Map<String, TrainerBaseService> serviceMap){
+    public void setServiceMap(Map<String, Service<Trainer>> serviceMap){
         this.serviceMap = serviceMap;
     }
 

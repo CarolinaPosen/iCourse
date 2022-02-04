@@ -30,7 +30,7 @@ public class CreateMarkController extends AbstractStudentController {
         student.addMark(mark);
 
         getStudentService().updateStudentsMark(student).get();
-        Student updateStudent = getStudentService().getStudentById(Integer.parseInt(req.getParameter("student-id"))).get();
+        Student updateStudent = getStudentService().getById(Integer.parseInt(req.getParameter("student-id"))).get();
 
         req.setAttribute("student", updateStudent);
         RoutingUtils.forwardToPage("marks.jsp", req, resp);

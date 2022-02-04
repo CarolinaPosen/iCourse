@@ -9,10 +9,17 @@
         <c:when test="${CURRENT_ACCOUNT != null }">
             <ul class="nav navbar-nav navbar-right">
                 <li><a>Welcome ${CURRENT_ACCOUNT.description }</a></li><br>
-                <form action="/web-app/sign-out" method="post">
+                <form action="/sign-out" method="post">
                     <li><button type="submit" class="btn btn-dark btn-sm">Sign-out</button></li>
                 </form>
             </ul>
         </c:when>
     </c:choose>
+
+    <div class="container">
+        <form action="${pageContext.request.contextPath}/auth/logout" method="post">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+
 </div>

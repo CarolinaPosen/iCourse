@@ -23,7 +23,6 @@ public class GroupServiceSpringImpl implements GroupService {
 
     private GroupRepository groupRepository;
 
-
     @Autowired
     public GroupServiceSpringImpl(
             @Qualifier("groupRepositoryOrmImpl") GroupRepository groupRepository) {
@@ -32,27 +31,27 @@ public class GroupServiceSpringImpl implements GroupService {
     }
 
     @Override
-    public Map<Integer, Group> readGroups() {
+    public Map<Integer, Group> read() {
         return groupRepository.findAll();
     }
 
     @Override
-    public Optional<Group> updateGroup(Group group) {
+    public Optional<Group> update(Group group) {
         return Optional.of((Group) groupRepository.save(group));
     }
 
     @Override
-    public Optional<Group> createGroup(Group group) {
+    public Optional<Group> create(Group group) {
         return Optional.of((Group)groupRepository.save(group));
     }
 
     @Override
-    public Optional<Group> deleteGroup(Group group) {
-            return groupRepository.remove(group.getId());
+    public Optional<Group> delete(Integer id) {
+            return groupRepository.remove(id);
     }
 
     @Override
-    public Optional<Group> getGroupById(Integer id) {
+    public Optional<Group> getById(Integer id) {
         Optional<Group> group = groupRepository.find(id);
         if (group.isPresent()) {
             log.error("Group id: " + id + " not exists");

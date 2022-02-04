@@ -3,7 +3,6 @@ package by.itacademy.mikhalevich.icourse.service;
 import javax.servlet.ServletContext;
 
 import by.itacademy.mikhalevich.icourse.*;
-import by.itacademy.mikhalevich.icourse.repository.LoginPasswordSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +27,8 @@ public class ServiceManager {
 	private final GroupService groupService;
 	private final SalaryService salaryService;
 	private final ThemeService themeService;
-	private final AccountService accountService;
+	private final RoleService roleService;
+	private final AuthorityService authorityService;
 
 	public static ServiceManager getInstance(ServletContext context) {
 		ServiceManager instance = (ServiceManager) context.getAttribute("SERVICE_MANAGER");
@@ -57,9 +57,11 @@ public class ServiceManager {
 	public ThemeService getThemeService() {
 		return themeService;
 	}
-
-	public AccountService getAccountService() {
-		return accountService;
+	public RoleService getRoleService() {
+		return roleService;
+	}
+	public AuthorityService getAuthorityService() {
+		return authorityService;
 	}
 
 	private ServiceManager(ServletContext context) {
@@ -71,7 +73,8 @@ public class ServiceManager {
 		groupService = new GroupServiceImpl();
 		salaryService = new SalaryServiceImpl();
 		themeService = new ThemeServiceImpl();
-		accountService = new AccountServiceImpl(new LoginPasswordSource());
+		roleService = new RoleServiceImpl();
+		authorityService = new AuthorityServiceImpl();
 	}
 
 	private BasicDataSource createDataSource() {

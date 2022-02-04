@@ -16,7 +16,7 @@ public class AllStudentsController extends AbstractStudentController {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Map<Integer, Student> students = getStudentService().readStudents();
+        Map<Integer, Student> students = getStudentService().read();
         req.setAttribute("students", students);
         RoutingUtils.forwardToPage("students.jsp", req, resp);
     }

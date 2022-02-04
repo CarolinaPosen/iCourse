@@ -3,12 +3,8 @@ package by.itacademy.mikhalevich.icourse.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 
 @Data
@@ -18,17 +14,17 @@ import java.util.Set;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false, exclude = {"title"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@Entity
-public class Role extends AbstractEntity{
+//@Entity
+public class ExRole extends AbstractEntity{
         private String title;
 //        Set<Trainer> trainers = new HashSet<>();
 
-        public Role withId(Integer id){
+        public ExRole withId(Integer id){
             setId(id);
             return this;
         }
 
-        public Role withTitle(String title) {
+        public ExRole withTitle(String title) {
             setTitle(title);
             return this;
         }

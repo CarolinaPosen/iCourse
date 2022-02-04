@@ -2,11 +2,10 @@ $('.create-mark-btn').click(function () {
 
     $.ajax({
         type: "GET",
-        url: 'http://localhost:8080/web-app/themes',
+        url: location.origin + '/themes',
         dataType: 'json',
         //data: data,
         success: function (responseData) {
-            // this prints out your data
             console.log("successful", responseData);
 
             responseData.responseType = 'json';
@@ -17,9 +16,12 @@ $('.create-mark-btn').click(function () {
                 var counter = text[i].title;
                 console.log("THEME:" + counter);
 
-                $('#createMarkPopup .theme-id' + i).text(text[i].title);
-                $('#createMarkPopup .theme-id' + i).val(text[i].id);
+                const option = document.createElement("option");
+                option.text = text[i].title;
+                option.value = text[i].id;
 
+                // Append to another element:
+                document.getElementById("add_mark_themes").appendChild(option);
             }
 
             var mark = $('#student-id-main');

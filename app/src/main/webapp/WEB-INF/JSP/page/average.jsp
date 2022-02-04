@@ -14,7 +14,7 @@
             <h2>AVERAGE SALARY: ${requestScope.average}</h2>
             </div>
             <div class="card mb-4 shadow-sm">
-                <form action="/web-app/salary" method="post">
+                <form action="/salary" method="post">
                     <h2>COUNT OF MONTH:<input name="month" class="form-control" type="number" max="${requestScope.teacher.salaries.size()}">
                         <input id="trainer_id" name="id" type="hidden" value="${requestScope.teacher.id}"></h2>
                     <button type="submit" class="btn btn-info btn-sm btn-block">Calculate average salary</button>

@@ -1,10 +1,6 @@
 package by.itacademy.mikhalevich.icourse.repository;
 
-import by.itacademy.mikhalevich.icourse.model.Role;
-import by.itacademy.mikhalevich.icourse.model.Trainer;
-
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class MainMemoryRepository {
 

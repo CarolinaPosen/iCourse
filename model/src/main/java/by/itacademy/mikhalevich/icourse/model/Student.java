@@ -1,8 +1,8 @@
 package by.itacademy.mikhalevich.icourse.model;
 
+import by.itacademy.mikhalevich.icourse.model.auth.Credential;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
@@ -20,12 +20,10 @@ import java.util.*;
 public class Student extends AbstractEntity{
 
     private String name;
-    private String login;
-    private String password;
 
-    @ManyToOne()
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "credential_id")
+    private Credential credential;
 
     //    @JsonManagedReference
     @OneToMany(mappedBy = "student", cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.DETACH})
@@ -48,16 +46,8 @@ public class Student extends AbstractEntity{
         return this;
     }
 
-    public Student withLogin(String login){
-        setLogin(login);
-        return this;
-    }
-    public Student withPassword(String password){
-        setPassword(password);
-        return this;
-    }
-    public Student withRole(Role role){
-        setRole(role);
+    public Student withCredential(Credential credential){
+        setCredential(credential);
         return this;
     }
 

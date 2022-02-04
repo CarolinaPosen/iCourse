@@ -3,6 +3,7 @@ package by.itacademy.mikhalevich.icourse.servicespring;
 import by.itacademy.mikhalevich.icourse.*;
 import by.itacademy.mikhalevich.icourse.calculating.Accounting;
 import by.itacademy.mikhalevich.icourse.model.*;
+import by.itacademy.mikhalevich.icourse.model.auth.Credential;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,26 +35,26 @@ public class TrainerServiceSpringImpl implements TeacherService {
     }
 
     @Override
-    public Map readTeachers() {
+    public Map read() {
         return trainerRepository.findAll();
     }
 
     @Override
-    public Optional<Trainer> updateTrainer(Trainer trainer) {
-        Role updateRole = (Role) roleRepository.findByName(trainer.getRole().getTitle()).get();
-        trainer.withRole(updateRole);
+    public Optional<Trainer> update(Trainer trainer) {
+        //Credential updateCredential = (Credential) roleRepository.findByName(trainer.getRole().getTitle()).get();
+       // trainer.withRole(updateRole);
         return Optional.ofNullable((Trainer) trainerRepository.save(trainer));
     }
 
     @Override
-    public Optional<Trainer> createTrainer(Trainer trainer) {
-        Role updateRole = (Role) roleRepository.findByName(trainer.getRole().getTitle()).get();
-        trainer.withRole(updateRole);
+    public Optional<Trainer> create(Trainer trainer) {
+        //ExRole updateRole = (ExRole) roleRepository.findByName(trainer.getRole().getTitle()).get();
+        //trainer.withRole(updateRole);
         return Optional.ofNullable((Trainer) trainerRepository.save(trainer));
     }
 
     @Override
-    public Optional<Trainer> deleteTrainer(Integer id) {
+    public Optional<Trainer> delete(Integer id) {
         Optional<Trainer> optionalTrainer = trainerRepository.find(id);
 
         if (!optionalTrainer.get().getGroups().isEmpty()) {
@@ -66,7 +67,7 @@ public class TrainerServiceSpringImpl implements TeacherService {
     }
 
     @Override
-    public Optional<Trainer> getTrainerById(Integer id) {
+    public Optional<Trainer> getById(Integer id) {
         Optional<Trainer> trainer = trainerRepository.find(id);
         if (trainer.isPresent()) {
             return trainer;

@@ -14,7 +14,7 @@
                             ID:<input type="number" name="id" class="id" class="form-control"><br>
                             MARK:<input type="number" name="mark" class="mark" class="form-control"><br>
                             DATE:<input type="date" name="date" class="date" class="form-control"><br>
-                            THEME:<input type="number" name="theme-id" class="theme-id" class="form-control"><br>
+                            THEMES:<select id="themes" name="themes-id" name="themes" size="8" multiple />
                             StudentID:<input type="number" name="student-id" class="student-id" class="form-control"><br>
                         </div>
                     </div>

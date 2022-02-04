@@ -27,7 +27,6 @@ public class AbstractGroupController extends HttpServlet {
     public final StudentService getStudentService() {
         return studentService;
     }
-
     public final GroupService getGroupService() {
         return groupService;
     }

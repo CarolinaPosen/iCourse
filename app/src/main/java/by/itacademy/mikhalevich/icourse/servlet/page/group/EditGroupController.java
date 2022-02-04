@@ -17,11 +17,11 @@ public class EditGroupController extends AbstractGroupController {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Group group = getGroupService().getGroupById(Integer.parseInt(req.getParameter("id"))).get();
+        Group group = getGroupService().getById(Integer.parseInt(req.getParameter("id"))).get();
         group.withTitle(req.getParameter("name"));
-        getGroupService().updateGroup(group);
+        getGroupService().update(group);
 
-        Map<Integer, Group> groups = getGroupService().readGroups();
+        Map<Integer, Group> groups = getGroupService().read();
         req.setAttribute("groups", groups);
         RoutingUtils.forwardToPage("groups.jsp", req, resp);
     }

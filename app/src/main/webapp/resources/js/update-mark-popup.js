@@ -1,6 +1,35 @@
 $(document).ready(function () {
     $('.change-mark-btn').click(function () {
 
+        $.ajax({
+            type: "GET",
+            url: location.origin + '/themes',
+            dataType: 'json',
+            //data: data,
+            success: function (responseData) {
+                // this prints out your data
+                console.log("successful", responseData);
+
+                responseData.responseType = 'json';
+
+                const text = responseData;
+
+                for (var i = 0; i < text.length; i++) {
+                    var counter = text[i].title;
+                    console.log("THEME:" + counter);
+
+                    const option = document.createElement("option");
+                    option.text = text[i].title;
+                    option.value = text[i].id;
+
+                    // Append to another element:
+                    document.getElementById("themes").appendChild(option);
+                }
+            }
+        })
+
+
+
         var idMark = $(this).attr('data-id-mark');
         var mark = $('#mark'+idMark);
 

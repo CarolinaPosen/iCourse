@@ -2,6 +2,7 @@ package by.itacademy.mikhalevich.icourse.jdbc;
 
 import by.itacademy.mikhalevich.icourse.StudentRepository;
 import by.itacademy.mikhalevich.icourse.model.*;
+import by.itacademy.mikhalevich.icourse.model.auth.Credential;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
@@ -17,7 +18,7 @@ import java.util.Optional;
 public class StudentRepositoryPostgres extends AbstractRepository<Student> implements StudentRepository {
     //language=PostgreSQL
     private static final String SELECT_FROM_STUDENT_ALL_FIELDS =
-            "select s.id id, s.name title, s.login log, s.password pass, s.role_id role_id," +
+            "select s.id id, s.name title, s.credential_id credential_id," +
                     " m.id mark_id, m.mark mark, m.date mark_date, m.theme_id theme_id," +
                     " th.title theme_title" +
                     " from student s " +
@@ -30,10 +31,10 @@ public class StudentRepositoryPostgres extends AbstractRepository<Student> imple
     private static final String FIND_STUDENT_BY_ID = SELECT_FROM_STUDENT_ALL_FIELDS + ONE_ENTITY_FILTER;
 
     //language=PostgreSQL
-    private static final String INSERT_STUDENT_SQL = "insert into student (name, login) values (?, ?) returning id";
+    private static final String INSERT_STUDENT_SQL = "insert into student (name) values (?) returning id";
 
     //language=PostgreSQL
-    private static final String UPDATE_STUDENT_SQL = "update student s set name = ?, login = ?, password = ?, role_id = ? " + ONE_ENTITY_FILTER;
+    private static final String UPDATE_STUDENT_SQL = "update student s set name = ?, credential_id = ? " + ONE_ENTITY_FILTER;
 
     //language=PostgreSQL
     private static final String DELETE_STUDENT_BY_ID = "delete from student s" + ONE_ENTITY_FILTER;
@@ -82,16 +83,12 @@ public class StudentRepositoryPostgres extends AbstractRepository<Student> imple
 
     public void insertLogic(Student student, PreparedStatement ps) throws SQLException {
         ps.setString(1, student.getName());
-        ps.setString(2, student.getLogin());
-        ps.setString(3, student.getPassword());
-        ps.setInt(4, student.getRole().getId());
+        ps.setInt(2, student.getCredential().getId());
     }
 
     public void updateLogic(Student student, PreparedStatement ps) throws SQLException {
         ps.setString(1, student.getName());
-        ps.setString(2, student.getLogin());
-        ps.setString(3, student.getPassword());
-        ps.setInt(4, student.getRole().getId());
+        ps.setInt(2, student.getCredential().getId());
     }
 
     @Override
@@ -107,11 +104,10 @@ public class StudentRepositoryPostgres extends AbstractRepository<Student> imple
             studentMap.putIfAbsent(sId, new Student()
                     .withId(sId)
                     .withName(rs.getString("title"))
-                    .withLogin(rs.getString("log"))
-                    .withPassword(rs.getString("pass"))
-                    .withRole(new Role()
-                            .withId(rs.getInt("role_id"))
-                            .withTitle("Role"))
+                    .withCredential(new Credential()
+                            .withId(rs.getInt("credential_id"))
+                            .withUsername("Username")
+                            .withPassword("Password"))
                     .addMark(putIfAbsentAndReturn(markMap, mId,
                             new Mark()
                                     .withId(mId)

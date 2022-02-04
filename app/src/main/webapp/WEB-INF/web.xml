@@ -42,9 +42,9 @@
         <auth-constraint>
             <role-name>admin</role-name>
         </auth-constraint>
-        <user-data-constraint>
+        <credential-data-constraint>
             <transport-guarantee>NONE</transport-guarantee>
-        </user-data-constraint>
+        </credential-data-constraint>
     </security-constraint>-->
 
 </web-app>

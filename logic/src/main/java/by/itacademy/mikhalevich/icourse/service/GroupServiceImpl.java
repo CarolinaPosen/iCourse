@@ -24,33 +24,33 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Map<Integer, Group> readGroups() {
+    public Map<Integer, Group> read() {
         return groupRepository.findAll();
     }
 
     @Override
-    public Optional<Group> updateGroup(Group group) {
+    public Optional<Group> update(Group group) {
         return Optional.of((Group) groupRepository.save(group));
     }
 
     @Override
-    public Optional<Group> createGroup(Group group) {
+    public Optional<Group> create(Group group) {
         return Optional.of((Group) groupRepository.save(group));
     }
 
     @Override
-    public Optional<Group> deleteGroup(Group group) {
-        Optional<Group> deletedGroup = groupRepository.remove(group.getId());
+    public Optional<Group> delete(Integer id) {
+        Optional<Group> deletedGroup = groupRepository.remove(id);
         if (!deletedGroup.isPresent()) {
-            log.error("Group id: " + group.getId() + " not exists");
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + group.getId() + " not exists");
+            log.error("Group id: " + id + " not exists");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + id + " not exists");
         } else {
             return deletedGroup;
         }
     }
 
     @Override
-    public Optional<Group> getGroupById(Integer id) {
+    public Optional<Group> getById(Integer id) {
         Optional group = groupRepository.find(id);
         if (!group.isPresent()) {
             log.error("Group id: " + id + " not exists");
@@ -59,5 +59,4 @@ public class GroupServiceImpl implements GroupService {
             return group;
         }
     }
-
 }

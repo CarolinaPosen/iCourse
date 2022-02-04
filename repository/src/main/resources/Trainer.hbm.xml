@@ -15,7 +15,7 @@
         <property name="login" column="login"/>
         <property name="password" column="password"/>
 
-        <many-to-one name="role" class="by.itacademy.mikhalevich.icourse.model.Role"
+        <many-to-one name="role" class="by.itacademy.mikhalevich.icourse.model.ExRole"
                      column="role_id"
                      cascade="all" />
 

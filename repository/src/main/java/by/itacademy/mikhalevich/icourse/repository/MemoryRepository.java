@@ -1,7 +1,5 @@
 package by.itacademy.mikhalevich.icourse.repository;
 
-import by.itacademy.mikhalevich.icourse.model.Role;
-import by.itacademy.mikhalevich.icourse.model.Trainer;
 import java.util.*;
 
 public class MemoryRepository {

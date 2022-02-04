@@ -58,8 +58,10 @@ public class RepositoryFactory {
     public static GroupRepository getGroupRepository() {
         switch (TYPE) {
             case JDBC:
+                log.info("Inject JDBC Repository");
                 return GroupRepositoryPostgres.getInstance(datasource);
             case JPA:
+                log.info("Inject JPA Repository");
                 return GroupRepositoryJpaImpl.getInstance();
             default:
                 return GroupRepositoryJpaImpl.getInstance();
@@ -96,6 +98,17 @@ public class RepositoryFactory {
                 return RoleRepositoryJpaImpl.getInstance();
             default:
                 return RoleRepositoryJpaImpl.getInstance();
+        }
+    }
+
+    public static AuthorityRepository getAuthorityRepository() {
+        switch (TYPE) {
+            case JDBC:
+                return null;
+            case JPA:
+                return AuthorityRepositoryJpaImpl.getInstance();
+            default:
+                return AuthorityRepositoryJpaImpl.getInstance();
         }
     }
 

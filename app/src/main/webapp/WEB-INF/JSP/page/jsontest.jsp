@@ -5,7 +5,7 @@
 <popup:add-new-teacher/>
 
 
-<c:set var="user" value=""/>
+<c:set var="credential" value=""/>
 
 <div id="jsonReceiver">
 

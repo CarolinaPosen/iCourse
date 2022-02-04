@@ -1,9 +1,10 @@
 package by.itacademy.mikhalevich.icourse.jdbc;
 
 import by.itacademy.mikhalevich.icourse.TrainerRepository;
-import by.itacademy.mikhalevich.icourse.model.Role;
+import by.itacademy.mikhalevich.icourse.model.ExRole;
 import by.itacademy.mikhalevich.icourse.model.Salary;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
+import by.itacademy.mikhalevich.icourse.model.auth.Credential;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
@@ -16,7 +17,7 @@ import java.util.*;
 public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> implements TrainerRepository {
     //language=PostgreSQL
     private static final String SELECT_FROM_TRAINERS_ALL_FIELDS =
-            "select t.id id, t.name title, t.login log, t.password pass, t.role_id role_id," +
+            "select t.id id, t.name title, t.credential_id credential_id," +
                     " s.id salary_id, s.salary salary, s.date salary_date " +
                     " from teacher t " +
                     " left join salary s " +
@@ -27,9 +28,9 @@ public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> imple
     //language=PostgreSQL
     private static final String FIND_EMPLOYEE_BY_ID = SELECT_FROM_TRAINERS_ALL_FIELDS + ONE_ENTITY_FILTER;
     //language=PostgreSQL
-    private static final String INSERT_EMPLOYEE_SQL = "insert into teacher (name, login, password, role_id) values (?, ?, ?, ?) returning id";
+    private static final String INSERT_EMPLOYEE_SQL = "insert into teacher (name, credential_id) values (?, ?, ?, ?) returning id";
     //language=PostgreSQL
-    private static final String UPDATE_EMPLOYEE_SQL = "update teacher t set name = ?, login = ?, password = ?, role_id = ? " + ONE_ENTITY_FILTER;
+    private static final String UPDATE_EMPLOYEE_SQL = "update teacher t set name = ?, credential_id = ? " + ONE_ENTITY_FILTER;
     //language=PostgreSQL
     private static final String DELETE_EMPLOYEE_BY_ID = "delete from teacher t" + ONE_ENTITY_FILTER;
 
@@ -77,16 +78,12 @@ public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> imple
 
     public void insertLogic(Trainer trainer, PreparedStatement ps) throws SQLException {
         ps.setString(1, trainer.getName());
-        ps.setString(2, trainer.getLogin());
-        ps.setString(3, trainer.getPassword());
-        ps.setInt(4, trainer.getRole().getId());
+        ps.setInt(2, trainer.getCredential().getId());
     }
 
     public void updateLogic(Trainer trainer, PreparedStatement ps) throws SQLException {
         ps.setString(1, trainer.getName());
-        ps.setString(2, trainer.getLogin());
-        ps.setString(3, trainer.getPassword());
-        ps.setInt(4, trainer.getRole().getId());
+        ps.setInt(4, trainer.getCredential().getId());
     }
 
     @Override
@@ -102,11 +99,8 @@ public class TeacherRepositoryPostgres extends AbstractRepository<Trainer> imple
                     new Trainer()
                             .withId(tId)
                             .withName(rs.getString("title"))
-                            .withLogin(rs.getString("log"))
-                            .withPassword(rs.getString("pass"))
-                            .withRole(new Role()
-                            .withId(rs.getInt("role_id"))
-                            .withTitle("Role"))
+                            .withCredential(new Credential()
+                                .withId(rs.getInt("credential_id")))
                             .addSalary(putIfAbsentAndReturn(salaryMap, sId,
                                     new Salary()
                                             .withId(sId)

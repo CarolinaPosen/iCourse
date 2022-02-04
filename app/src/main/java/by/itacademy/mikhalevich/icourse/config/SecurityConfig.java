@@ -12,22 +12,46 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/", "/teachers").permitAll()
-                .antMatchers("/salary").authenticated()
-                .antMatchers("/groups").hasAnyAuthority("ROLE_ADMIN", "READ_INFO")
-//                .antMatchers("/info").hasAnyAuthority("ROLE_ADMIN")
-                .antMatchers("/marks").hasRole("USER")
-                .and().formLogin()
-                .and().httpBasic()
-                .and().logout().logoutSuccessUrl("/")
-                .and().csrf().disable();
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/api/**").permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin()
+//                .loginPage("/auth/login").permitAll()
+//                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/teachers", true)
+                .and()
+                .logout()
+                // use this first
+//                .logoutUrl("/auth/logout");
+                .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "POST"))
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/auth/login");
+
+
+//        http.authorizeRequests()
+//                .antMatchers("/", "/teachers").permitAll()
+//                .antMatchers("/salary").authenticated()
+//                .antMatchers("/groups").hasAnyAuthority("ROLE_ADMIN", "READ_INFO")
+////                .antMatchers("/info").hasAnyAuthority("ROLE_ADMIN")
+//                .antMatchers("/marks").hasRole("USER")
+//                .and().formLogin()
+//                .and().httpBasic()
+//                .and().logout().logoutSuccessUrl("/")
+//                .and().csrf().disable();
 
 
 //        http.authorizeRequests()

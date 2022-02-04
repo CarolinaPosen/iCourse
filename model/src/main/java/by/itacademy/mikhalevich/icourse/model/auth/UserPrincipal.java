@@ -12,17 +12,17 @@ import java.util.stream.Collectors;
 public class UserPrincipal implements UserDetails {
 
     public static final String ROLE_PREFIX = "ROLE_";
-    private final User user;
+    private final Credential credential;
     private final Collection<SimpleGrantedAuthority> authorities;
 
 
-    public UserPrincipal(User user) {
-        this.user = user;
-        List<SimpleGrantedAuthority> roleList = user.getRoles().stream()
+    public UserPrincipal(Credential credential) {
+        this.credential = credential;
+        List<SimpleGrantedAuthority> roleList = credential.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(ROLE_PREFIX + role.getName()))
                 .collect(Collectors.toList());
 
-        List<SimpleGrantedAuthority> authorityList = user.getAuthorities().stream()
+        List<SimpleGrantedAuthority> authorityList = credential.getAuthorities().stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getName()))
                 .collect(Collectors.toList());
 
@@ -38,17 +38,17 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return credential.getUsername();
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return credential.getPassword();
     }
 
     @Override
     public boolean isEnabled() {
-        return user.isEnabled();
+        return credential.isEnabled();
     }
 
     @Override

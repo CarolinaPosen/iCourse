@@ -18,7 +18,7 @@ public class SalaryController extends JsonController {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BigDecimal averageSalary;
 
-        Trainer trainer = getTeacherService().getTrainerById(Integer.parseInt(req.getParameter("id"))).get();
+        Trainer trainer = getTeacherService().getById(Integer.parseInt(req.getParameter("id"))).get();
 
         if(req.getParameter("month") != null){
             Integer countOfMonth = Integer.parseInt(req.getParameter("month"));

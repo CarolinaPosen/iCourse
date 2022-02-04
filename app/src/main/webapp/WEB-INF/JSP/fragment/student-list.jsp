@@ -13,8 +13,10 @@
 
 
             <h3 class="name text-center font-weight-lighter">${student.value.name}</h3>
-            <p class="login text-center font-weight-lighter">${student.value.login}</p>
-            <p class="password text-center font-weight-lighter">${student.value.password}</p>
+            <p class="login text-center font-weight-lighter">${student.value.credential.username}</p>
+            <p class="password text-center font-weight-lighter">${student.value.credential.password}</p>
+            <p class="role text-center font-weight-lighter">${student.value.credential.roles}</p>
+            <p class="authority text-center font-weight-lighter">${student.value.credential.authorities}</p>
                 <%--<p class="salary text-center font-weight-lighter">${teacher.value.salaries}</p>--%>
             <p class="id text-center font-weight-lighter">${student.key}</p>
 
@@ -26,7 +28,7 @@
             <form action="${pageContext.request.contextPath}/marks" method="post">
                 <input name="id" type="hidden" value="${student.key}" class="form-control">
                 <input name="name" type="hidden" value="${student.value.name}" class="form-control">
-                <input name="login" type="hidden" value="${student.value.login}" class="form-control">
+                <input name="login" type="hidden" value="${student.value.credential.username}" class="form-control">
                 <input name="salary" type="hidden" value="${student.value.marks}" class="form-control">
                 <button type="submit" class="btn btn-info btn-sm btn-block">Show marks</button>
             </form>

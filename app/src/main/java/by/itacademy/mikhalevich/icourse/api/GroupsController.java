@@ -1,11 +1,9 @@
 package by.itacademy.mikhalevich.icourse.api;
 
-import by.itacademy.mikhalevich.icourse.GroupService;
+import by.itacademy.mikhalevich.icourse.Service;
 import by.itacademy.mikhalevich.icourse.model.Group;
-import by.itacademy.mikhalevich.icourse.servicespring.base.GroupBaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
@@ -30,9 +28,9 @@ import java.util.Optional;
 @PropertySource("classpath:application.properties")
 public class GroupsController {
 
-    private GroupBaseService groupService;
+    private Service<Group> groupService;
 
-    private Map<String, GroupBaseService> serviceMap;
+    private Map<String, Service<Group>> serviceMap;
     @Value("${group-service.type}")
     private String serviceType;
 
@@ -43,7 +41,7 @@ public class GroupsController {
     }
 
     @Autowired
-    public void setServiceMap(Map<String, GroupBaseService> serviceMap){
+    public void setServiceMap(Map<String, Service<Group>> serviceMap){
         this.serviceMap = serviceMap;
     }
 

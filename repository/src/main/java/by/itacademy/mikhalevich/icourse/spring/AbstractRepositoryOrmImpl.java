@@ -1,22 +1,15 @@
 package by.itacademy.mikhalevich.icourse.spring;
 
-import by.itacademy.mikhalevich.icourse.GroupRepository;
 import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.exception.DataBaseErrorException;
 import by.itacademy.mikhalevich.icourse.model.AbstractEntity;
-import by.itacademy.mikhalevich.icourse.model.Group;
-import by.itacademy.mikhalevich.icourse.model.Role;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;

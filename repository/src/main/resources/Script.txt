@@ -1,0 +1,173 @@
+--DROP TABLE public.student_class;
+--DROP TABLE public.theme_class;
+--DROP TABLE public.salary;
+--DROP TABLE public."class";
+--DROP TABLE public.teacher;
+--DROP TABLE public."mark";
+--DROP TABLE public.student;
+--DROP TABLE public.theme;
+--
+--DROP TABLE public.credential_role;
+--
+--DROP TABLE public.credential_authority;
+--
+--DROP TABLE public.authority;
+--DROP TABLE public."role";
+--DROP TABLE public."credential";
+
+
+
+
+
+-- public."mark" definition
+-- Drop mark
+-- DROP TABLE public."mark";
+
+CREATE TABLE public."mark" (
+	id serial4 NOT NULL,
+	mark int4 NOT null,
+	"date" timestamp NOT NULL,
+	student_id int4 NULL,
+	theme_id int4 NULL
+);
+
+-- public.theme definition
+-- Drop table
+-- DROP TABLE public.theme;
+
+CREATE TABLE public.theme (
+	id serial4 NOT NULL,
+	title varchar(50) NULL
+);
+
+-- public.student_theme_class definition
+-- Drop table
+-- DROP TABLE public.student_theme_class;
+
+CREATE TABLE public.theme_class (
+	theme_id int4 NULL,
+	class_id int4 null
+);
+
+-- public.student_theme_class definition
+-- Drop table
+-- DROP TABLE public.student_theme_class;
+
+CREATE TABLE public.student_class (
+	student_id int4 NULL,
+	class_id int4 null
+);
+
+
+-- public.student definition
+-- Drop table
+-- DROP TABLE public.student;
+
+CREATE TABLE public.student (
+	id serial4 NOT NULL,
+	"name" varchar(50) NOT NULL,
+	credential_id int4 NULL
+);
+
+
+-- public.teacher definition
+-- Drop table
+-- DROP TABLE public.teacher;
+
+CREATE TABLE public.teacher (
+	id serial4 NOT NULL,
+	"name" varchar(50) NOT NULL,
+	credential_id int4 NULL
+);
+
+
+-- public.salary definition
+-- Drop table
+-- DROP TABLE public.salary;
+
+CREATE TABLE public.salary (
+	id serial4 NOT NULL,
+	salary numeric(4) NOT NULL,
+	"date" timestamp NOT NULL,
+	teacher_id int4 NULL
+);
+
+
+
+-- public."class" definition
+-- Drop table
+-- DROP TABLE public."class";
+
+CREATE TABLE public."class" (
+	id serial4 NOT NULL,
+	title varchar(50) NOT NULL,
+	teacher_id int4 NULL
+);
+
+
+create table public."credential" (
+    id serial4 NOT NULL,
+	username varchar(50) not null,
+	password varchar(255) not null,
+	enabled boolean not null,
+	primary key(id)
+);
+
+
+
+-- public."role" definition
+-- Drop table
+-- DROP TABLE public."role";
+
+create table public."role" (
+    id serial4 NOT NULL,
+	name varchar(50) not null,
+	primary key(id)
+);
+
+
+create table public.authority (
+    id serial4 NOT NULL,
+	name varchar(50) not null,
+	primary key(id)
+);
+
+create table public.credential_role (
+	credential_id serial4 not null,
+	role_id serial4 not null,
+	primary key (credential_id, role_id),
+	foreign key (credential_id) references "credential" (id),
+	foreign key (role_id) references "role" (id)
+);
+
+create table public.credential_authority (
+	credential_id serial4 not null,
+	authority_id serial4 not null,
+	primary key (credential_id, authority_id),
+	foreign key (credential_id) references "credential" (id),
+	foreign key (authority_id) references "authority" (id)
+);
+
+insert into "credential"(username, "password", enabled) values
+('alex', '{bcrypt}$2a$12$Lv22bizCGwR5rzLhB1eUaO5CWp/7CVx3iYyT8B/bQYJ60Dn387k02', true),
+('john', '{bcrypt}$2a$12$J70ghsrR8LspjUv7zYu3/OczJwroI3nARsbpi/Hsb0u.m88/iKW.u', true)
+;
+
+insert into "role"("name") values
+('USER'),
+('ADMIN')
+;
+
+insert into authority("name") values
+('READ_INFO')
+;
+
+insert into credential_role(credential_id, role_id) values
+(1, 1),
+(1, 2),
+(2, 1)
+;
+
+insert into credential_authority(credential_id, authority_id) values
+(2, 1)
+;

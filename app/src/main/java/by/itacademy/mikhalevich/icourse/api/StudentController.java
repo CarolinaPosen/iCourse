@@ -1,14 +1,9 @@
 package by.itacademy.mikhalevich.icourse.api;
 
-import by.itacademy.mikhalevich.icourse.GroupService;
-import by.itacademy.mikhalevich.icourse.StudentService;
-import by.itacademy.mikhalevich.icourse.model.Group;
-import by.itacademy.mikhalevich.icourse.service.StudentServiceImpl;
+import by.itacademy.mikhalevich.icourse.Service;
 import by.itacademy.mikhalevich.icourse.model.Student;
-import by.itacademy.mikhalevich.icourse.servicespring.base.StudentBaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
@@ -26,9 +21,9 @@ import java.util.Optional;
 @PropertySource("classpath:application.properties")
 public class StudentController {
 
-    private StudentBaseService studentService;
+    private Service<Student> studentService;
 
-    private Map<String, StudentBaseService> serviceMap;
+    private Map<String, Service<Student>> serviceMap;
     @Value("${student-service.type}")
     private String serviceType;
 
@@ -39,7 +34,7 @@ public class StudentController {
     }
 
     @Autowired
-    public void setServiceMap(Map<String, StudentBaseService> serviceMap){
+    public void setServiceMap(Map<String, Service<Student>> serviceMap){
         this.serviceMap = serviceMap;
     }
 

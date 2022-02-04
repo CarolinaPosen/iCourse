@@ -1,12 +1,7 @@
 package by.itacademy.mikhalevich.icourse.servicespring;
 
 import by.itacademy.mikhalevich.icourse.*;
-import by.itacademy.mikhalevich.icourse.factory.RepositoryFactory;
-import by.itacademy.mikhalevich.icourse.jpa.MarkRepositoryJpaImpl;
-import by.itacademy.mikhalevich.icourse.jpa.RoleRepositoryJpaImpl;
-import by.itacademy.mikhalevich.icourse.jpa.ThemeRepositoryJpaImpl;
-import by.itacademy.mikhalevich.icourse.model.Mark;
-import by.itacademy.mikhalevich.icourse.model.Role;
+import by.itacademy.mikhalevich.icourse.model.ExRole;
 import by.itacademy.mikhalevich.icourse.model.Student;
 import by.itacademy.mikhalevich.icourse.model.Theme;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.sql.Timestamp;
 import java.util.Map;
 import java.util.Optional;
 
@@ -38,46 +32,40 @@ public class StudentServiceSpringImpl implements StudentService {
     }
 
     @Override
-    public Map readStudents() {
+    public Map read() {
         return studentRepository.findAll();
     }
 
     @Override
-    public Optional<Student> updateStudent(Student student) {
+    public Optional<Student> update(Student student) {
         Student updateStudent = (Student) studentRepository.find(student.getId()).get();
         updateStudent.withId(student.getId());
         updateStudent.withName(student.getName());
-        updateStudent.withLogin(student.getLogin());
-        updateStudent.withPassword(student.getPassword());
+//        updateStudent.withLogin(student.getLogin());
+//        updateStudent.withPassword(student.getPassword());
         student.getMarks().forEach(mark -> mark.setTheme((Theme) themeRepository.find(mark.getTheme().getId()).get()));
         student.getMarks().forEach(updateStudent::addMark);
         return Optional.ofNullable((Student) studentRepository.save(updateStudent));
     }
 
-    @Override
     public Optional<Student> updateStudentsMark(Student student) {
         return Optional.empty();
     }
 
     @Override
-    public Optional<Student> createStudent(Student student) {
-        Role updateRole = (Role) roleRepository.findByName(student.getRole().getTitle()).get();
-        student.withRole(updateRole);
+    public Optional<Student> create(Student student) {
+//        ExRole updateRole = (ExRole) roleRepository.findByName(student.getRole().getTitle()).get();
+//        student.withRole(updateRole);
         return Optional.ofNullable((Student) studentRepository.save(student));
     }
 
     @Override
-    public Optional<Student> deleteStudent(Integer id) {
+    public Optional<Student> delete(Integer id) {
         return  studentRepository.remove(id);
     }
 
     @Override
-    public Optional<Student> deleteStudent(Student student) {
-        return  studentRepository.remove(student.getId());
-    }
-
-    @Override
-    public Optional<Student> getStudentById(Integer id) {
+    public Optional<Student> getById(Integer id) {
         Optional student = studentRepository.find(id);
         if (student.isPresent()) {
             return student;

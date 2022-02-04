@@ -17,7 +17,7 @@ public class EditGroupStudentController extends AbstractGroupController {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Group group = getGroupService().getGroupById(Integer.parseInt(req.getParameter("group-id"))).get();
+        Group group = getGroupService().getById(Integer.parseInt(req.getParameter("group-id"))).get();
 
         req.setAttribute("group", group);
         RoutingUtils.forwardToPage("group-students.jsp", req, resp);

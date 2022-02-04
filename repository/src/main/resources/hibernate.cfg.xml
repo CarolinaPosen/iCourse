@@ -38,7 +38,9 @@
 <!--        <mapping resource="Salary.hbm.xml"/>-->
 
         <mapping class="by.itacademy.mikhalevich.icourse.model.Trainer"/>
-        <mapping class="by.itacademy.mikhalevich.icourse.model.Role"/>
+        <mapping class="by.itacademy.mikhalevich.icourse.model.auth.Credential"/>
+        <mapping class="by.itacademy.mikhalevich.icourse.model.auth.Role"/>
+        <mapping class="by.itacademy.mikhalevich.icourse.model.auth.Authority"/>
         <mapping class="by.itacademy.mikhalevich.icourse.model.Salary"/>
 
         <mapping class="by.itacademy.mikhalevich.icourse.model.Student"/>

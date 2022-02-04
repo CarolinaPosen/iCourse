@@ -30,9 +30,9 @@ public class GroupRepositoryPostgres extends AbstractRepository<Group> implement
     //language=PostgreSQL
     private static final String SELECT_FROM_GROUP_ALL_FIELDS =
             "select c.id g_id, c.title title," +
-                    " s.id s_id, s.name " + S_NAME + ", s.login log, s.password pass, s.role_id role_id," +
+                    " s.id s_id, s.name " + S_NAME + ", cr.username log, cr.password pass, s.credential_id credential_id," +
                     " th.id th_id, th.title theme_title," +
-                    " t.id t_id, t.name t_name, t.login t_login" +
+                    " t.id t_id, t.name t_name" +
                     " from class c" +
                     " join theme_class thc" +
                     " on c.id = thc.class_id" +
@@ -43,7 +43,9 @@ public class GroupRepositoryPostgres extends AbstractRepository<Group> implement
                     " join student_class sc " +
                     " on sc.class_id = c.id" +
                     " join student s " +
-                    " on sc.student_id = s.id";
+                    " on sc.student_id = s.id" +
+                    " join credential cr " +
+                    " on s.credential_id = cr.id";
     //language=PostgreSQL
     private static final String ONE_ENTITY_FILTER = " where c.id = ? ";
     //language=PostgreSQL

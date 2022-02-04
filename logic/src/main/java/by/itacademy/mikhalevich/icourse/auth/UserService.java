@@ -1,8 +1,7 @@
 package by.itacademy.mikhalevich.icourse.auth;
 
-import by.itacademy.mikhalevich.icourse.model.auth.User;
+import by.itacademy.mikhalevich.icourse.model.auth.Credential;
 import by.itacademy.mikhalevich.icourse.model.auth.UserPrincipal;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,10 +23,10 @@ public class UserService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> userOptional = userRepository.findByUsername(username);
-        User user = userOptional.orElseThrow(() -> {
+        Optional<Credential> userOptional = userRepository.findByUsername(username);
+        Credential credential = userOptional.orElseThrow(() -> {
             throw new UsernameNotFoundException(String.format("User %s not found", username));
         });
-        return new UserPrincipal(user);
+        return new UserPrincipal(credential);
     }
 }

@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name = "by.itacademy.mikhalevich.icourse.model.Role" table = "role">
+    <class name = "by.itacademy.mikhalevich.icourse.model.ExRole" table = "role">
 
         <id name = "id" type = "int">
             <column name="id"/>

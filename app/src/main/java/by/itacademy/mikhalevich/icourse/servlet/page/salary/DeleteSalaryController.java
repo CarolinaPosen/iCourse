@@ -22,7 +22,7 @@ public class DeleteSalaryController extends AbstractSalaryController {
 
         getSalaryService().deleteSalary(Integer.parseInt(req.getParameter("id")));
 
-        Trainer trainer = getTeacherService().getTrainerById(trainerId).get();
+        Trainer trainer = getTeacherService().getById(trainerId).get();
 
         req.setAttribute("teacher", trainer);
         RoutingUtils.forwardToPage("average.jsp", req, resp);

@@ -1,13 +1,9 @@
 package by.itacademy.mikhalevich.icourse.servlet.page.salary;
 
-import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Salary;
-import by.itacademy.mikhalevich.icourse.model.Student;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
-import by.itacademy.mikhalevich.icourse.servlet.AbstractStudentController;
 import by.itacademy.mikhalevich.icourse.servlet.AbstractTeacherController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
-import org.hibernate.tool.schema.extract.spi.TableInformation;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +13,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.Map;
 
 @WebServlet("/create-salary")
 public class CreateSalaryController extends AbstractTeacherController {
@@ -33,7 +28,7 @@ public class CreateSalaryController extends AbstractTeacherController {
                         .withDate(Timestamp.from(Instant.now()))
                         .withTrainer(new Trainer().withId(Integer.parseInt(req.getParameter("trainer")))));
 
-        Trainer updateTrainer = getTeacherService().getTrainerById(Integer.parseInt(req.getParameter("trainer"))).get();
+        Trainer updateTrainer = getTeacherService().getById(Integer.parseInt(req.getParameter("trainer"))).get();
 
         req.setAttribute("teacher", updateTrainer);
         RoutingUtils.forwardToPage("average.jsp", req, resp);

@@ -17,9 +17,9 @@ public class DeleteStudentController extends AbstractStudentController {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        getStudentService().deleteStudent(Integer.parseInt(req.getParameter("id")));
+        getStudentService().delete(Integer.parseInt(req.getParameter("id")));
 
-        Map<Integer, Student> students = getStudentService().readStudents();
+        Map<Integer, Student> students = getStudentService().read();
         req.setAttribute("students", students);
         RoutingUtils.forwardToPage("students.jsp", req, resp);
     }

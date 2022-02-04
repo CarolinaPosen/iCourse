@@ -19,7 +19,7 @@ public class MarkController extends AbstractStudentController {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Student student = getStudentService().getStudentById(Integer.parseInt(req.getParameter("id"))).get();
+        Student student = getStudentService().getById(Integer.parseInt(req.getParameter("id"))).get();
         req.setAttribute("student", student);
         RoutingUtils.forwardToPage("marks.jsp", req, resp);
 

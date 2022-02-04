@@ -12,8 +12,8 @@
         <div id="student${student.id}" class="card mb-4 shadow-sm">
 
             <h3 class="name text-center font-weight-lighter">${student.name}</h3>
-            <p class="login text-center font-weight-lighter">${student.login}</p>
-            <p class="password text-center font-weight-lighter">${student.password}</p>
+            <p class="login text-center font-weight-lighter">${student.credential.username}</p>
+            <p class="password text-center font-weight-lighter">${student.credential.password}</p>
                 <%--<p class="salary text-center font-weight-lighter">${teacher.value.salaries}</p>--%>
             <p class="id text-center font-weight-lighter">${student.id}</p>
 
@@ -24,7 +24,7 @@
             <form action="${pageContext.request.contextPath}/marks" method="post">
                 <input name="id" type="hidden" value="${student.id}" class="form-control">
                 <input name="name" type="hidden" value="${student.name}" class="form-control">
-                <input name="login" type="hidden" value="${student.login}" class="form-control">
+                <input name="login" type="hidden" value="${student.credential.username}" class="form-control">
                 <input name="salary" type="hidden" value="${student.marks}" class="form-control">
                 <button type="submit" class="btn btn-info btn-sm btn-block">Show marks</button>
             </form>

@@ -1,6 +1,6 @@
 package by.itacademy.mikhalevich.icourse.servlet.page.student;
 
-import by.itacademy.mikhalevich.icourse.model.Role;
+import by.itacademy.mikhalevich.icourse.model.ExRole;
 import by.itacademy.mikhalevich.icourse.model.Student;
 import by.itacademy.mikhalevich.icourse.servlet.AbstractStudentController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
@@ -18,17 +18,17 @@ public class EditStudentController extends AbstractStudentController {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Student student = getStudentService().getStudentById(Integer.parseInt(req.getParameter("id"))).get();
+        Student student = getStudentService().getById(Integer.parseInt(req.getParameter("id"))).get();
 
         student
-                .withName(req.getParameter("name"))
-                .withLogin(req.getParameter("login"))
-                .withPassword(req.getParameter("password"))
-                .withRole(new Role().withTitle(req.getParameter("role")));
+                .withName(req.getParameter("name"));
+//                .withLogin(req.getParameter("login"))
+//                .withPassword(req.getParameter("password"))
+//                .withRole(new ExRole().withTitle(req.getParameter("role")));
 
-        getStudentService().updateStudent((student));
+        getStudentService().update((student));
 
-        Map<Integer, Student> students = getStudentService().readStudents();
+        Map<Integer, Student> students = getStudentService().read();
         req.setAttribute("students", students);
         RoutingUtils.forwardToPage("students.jsp", req, resp);
     }

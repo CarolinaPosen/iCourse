@@ -11,10 +11,11 @@
         <div id="teacher${teacher.key}" class="card mb-4 shadow-sm">
 
             <h3 class="name text-center font-weight-lighter">${teacher.value.name}</h3>
-            <p class="login text-center font-weight-lighter">${teacher.value.login}</p>
-            <p class="password text-center font-weight-lighter">${teacher.value.password}</p>
+            <p class="login text-center font-weight-lighter">${teacher.value.credential.username}</p>
+            <p class="password text-center font-weight-lighter">${teacher.value.credential.password}</p>
 <%--            <p class="salary text-center font-weight-lighter">${teacher.value.salaries}</p>--%>
-            <p class="role text-center font-weight-lighter">${teacher.value.role}</p>
+            <p class="role text-center font-weight-lighter">${teacher.value.credential.roles}</p>
+            <p class="authority text-center font-weight-lighter">${teacher.value.credential.authorities}</p>
             <p class="id text-center font-weight-lighter">${teacher.key}</p>
 
             <button type="button" class="btn change-btn btn-success btn-sm btn-block"
@@ -24,7 +25,7 @@
             <form action="${pageContext.request.contextPath}/salary" method="post">
                 <input name="id" type="hidden" value="${teacher.key}" class="form-control">
                 <input name="name" type="hidden" value="${teacher.value.name}" class="form-control">
-                <input name="login" type="hidden" value="${teacher.value.login}" class="form-control">
+                <input name="login" type="hidden" value="${teacher.value.credential.username}" class="form-control">
                 <input name="salary" type="hidden" value="${teacher.value.salaries}" class="form-control">
                 <button type="submit" class="btn btn-info btn-sm btn-block">Average salary</button>
             </form>

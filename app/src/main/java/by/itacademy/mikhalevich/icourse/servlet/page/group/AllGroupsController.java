@@ -12,12 +12,11 @@ import java.io.IOException;
 import java.util.Map;
 
 @WebServlet("/groups")
-public class GroupsController extends AbstractGroupController {
+public class AllGroupsController extends AbstractGroupController {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Map<Integer, Group> groups = getGroupService().readGroups();
-
+        Map<Integer, Group> groups = getGroupService().read();
         req.setAttribute("groups", groups);
         RoutingUtils.forwardToPage("groups.jsp", req, resp);
     }

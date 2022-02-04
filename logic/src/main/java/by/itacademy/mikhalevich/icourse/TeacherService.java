@@ -6,13 +6,13 @@ import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Optional;
 
-public interface TeacherService {
+public interface TeacherService extends Service<Trainer> {
 
-	Map<Integer, Trainer> readTeachers();
-	Optional<Trainer> updateTrainer(Trainer trainer);
-	Optional<Trainer> createTrainer(Trainer trainer);
-	Optional<Trainer> deleteTrainer(Integer id);
-	Optional<Trainer> getTrainerById (Integer id);
+//	Map<Integer, Trainer> readTeachers();
+//	Optional<Trainer> updateTrainer(Trainer trainer);
+//	Optional<Trainer> createTrainer(Trainer trainer);
+//	Optional<Trainer> deleteTrainer(Integer id);
+//	Optional<Trainer> getTrainerById (Integer id);
 	BigDecimal averageSalary(Integer id, int month);
 
 

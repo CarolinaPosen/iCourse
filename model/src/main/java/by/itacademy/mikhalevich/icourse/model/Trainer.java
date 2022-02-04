@@ -1,11 +1,10 @@
 package by.itacademy.mikhalevich.icourse.model;
 
+import by.itacademy.mikhalevich.icourse.model.auth.Credential;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.*;
@@ -21,12 +20,10 @@ import java.util.*;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Trainer extends AbstractEntity {
     private String name;
-    private String login;
-    private String password;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH})
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "credential_id")
+    private Credential credential;
 
     @JsonBackReference
     @OneToMany(mappedBy = "trainer", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
@@ -44,16 +41,9 @@ public class Trainer extends AbstractEntity {
         setName(name);
         return this;
     }
-    public Trainer withLogin(String login){
-        setLogin(login);
-        return this;
-    }
-    public Trainer withPassword(String password){
-        setPassword(password);
-        return this;
-    }
-    public Trainer withRole(Role role){
-        setRole(role);
+
+    public Trainer withCredential(Credential credential){
+        setCredential(credential);
         return this;
     }
 

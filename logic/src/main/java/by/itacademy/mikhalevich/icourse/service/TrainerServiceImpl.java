@@ -4,10 +4,13 @@ import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.TeacherService;
 import by.itacademy.mikhalevich.icourse.factory.RepositoryFactory;
 import by.itacademy.mikhalevich.icourse.calculating.Accounting;
+import by.itacademy.mikhalevich.icourse.model.ExRole;
 import by.itacademy.mikhalevich.icourse.model.Group;
-import by.itacademy.mikhalevich.icourse.model.Role;
 import by.itacademy.mikhalevich.icourse.model.Salary;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
+import by.itacademy.mikhalevich.icourse.model.auth.Authority;
+import by.itacademy.mikhalevich.icourse.model.auth.Credential;
+import by.itacademy.mikhalevich.icourse.model.auth.Role;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -25,34 +28,41 @@ public class TrainerServiceImpl implements TeacherService {
     private Repository trainerRepository;
     private Repository roleRepository;
     private Repository groupRepository;
+    private Repository authorityRepository;
 
     public TrainerServiceImpl() {
         this.trainerRepository = RepositoryFactory.getTrainerRepository();
         this.roleRepository = RepositoryFactory.getRoleRepository();
         this.groupRepository = RepositoryFactory.getGroupRepository();
+        this.authorityRepository = RepositoryFactory.getAuthorityRepository();
     }
 
     @Override
-    public Map readTeachers() {
+    public Map read() {
         return trainerRepository.findAll();
     }
 
     @Override
-    public Optional<Trainer> updateTrainer(Trainer trainer) {
-        Role updateRole = (Role) roleRepository.findByName(trainer.getRole().getTitle()).get();
-        trainer.withRole(updateRole);
+    public Optional<Trainer> update(Trainer trainer) {
+        Role updateRole = (Role) roleRepository.find(trainer.getCredential().getRoles().stream().findFirst().get().getId()).get();
+        Authority updateAuthority = (Authority) authorityRepository.find(trainer.getCredential().getAuthorities().stream().findFirst().get().getId()).get();
+        Credential credential = trainer.getCredential();
+        credential.withRole(updateRole);
+        credential.withAuthority(updateAuthority);
+        trainer.withCredential(credential);
+        log.info(trainer.toString());
         return Optional.ofNullable((Trainer) trainerRepository.save(trainer));
     }
 
     @Override
-    public Optional<Trainer> createTrainer(Trainer trainer) {
-        Role updateRole = (Role) roleRepository.findByName(trainer.getRole().getTitle()).get();
-        trainer.withRole(updateRole);
+    public Optional<Trainer> create(Trainer trainer) {
+//        ExRole updateRole = (ExRole) roleRepository.findByName(trainer.getRole().getTitle()).get();
+//        trainer.withRole(updateRole);
         return Optional.ofNullable((Trainer) trainerRepository.save(trainer));
     }
 
     @Override
-    public Optional<Trainer> deleteTrainer(Integer id) {
+    public Optional<Trainer> delete(Integer id) {
 
         Optional<Trainer> optionalTrainer = trainerRepository.find(id);
         Trainer trainer;
@@ -74,7 +84,7 @@ public class TrainerServiceImpl implements TeacherService {
     }
 
     @Override
-    public Optional<Trainer> getTrainerById(Integer id) {
+    public Optional<Trainer> getById(Integer id) {
         Optional<Trainer> trainer = trainerRepository.find(id);
         if (trainer.isPresent()) {
             return trainer;

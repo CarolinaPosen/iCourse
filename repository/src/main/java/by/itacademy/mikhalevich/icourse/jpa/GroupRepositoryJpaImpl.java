@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.TypedQuery;
 
-//@Component("groupRepositoryJpaImpl")
 public class GroupRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Group> implements GroupRepository {
 
     private static volatile GroupRepositoryJpaImpl instance;

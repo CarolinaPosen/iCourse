@@ -2,11 +2,12 @@ package by.itacademy.mikhalevich.icourse.jpa;
 
 import by.itacademy.mikhalevich.icourse.RoleRepository;
 import by.itacademy.mikhalevich.icourse.jdbc.TeacherRepositoryPostgres;
-import by.itacademy.mikhalevich.icourse.model.Role;
+import by.itacademy.mikhalevich.icourse.model.auth.Role;
 
 import javax.persistence.TypedQuery;
 
 public class RoleRepositoryJpaImpl extends AbstractRepositoryJpaImpl<Role> implements RoleRepository {
+
     private RoleRepositoryJpaImpl() {
     }
 
@@ -32,7 +33,7 @@ protected TypedQuery<Role> findAllQuery() {
 
     @Override
     protected TypedQuery<Role> findByNameQuery(String name) {
-            TypedQuery<Role> query = helper.getEntityManager().createQuery("from Role r where r.title = :name", Role.class);
+            TypedQuery<Role> query = helper.getEntityManager().createQuery("from Role r where r.name = :name", Role.class);
             query.setParameter("name", name);
             return query;
     }

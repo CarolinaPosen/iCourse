@@ -1,6 +1,6 @@
 package by.itacademy.mikhalevich.icourse.servlet.page.trainer;
 
-import by.itacademy.mikhalevich.icourse.model.Role;
+import by.itacademy.mikhalevich.icourse.model.ExRole;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
 import by.itacademy.mikhalevich.icourse.servlet.AbstractTeacherController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
@@ -18,14 +18,14 @@ public class CreateTeacherController extends AbstractTeacherController {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        getTeacherService().createTrainer(
+        getTeacherService().create(
                 new Trainer()
-                        .withName(req.getParameter("name"))
-                        .withLogin(req.getParameter("login"))
-                        .withPassword(req.getParameter("password"))
-                        .withRole(new Role().withTitle(req.getParameter("role"))));
+                        .withName(req.getParameter("name")));
+//                        .withLogin(req.getParameter("login"))
+//                        .withPassword(req.getParameter("password"))
+//                        .withRole(new ExRole().withTitle(req.getParameter("role"))));
 
-        Map<Integer, Trainer> teachers = getTeacherService().readTeachers();
+        Map<Integer, Trainer> teachers = getTeacherService().read();
         req.setAttribute("teachers", teachers);
         RoutingUtils.forwardToPage("teachers.jsp", req, resp);
     }

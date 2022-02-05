@@ -1,16 +1,20 @@
 package by.itacademy.mikhalevich.icourse.api;
 
 import by.itacademy.mikhalevich.icourse.Service;
+import by.itacademy.mikhalevich.icourse.model.Group;
 import by.itacademy.mikhalevich.icourse.model.Trainer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -35,10 +39,6 @@ public class TeacherController {
         this.serviceMap = serviceMap;
     }
 
-//    @Autowired()
-//    public TeacherController(@Qualifier("trainerServiceSpringImpl") TeacherService trainerService) {
-//        this.trainerService = trainerService;
-//    }
 
     @GetMapping
     public Map<Integer, Trainer> allTrainers()  {
@@ -67,6 +67,11 @@ public class TeacherController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Trainer> deleteTrainer(@PathVariable Integer id)  {
-        return ResponseEntity.of(trainerService.delete(id));
+        Optional<Trainer> deletedTrainer = trainerService.delete(id);
+        if (!deletedTrainer.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + id + " not exists");
+        } else {
+            return new ResponseEntity(HttpStatus.OK);
+        }
     }
 }

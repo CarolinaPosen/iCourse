@@ -34,8 +34,9 @@
             </ul>
 
             <button type="button" class="btn change-btn btn-success btn-sm btn-block"
-                    data-id-group="${group.key}">Change groups name
+                    data-id-group="${group.key}">Change groups data
             </button>
+
 
             <form action="${pageContext.request.contextPath}/group-students-edit" method="post">
                 <input name="group-id" type="hidden" value="${group.key}" class="form-control">

@@ -24,48 +24,42 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/api/**").permitAll()
+
+                .antMatchers("/teachers").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER", "READ_INFO")
+                .antMatchers("/teacher-edit").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/delete-teacher").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/create-teacher").hasAnyAuthority("ROLE_ADMIN")
+
+                .antMatchers("/students").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER", "READ_INFO")
+                .antMatchers("/student-edit").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/delete-student").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/create-student").hasAnyAuthority("ROLE_ADMIN")
+
+                .antMatchers("/groups").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER", "READ_INFO")
+                .antMatchers("/group-edit").hasAnyAuthority("ROLE_ADMIN", "WRITE_INFO")
+                .antMatchers("/delete-group").hasAnyAuthority("ROLE_ADMIN")
+
+                .antMatchers("/salary").hasAnyAuthority("WRITE_INFO", "READ_INFO")
+                .antMatchers("/salary-edit").hasAnyAuthority("WRITE_INFO")
+                .antMatchers("/marks").hasAnyAuthority("WRITE_INFO", "READ_INFO")
+                .antMatchers("/mark-edit").hasAnyAuthority("WRITE_INFO")
+                .antMatchers("/group-students-edit").hasAnyAuthority("WRITE_INFO")
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-//                .loginPage("/auth/login").permitAll()
-//                .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/teachers", true)
                 .and()
                 .logout()
-                // use this first
-//                .logoutUrl("/auth/logout");
                 .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "POST"))
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/auth/login");
-
-
-//        http.authorizeRequests()
-//                .antMatchers("/", "/teachers").permitAll()
-//                .antMatchers("/salary").authenticated()
-//                .antMatchers("/groups").hasAnyAuthority("ROLE_ADMIN", "READ_INFO")
-////                .antMatchers("/info").hasAnyAuthority("ROLE_ADMIN")
-//                .antMatchers("/marks").hasRole("USER")
-//                .and().formLogin()
-//                .and().httpBasic()
-//                .and().logout().logoutSuccessUrl("/")
-//                .and().csrf().disable();
-
-
-//        http.authorizeRequests()
-////                .anyRequest().authenticated()
-//                .antMatchers("/", "/teachers").permitAll()
-//                .antMatchers( "/salary").authenticated()
-//                .and().formLogin()
-//                .and()
-//                .csrf().disable()
-//                .httpBasic();
+                .logoutSuccessUrl("/");
     }
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

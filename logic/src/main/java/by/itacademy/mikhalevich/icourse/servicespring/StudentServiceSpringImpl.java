@@ -38,14 +38,7 @@ public class StudentServiceSpringImpl implements StudentService {
 
     @Override
     public Optional<Student> update(Student student) {
-        Student updateStudent = (Student) studentRepository.find(student.getId()).get();
-        updateStudent.withId(student.getId());
-        updateStudent.withName(student.getName());
-//        updateStudent.withLogin(student.getLogin());
-//        updateStudent.withPassword(student.getPassword());
-        student.getMarks().forEach(mark -> mark.setTheme((Theme) themeRepository.find(mark.getTheme().getId()).get()));
-        student.getMarks().forEach(updateStudent::addMark);
-        return Optional.ofNullable((Student) studentRepository.save(updateStudent));
+        return Optional.ofNullable((Student) studentRepository.save(student));
     }
 
     public Optional<Student> updateStudentsMark(Student student) {
@@ -54,14 +47,14 @@ public class StudentServiceSpringImpl implements StudentService {
 
     @Override
     public Optional<Student> create(Student student) {
-//        ExRole updateRole = (ExRole) roleRepository.findByName(student.getRole().getTitle()).get();
-//        student.withRole(updateRole);
         return Optional.ofNullable((Student) studentRepository.save(student));
     }
 
     @Override
     public Optional<Student> delete(Integer id) {
-        return  studentRepository.remove(id);
+        Optional<Student> optionalStudent = studentRepository.find(id);
+        this.studentRepository.remove(id);
+        return optionalStudent;
     }
 
     @Override

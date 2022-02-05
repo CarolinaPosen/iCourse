@@ -46,7 +46,4 @@
 <script src="${pageContext.request.contextPath}/resources/js/create-salary-popup.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/update-mark-popup.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/create-mark-popup.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jsontest.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/app-ajax.js"></script>
 </body>
-</html>

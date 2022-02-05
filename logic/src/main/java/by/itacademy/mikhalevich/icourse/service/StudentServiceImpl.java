@@ -7,6 +7,9 @@ import by.itacademy.mikhalevich.icourse.model.Group;
 import by.itacademy.mikhalevich.icourse.model.ExRole;
 import by.itacademy.mikhalevich.icourse.model.Student;
 import by.itacademy.mikhalevich.icourse.model.Theme;
+import by.itacademy.mikhalevich.icourse.model.auth.Authority;
+import by.itacademy.mikhalevich.icourse.model.auth.Credential;
+import by.itacademy.mikhalevich.icourse.model.auth.Role;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +25,7 @@ public class StudentServiceImpl implements StudentService {
     private Repository markRepository;
     private Repository themeRepository;
     private Repository groupRepository;
+    private Repository authorityRepository;
 
     public StudentServiceImpl() {
         this.studentRepository = RepositoryFactory.getStudentRepository();
@@ -29,6 +33,7 @@ public class StudentServiceImpl implements StudentService {
         this.markRepository = RepositoryFactory.getMarkRepository();
         this.themeRepository = RepositoryFactory.getThemeRepository();
         this.groupRepository = RepositoryFactory.getGroupRepository();
+        this.authorityRepository = RepositoryFactory.getAuthorityRepository();
     }
 
     @Override
@@ -38,6 +43,13 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Optional<Student> update(Student student) {
+        Role updateRole = (Role) roleRepository.find(student.getCredential().getRoles().stream().findFirst().get().getId()).get();
+        Authority updateAuthority = (Authority) authorityRepository.find(student.getCredential().getAuthorities().stream().findFirst().get().getId()).get();
+        Credential credential = student.getCredential();
+        credential.withRole(updateRole);
+        credential.withAuthority(updateAuthority);
+        student.withCredential(credential);
+        log.info(student.toString());
         return Optional.ofNullable((Student) studentRepository.save(student));
     }
 

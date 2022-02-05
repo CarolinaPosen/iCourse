@@ -7,6 +7,7 @@ import by.itacademy.mikhalevich.icourse.model.auth.Credential;
 import by.itacademy.mikhalevich.icourse.model.auth.Role;
 import by.itacademy.mikhalevich.icourse.servlet.AbstractTeacherController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,8 +27,7 @@ public class EditTeacherController extends AbstractTeacherController {
         Credential credential = trainer.getCredential();
 
         credential.setUsername(req.getParameter("login"));
-        credential.setPassword(req.getParameter("password"));
-        credential.setPassword(req.getParameter("password"));
+        credential.setPassword(new BCryptPasswordEncoder().encode(req.getParameter("password")));
         credential.withRole(new Role().withId(Integer.parseInt(req.getParameter("role-id"))));
         credential.withAuthority(new Authority().withId(Integer.parseInt(req.getParameter("authorities-id"))));
 

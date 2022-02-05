@@ -45,10 +45,6 @@ public class GroupsController {
         this.serviceMap = serviceMap;
     }
 
-//    @Autowired
-//    public GroupsController(@Qualifier("groupServiceSpringImpl") GroupService groupService) {
-//        this.groupService = groupService;
-//    }
 
     @GetMapping
     public Map<Integer, Group> allGroups() {
@@ -91,16 +87,11 @@ public class GroupsController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Group> deleteGroup(@PathVariable Integer id) {
-//        Optional<Group> group = groupService.getGroupById(id);
-//        if (group.isEmpty()) {
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + id + " not exists");
-//        } else {
             Optional<Group> deletedGroup = groupService.delete(id);
             if (!deletedGroup.isPresent()) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group id: " + id + " not exists");
             } else {
-                return ResponseEntity.of(deletedGroup);
+                return new ResponseEntity(HttpStatus.OK);
             }
-//        }
     }
 }

@@ -2,8 +2,10 @@ package by.itacademy.mikhalevich.icourse.service;
 
 import by.itacademy.mikhalevich.icourse.GroupRepository;
 import by.itacademy.mikhalevich.icourse.GroupService;
+import by.itacademy.mikhalevich.icourse.TrainerRepository;
 import by.itacademy.mikhalevich.icourse.factory.RepositoryFactory;
 import by.itacademy.mikhalevich.icourse.model.Group;
+import by.itacademy.mikhalevich.icourse.model.Trainer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -18,9 +20,11 @@ import java.util.Optional;
 public class GroupServiceImpl implements GroupService {
 
     private GroupRepository groupRepository;
+    private TrainerRepository trainerRepository;
 
     public GroupServiceImpl() {
         this.groupRepository = RepositoryFactory.getGroupRepository();
+        this.trainerRepository = RepositoryFactory.getTrainerRepository();
     }
 
     @Override
@@ -30,6 +34,8 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Optional<Group> update(Group group) {
+        Optional<Trainer> trainer = trainerRepository.find(group.getTrainer().getId());
+        trainer.ifPresent(group::setTrainer);
         return Optional.of((Group) groupRepository.save(group));
     }
 

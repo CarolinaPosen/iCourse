@@ -38,11 +38,6 @@ public class StudentController {
         this.serviceMap = serviceMap;
     }
 
-//    @Autowired()
-//    public StudentController(@Qualifier("studentServiceSpringImpl") StudentService studentService) {
-//        this.studentService = studentService;
-//    }
-
     @GetMapping
     public Map<Integer, Student> allStudents()  {
         return studentService.read();
@@ -70,23 +65,11 @@ public class StudentController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Student> deleteStudent(@PathVariable Integer id)  {
-
-
-//        Student student = studentService.getStudentById(id);
-//        return ResponseEntity.of(studentService.deleteStudent(student.getId()));
-
-
-//        Optional<Student> student = studentService.getStudentById(id);
-//        if (student.isEmpty()) {
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student id: " + id + " not exists");
-//        } else {
-            Optional<Student> deletedStudent = studentService.delete(id);
-            if (!deletedStudent.isPresent()) {
+        Optional<Student> deletedStudent = studentService.delete(id);
+        if (!deletedStudent.isPresent()) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student id: " + id + " not exists");
             } else {
-                return ResponseEntity.of(deletedStudent);
+                return new ResponseEntity(HttpStatus.OK);
             }
         }
-//    }
-
 }

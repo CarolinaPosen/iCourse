@@ -9,6 +9,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 //import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 //import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 import org.springframework.web.servlet.config.annotation.*;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 @EnableWebSecurity
 @EnableAspectJAutoProxy(proxyTargetClass = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableJpaRepositories(
         basePackages = "by.itacademy.mikhalevich.icourse",
         entityManagerFactoryRef = "entityManagerFactory",

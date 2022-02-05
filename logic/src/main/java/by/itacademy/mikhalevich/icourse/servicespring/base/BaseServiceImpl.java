@@ -46,7 +46,7 @@ public abstract class BaseServiceImpl<T extends AbstractEntity> implements Servi
     @Override
     public Optional<T> delete(Integer id) {
         Optional<T> removeEntity = getRepository().find(id);
-        getRepository().remove(removeEntity.get().getId());
+        getRepository().remove(id);
         return removeEntity;
     }
 

@@ -11,8 +11,11 @@
                 <div class="modal-body row">
                     <div class="col-sm-12">
                         <div class="list-group hidden-xs adv-chars">
-                            ID:<input type="number" name="id" class="id" name="id" class="form-control"><br>
+                            ID:<input type="text" name="id" class="id" class="form-control"><br>
                             NAME:<input type="text" name="name" class="name" class="form-control"><br>
+                            TRAINERS:
+                            <select id="group-trainers" name="trainers-id" size="5" multiple></select><br>
+
                         </div>
                     </div>
                 </div>

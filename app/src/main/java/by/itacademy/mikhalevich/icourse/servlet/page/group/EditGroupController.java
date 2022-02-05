@@ -1,6 +1,7 @@
 package by.itacademy.mikhalevich.icourse.servlet.page.group;
 
 import by.itacademy.mikhalevich.icourse.model.Group;
+import by.itacademy.mikhalevich.icourse.model.Trainer;
 import by.itacademy.mikhalevich.icourse.servlet.AbstractGroupController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
 
@@ -19,6 +20,13 @@ public class EditGroupController extends AbstractGroupController {
 
         Group group = getGroupService().getById(Integer.parseInt(req.getParameter("id"))).get();
         group.withTitle(req.getParameter("name"));
+
+        if(group.getTrainer()==null){
+            group.setTrainer(new Trainer().withId(Integer.parseInt(req.getParameter("trainers-id"))));
+        } else {
+            group.getTrainer().setId(Integer.parseInt(req.getParameter("trainers-id")));
+        }
+
         getGroupService().update(group);
 
         Map<Integer, Group> groups = getGroupService().read();

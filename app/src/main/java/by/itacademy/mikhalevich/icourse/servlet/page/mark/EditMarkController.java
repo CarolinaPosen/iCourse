@@ -1,6 +1,7 @@
 package by.itacademy.mikhalevich.icourse.servlet.page.mark;
 import by.itacademy.mikhalevich.icourse.model.Mark;
 import by.itacademy.mikhalevich.icourse.model.Student;
+import by.itacademy.mikhalevich.icourse.model.Theme;
 import by.itacademy.mikhalevich.icourse.servlet.AbstractMarkController;
 import by.itacademy.mikhalevich.icourse.util.RoutingUtils;
 
@@ -20,6 +21,7 @@ public class EditMarkController extends AbstractMarkController {
         Mark mark = getMarkService().getMarkById(id);
 
         mark.withMark(Integer.parseInt(req.getParameter("mark")));
+        mark.withTheme(new Theme().withId(Integer.parseInt(req.getParameter("themes-id"))));
 
         getMarkService().updateMark(mark);
 

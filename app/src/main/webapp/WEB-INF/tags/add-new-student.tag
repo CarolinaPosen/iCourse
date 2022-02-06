@@ -3,7 +3,7 @@
 <div id="createStudentPopup" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form action="/create-student" method="post">
+            <form action="${pageContext.request.contextPath}/create-student" method="post">
                 <div class="modal-header">
                     <h4 class="modal-title">Create student</h4>
                 </div>
@@ -14,13 +14,12 @@
                             LOGIN: <input type="text" class="login" name="login" class="form-control login"><br>
                             PASSWORD: <input type="text" class="password" name="password" class="form-control password"><br>
                             GROUP: <input type="text" class="group" name="group" class="form-control group"><br>
-                            ROLE:<p><label>
-                            <select name="role" size="3" multiple>
-                                <option selected type="text" value="Admin"> Administrator</option>
-                                <option type="text" value="Manager"> Manager</option>
-                                <option type="text" value="User"> User</option>
-                            </select>
-                        </label><br>
+                            ROLES:
+                            <select id="new-student-roles" name="new-student-role-id" name="roles" size="3" multiple></select><br>
+
+                            AUTHORITIES:
+                            <select id="new-student-authorities" name="new-student-authorities-id" name="authorities" size="3" multiple></select><br>
+
                         </div>
                     </div>
                 </div>

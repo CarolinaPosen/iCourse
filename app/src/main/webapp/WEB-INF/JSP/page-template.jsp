@@ -27,7 +27,6 @@
         <div class="col-sm-7 col-md-8 col-lg-9 col-xs-9">
             <main>
                 <jsp:include page="${requestScope.currentPage}"/>
-                <script>alert(${requestScope.currentPage})</script>
             </main>
         </div>
     </div>
@@ -37,13 +36,13 @@
 <footer class="footer" style="background-color: #d0e9c6">
 </footer>
 
-<script src="${pageContext.request.contextPath}/resources/js/update-group-popup.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/update-teacher-popup.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/create-teacher-popup.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/update-student-popup.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/create-student-popup.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/update-salary-popup.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/create-salary-popup.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/update-mark-popup.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/create-mark-popup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/update-group-popup.js" defer></script>
+<script src="${pageContext.request.contextPath}/resources/js/update-teacher-popup.js" defer></script>
+<script src="${pageContext.request.contextPath}/resources/js/create-teacher-popup.js" defer></script>
+<script src="${pageContext.request.contextPath}/resources/js/update-student-popup.js" defer></script>
+<script src="${pageContext.request.contextPath}/resources/js/create-student-popup.js" defer></script>
+<script src="${pageContext.request.contextPath}/resources/js/update-salary-popup.js" defer></script>
+<script src="${pageContext.request.contextPath}/resources/js/create-salary-popup.js" defer></script>
+<script src="${pageContext.request.contextPath}/resources/js/update-mark-popup.js" defer></script>
+<script src="${pageContext.request.contextPath}/resources/js/create-mark-popup.js" defer></script>
 </body>

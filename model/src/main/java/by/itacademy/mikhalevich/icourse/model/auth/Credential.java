@@ -23,13 +23,13 @@ public class Credential extends AbstractEntity {
 
     private boolean enabled;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "credential_role",
             joinColumns = @JoinColumn(name = "credential_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles = new ArrayList<>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "credential_authority",
             joinColumns = @JoinColumn(name = "credential_id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id"))

@@ -22,7 +22,8 @@ $(document).ready(function () {
                 option.value = text[i].id;
 
                 // Append to another element:
-                document.getElementById("student-roles").appendChild(option);
+                var k = document.getElementById("student-roles");
+                if(k != null) k.appendChild(option);
             }
         }
     })
@@ -49,7 +50,8 @@ $(document).ready(function () {
                 option.value = text[i].id;
 
                 // Append to another element:
-                document.getElementById("student-authorities").appendChild(option);
+                var k = document.getElementById("student-authorities");
+                if(k != null) k.appendChild(option);
             }
         }
     })

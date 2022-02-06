@@ -1,6 +1,8 @@
 package by.itacademy.mikhalevich.icourse.config;
 
 import by.itacademy.mikhalevich.icourse.auth.UserService;
+import by.itacademy.mikhalevich.icourse.exception.SimpleAccessDeniedHandler;
+import by.itacademy.mikhalevich.icourse.exception.SimpleAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -55,7 +57,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/")
+                .and();
+//                .exceptionHandling().accessDeniedHandler(new SimpleAccessDeniedHandler())
+//                .authenticationEntryPoint(new SimpleAuthenticationEntryPoint());
     }
 
     @Bean

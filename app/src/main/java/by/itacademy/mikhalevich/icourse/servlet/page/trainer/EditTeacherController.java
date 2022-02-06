@@ -28,8 +28,12 @@ public class EditTeacherController extends AbstractTeacherController {
 
         credential.setUsername(req.getParameter("login"));
         credential.setPassword(new BCryptPasswordEncoder().encode(req.getParameter("password")));
-        credential.withRole(new Role().withId(Integer.parseInt(req.getParameter("role-id"))));
-        credential.withAuthority(new Authority().withId(Integer.parseInt(req.getParameter("authorities-id"))));
+        if(req.getParameter("role-id")!=null) {
+            credential.withRole(new Role().withId(Integer.parseInt(req.getParameter("role-id"))));
+        }
+        if(req.getParameter("authorities-id")!=null) {
+            credential.withAuthority(new Authority().withId(Integer.parseInt(req.getParameter("authorities-id"))));
+        }
 
         trainer
                 .withName(req.getParameter("name"))

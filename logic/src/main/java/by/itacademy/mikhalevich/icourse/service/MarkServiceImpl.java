@@ -3,7 +3,9 @@ package by.itacademy.mikhalevich.icourse.service;
 import by.itacademy.mikhalevich.icourse.MarkService;
 import by.itacademy.mikhalevich.icourse.Repository;
 import by.itacademy.mikhalevich.icourse.jpa.MarkRepositoryJpaImpl;
+import by.itacademy.mikhalevich.icourse.jpa.ThemeRepositoryJpaImpl;
 import by.itacademy.mikhalevich.icourse.model.Mark;
+import by.itacademy.mikhalevich.icourse.model.Theme;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
@@ -12,9 +14,11 @@ import java.util.Optional;
 @Slf4j
 public class MarkServiceImpl implements MarkService {
     private Repository markRepository;
+    private Repository themeRepository;
 
     public MarkServiceImpl() {
         this.markRepository = MarkRepositoryJpaImpl.getInstance();
+        this.themeRepository = ThemeRepositoryJpaImpl.getInstance();
     }
 
     @Override
@@ -24,6 +28,8 @@ public class MarkServiceImpl implements MarkService {
 
     @Override
     public Map<Integer, Mark> updateMark(Mark mark) {
+        Theme theme = (Theme) themeRepository.find(mark.getTheme().getId()).get();
+        mark.withTheme(theme);
         markRepository.save(mark);
         return null;
     }

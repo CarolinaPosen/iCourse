@@ -18,6 +18,7 @@ public class AllGroupsController extends AbstractGroupController {
     @Override
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'READ_INFO')")
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         Map<Integer, Group> groups = getGroupService().read();
         req.setAttribute("groups", groups);
         RoutingUtils.forwardToPage("groups.jsp", req, resp);

@@ -64,11 +64,7 @@ public class StudentServiceImpl implements StudentService {
     public Optional<Student> create(Student student) {
 
         int groupId = student.getGroups().stream().findFirst().get().getId();
-
-        //ExRole updateRole = (ExRole) roleRepository.findByName(student.getRole().getTitle()).get();
-
         Group updateGroup = (Group) groupRepository.find(groupId).get();
-        //student.withRole(updateRole);
         updateGroup.addStudent(student);
         groupRepository.save(updateGroup);
         return Optional.empty();

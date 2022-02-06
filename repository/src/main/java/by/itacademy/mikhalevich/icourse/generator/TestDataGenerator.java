@@ -29,11 +29,21 @@ public class TestDataGenerator {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
-        List<Role> trainerRoleAdmin = Arrays.asList(new Role().withName("ADMIN"));
-        List<Role> trainerRoleUser = Arrays.asList(new Role().withName("USER"));
+        Role roleAdmin = new Role().withName("ADMIN");
+        Role roleUser = new Role().withName("USER");
+        em.persist(roleAdmin);
+        em.persist(roleUser);
 
-        List<Authority> trainerAuthorityRead = Arrays.asList(new Authority().withName("READ_INFO"));
-        List<Authority> trainerAuthorityWrite = Arrays.asList(new Authority().withName("WRITE_INFO"));
+        Authority authorityRead = new Authority().withName("READ_INFO");
+        Authority authorityWrite = new Authority().withName("WRITE_INFO");
+        em.persist(authorityRead);
+        em.persist(authorityWrite);
+
+        List<Role> trainerRoleAdmin = Arrays.asList(roleAdmin);
+        List<Role> trainerRoleUser = Arrays.asList(roleUser);
+
+        List<Authority> trainerAuthorityRead = Arrays.asList(authorityRead);
+        List<Authority> trainerAuthorityWrite = Arrays.asList(authorityWrite);
 
         Trainer trainer1 = new Trainer()
                 .withName("Сафонова Габи Авксентьевна")

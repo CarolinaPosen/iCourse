@@ -22,7 +22,8 @@ $(document).ready(function () {
                 option.value = text[i].id;
 
                 // Append to another element:
-                document.getElementById("group-trainers").appendChild(option);
+                var k = document.getElementById("group-trainers");
+                if(k != null) k.appendChild(option);
             }
         }
     })

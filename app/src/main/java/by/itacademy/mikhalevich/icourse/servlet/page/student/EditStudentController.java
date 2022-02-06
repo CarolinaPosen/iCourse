@@ -21,23 +21,21 @@ public class EditStudentController extends AbstractStudentController {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         Student student = getStudentService().getById(Integer.parseInt(req.getParameter("id"))).get();
-
         Credential credential = student.getCredential();
-
         credential.setUsername(req.getParameter("login"));
         credential.setPassword(new BCryptPasswordEncoder().encode(req.getParameter("password")));
-        credential.withRole(new Role().withId(Integer.parseInt(req.getParameter("student-role-id"))));
-        credential.withAuthority(new Authority().withId(Integer.parseInt(req.getParameter("student-authorities-id"))));
-
-
+        if(req.getParameter("student-role-id")!=null){
+            credential.withRole(new Role().withId(Integer.parseInt(req.getParameter("student-role-id"))));
+        }
+        if(req.getParameter("student-authorities-id")!=null){
+            credential.withAuthority(new Authority().withId(Integer.parseInt(req.getParameter("student-authorities-id"))));
+        }
         student
                 .withName(req.getParameter("name"))
                 .withCredential(credential);
 
         getStudentService().update((student));
-
         Map<Integer, Student> students = getStudentService().read();
         req.setAttribute("students", students);
         RoutingUtils.forwardToPage("students.jsp", req, resp);

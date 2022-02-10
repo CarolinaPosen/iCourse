@@ -51,7 +51,7 @@ public class SpringOrmConfig {
         properties.setProperty("hibernate.dbcp.maxIdle", "10");
         properties.setProperty("hibernate.dbcp.minIdle","10");
         properties.setProperty("hibernate.dbcp.maxWaitMillis","-1");
-        properties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
+//        properties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
         return properties;
     }
 

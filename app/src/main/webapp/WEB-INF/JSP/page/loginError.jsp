@@ -1,16 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Yauheni
-  Date: 13.10.2021
-  Time: 16:17
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>LoginError</title>
-</head>
-<body>
-LoginError
-</body>
-</html>
+<div class="text-center">
+    <h2>403 Forbidden</h2>
+    <h3 class="name text-center font-weight-lighter">${requestScope.Auth.name}</h3>
+    <p class="login text-center font-weight-lighter">${requestScope.URL}</p>
+</div>

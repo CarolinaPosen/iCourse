@@ -26,6 +26,11 @@ public class ExperimentLoggingAspect {
         //pointcut
     }
 
+    @Before("execution(* by.itacademy.mikhalevich.icourse.service.*.*(..))")
+    public void method(){
+
+    }
+
     @Before("controllers()")
     public void before(JoinPoint jp) {
 //        Arrays.stream(jp.getArgs()).forEach(arg -> log.info(arg.toString()));
